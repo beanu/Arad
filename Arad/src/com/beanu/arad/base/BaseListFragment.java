@@ -1,4 +1,4 @@
-package com.beanu.arad.core;
+package com.beanu.arad.base;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 

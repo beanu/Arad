@@ -1,8 +1,5 @@
 package com.beanu.arad;
 
-import net.tsz.afinal.FinalBitmap;
-import net.tsz.afinal.FinalDb;
-import net.tsz.afinal.FinalHttp;
 import android.app.Application;
 
 public class AradApplication extends Application {
@@ -11,9 +8,9 @@ public class AradApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		Arad.app = this;
-		Arad.db = FinalDb.create(getApplicationContext());
-		Arad.http = new FinalHttp();
-		Arad.imageLoader = FinalBitmap.create(getApplicationContext());
+		Arad.db = DB.getInstance(getApplicationContext());
+		Arad.http = Http.create();
+		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext());
 	}
 
 	@Override

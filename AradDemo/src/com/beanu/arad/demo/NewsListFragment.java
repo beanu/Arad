@@ -21,7 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.beanu.arad.Arad;
-import com.beanu.arad.core.BaseListFragment;
+import com.beanu.arad.base.BaseListFragment;
 
 public class NewsListFragment extends BaseListFragment {
 

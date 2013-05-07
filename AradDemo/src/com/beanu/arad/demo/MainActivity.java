@@ -2,7 +2,7 @@ package com.beanu.arad.demo;
 
 import android.os.Bundle;
 
-import com.beanu.arad.core.BaseActivity;
+import com.beanu.arad.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
