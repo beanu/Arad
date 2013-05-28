@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="arad_check_network_no_available_network_title">No available network</string>
+    <string name="arad_check_network_no_available_network_message">Please note that there\'s some problem on your network status. You must set your network properly first.</string>
+
+</resources>

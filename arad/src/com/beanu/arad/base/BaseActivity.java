@@ -4,13 +4,12 @@ import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.beanu.rms.R;
 
 public class BaseActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setTheme(R.style.Theme_Sherlock_Light);
+//		setTheme(R.style.Theme_Sherlock_Light);
 		super.onCreate(savedInstanceState);
 
 	}

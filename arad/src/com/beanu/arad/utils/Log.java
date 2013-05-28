@@ -1,14 +1,14 @@
-package com.beanu.arad.support.utils;
+package com.beanu.arad.utils;
 
 import com.beanu.rms.BuildConfig;
 
 /**
  * Wrapper API for sending log output.
  */
-public class AppLogger {
+public class Log {
 	protected static final String TAG = "Arad";
 
-	private AppLogger() {
+	private Log() {
 	}
 
 	/**
