@@ -14,14 +14,7 @@ import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import cn.eoe.app.R;
-
 import com.google.zxing.camera.CameraManager;
 import com.google.zxing.decoding.CaptureActivityHandler;
 import com.google.zxing.decoding.InactivityTimer;
@@ -51,15 +44,15 @@ public class CaptureActivity extends Activity implements Callback {
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
 
-    private TextView mTitle;
-    private ImageView mGoHome;
+//    private TextView mTitle;
+//    private ImageView mGoHome;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.qr_code_scan);
+        setContentView(R.layout.zxing_code_scan);
 
         CameraManager.init(getApplication());
         initControl();
@@ -70,15 +63,15 @@ public class CaptureActivity extends Activity implements Callback {
 
     private void initControl() {
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-        mTitle = (TextView) findViewById(R.id.details_textview_title);
-        mTitle.setText(R.string.scan_title);
-        mGoHome = (ImageView) findViewById(R.id.details_imageview_gohome);
-        mGoHome.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        mTitle = (TextView) findViewById(R.id.details_textview_title);
+//        mTitle.setText(R.string.scan_title);
+//        mGoHome = (ImageView) findViewById(R.id.details_imageview_gohome);
+//        mGoHome.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
     }
 
     @Override
