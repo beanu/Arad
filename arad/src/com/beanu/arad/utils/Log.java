@@ -1,6 +1,6 @@
 package com.beanu.arad.utils;
 
-import com.beanu.rms.BuildConfig;
+import com.beanu.arad.BuildConfig;
 
 /**
  * Wrapper API for sending log output.

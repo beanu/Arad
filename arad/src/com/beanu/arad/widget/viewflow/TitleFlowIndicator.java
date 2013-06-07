@@ -28,7 +28,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.beanu.rms.R;
+import com.beanu.arad.R;
 
 /**
  * A TitleFlowIndicator is a FlowIndicator which displays the title of left view

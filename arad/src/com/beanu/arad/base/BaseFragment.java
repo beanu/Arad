@@ -36,6 +36,13 @@ public class BaseFragment extends SherlockFragment {
 		return FIRST_TIME_START;
 	}
 
+	protected boolean isFirstTimeStart(Bundle savedInstanceState) {
+		if (getCurrentState(savedInstanceState) == FIRST_TIME_START)
+			return true;
+		else
+			return false;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

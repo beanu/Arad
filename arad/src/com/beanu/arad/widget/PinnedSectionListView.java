@@ -29,7 +29,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
-import com.beanu.rms.BuildConfig;
+import com.beanu.arad.BuildConfig;
 
 /**
  * ListView capable to pin views at its top while the rest is still scrolled.
