@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -29,7 +29,9 @@ import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.beanu.arad.support.VelocityListView;
+import com.beanu.arad.pulltorefresh.R;
+import com.beanu.arad.widget.VelocityListView;
+
 
 public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView> {
 

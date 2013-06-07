@@ -1,4 +1,4 @@
-package com.beanu.arad.compoundselector;
+package com.beanu.arad.widget.compoundselector;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,8 +8,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import com.beanu.arad.compoundselector.adapter.SelectorLeftAdapter;
-import com.beanu.arad.compoundselector.adapter.SelectorRightAdapter;
+
+import com.beanu.arad.compoundselector.R;
+import com.beanu.arad.widget.compoundselector.adapter.SelectorLeftAdapter;
+import com.beanu.arad.widget.compoundselector.adapter.SelectorRightAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

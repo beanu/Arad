@@ -6,7 +6,7 @@
               android:layoutAnimation="@anim/acs_selector_anim_layout">
 
 
-    <com.beanu.arad.compoundselector.Pull_ListView
+    <com.beanu.arad.widget.compoundselector.Pull_ListView
         android:id="@+id/listLeft"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,9 +15,9 @@
         android:choiceMode="singleChoice"
         android:divider="@null"
         android:scrollbars="none">
-    </com.beanu.arad.compoundselector.Pull_ListView>
+    </com.beanu.arad.widget.compoundselector.Pull_ListView>
 
-    <com.beanu.arad.compoundselector.Pull_ListView
+    <com.beanu.arad.widget.compoundselector.Pull_ListView
         android:id="@+id/listRight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,6 +27,6 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:scrollbars="none">
-    </com.beanu.arad.compoundselector.Pull_ListView>
+    </com.beanu.arad.widget.compoundselector.Pull_ListView>
 
 </LinearLayout>

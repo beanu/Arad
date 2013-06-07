@@ -1,4 +1,4 @@
-package com.beanu.arad.compoundselector.adapter;
+package com.beanu.arad.widget.compoundselector.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

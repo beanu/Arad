@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.beanu.arad.base.BaseFragment;
+import com.beanu.arad.pulltorefresh.R;
 
 /**
  * A sample implementation of how to use {@link PullToRefreshListView} with

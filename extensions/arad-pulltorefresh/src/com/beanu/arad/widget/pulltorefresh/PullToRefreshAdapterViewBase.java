@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
+
+import com.beanu.arad.pulltorefresh.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

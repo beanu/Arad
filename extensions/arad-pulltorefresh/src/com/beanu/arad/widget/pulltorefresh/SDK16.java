@@ -1,4 +1,4 @@
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.view.View;

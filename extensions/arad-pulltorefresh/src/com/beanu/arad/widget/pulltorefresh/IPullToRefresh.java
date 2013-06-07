@@ -1,11 +1,11 @@
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.Interpolator;
 
-import com.beanu.arad.pulltorefresh.PullToRefreshBase.Mode;
-import com.beanu.arad.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.beanu.arad.widget.pulltorefresh.PullToRefreshBase.Mode;
+import com.beanu.arad.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 public interface IPullToRefresh<T extends View> {
 

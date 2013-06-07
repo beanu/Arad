@@ -17,7 +17,7 @@
        because it is pull to refresh listview
     -->
 
-    <com.beanu.arad.pulltorefresh.PullToRefreshListView
+    <com.beanu.arad.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/pull_listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
