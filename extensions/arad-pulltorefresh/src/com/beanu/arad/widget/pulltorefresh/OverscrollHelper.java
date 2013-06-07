@@ -1,10 +1,10 @@
-package com.beanu.arad.pulltorefresh;
+package com.beanu.arad.widget.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.util.Log;
 import android.view.View;
 
-import com.beanu.arad.pulltorefresh.PullToRefreshBase.Mode;
+import com.beanu.arad.widget.pulltorefresh.PullToRefreshBase.Mode;
 
 @TargetApi(9)
 final class OverscrollHelper {

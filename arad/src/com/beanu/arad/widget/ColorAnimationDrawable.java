@@ -1,4 +1,4 @@
-package com.beanu.arad.support;
+package com.beanu.arad.widget;
 
 import java.util.Random;
 

@@ -1,4 +1,6 @@
-package com.beanu.arad.compoundselector.adapter;
+package com.beanu.arad.widget.compoundselector.adapter;
+
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.xiaojiujiu.R;
 
-import java.util.List;
+import com.beanu.arad.compoundselector.R;
 
 public class SelectorLeftAdapter extends BaseAdapter {
 	Context context;
@@ -41,7 +42,7 @@ public class SelectorLeftAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.selector_list_left_item, null);
+			convertView = inflater.inflate(R.layout.acs_selector_list_left_item, null);
 			holder = new ViewHolder();
 			holder.textView = (TextView) convertView.findViewById(R.id.selector_list_left_item_textview);
 			convertView.setTag(holder);

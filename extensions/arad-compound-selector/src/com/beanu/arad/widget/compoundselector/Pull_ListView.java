@@ -1,4 +1,4 @@
-package com.beanu.arad.compoundselector;
+package com.beanu.arad.widget.compoundselector;
 
 import android.content.Context;
 import android.util.AttributeSet;
