@@ -5,8 +5,9 @@
 
     <TextView
         android:id="@+id/empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/empty"
         android:visibility="gone" />
@@ -18,7 +19,7 @@
     -->
 
     <com.beanu.arad.widget.pulltorefresh.PullToRefreshListView
-        android:id="@+id/pull_listView"
+        android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
@@ -33,6 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </FrameLayout>

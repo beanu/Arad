@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
  *
@@ -48,7 +49,7 @@ public class PullToRefreshListFragment extends BaseFragment {
 	protected TextView empty;
 	protected ProgressBar progressBar;
 
-	private volatile boolean enableRefreshTime = true;//TODO判断很短的时间内如果多次下来 不刷新
+	private volatile boolean enableRefreshTime = true;// TODO判断很短的时间内如果多次下来 不刷新
 
 	public boolean isListViewFling() {
 		return !enableRefreshTime;
@@ -61,9 +62,9 @@ public class PullToRefreshListFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.pull_to_refresh_listview_layout, container, false);
 		empty = (TextView) view.findViewById(R.id.empty);
 		progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-		pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_listView);
+		pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.listView);
 
-		footerView = inflater.inflate(R.layout.pull_to_refresh_footer, null);
+		footerView = inflater.inflate(R.layout.pull_to_refresh_listview_footer_layout, null);
 		getListView().addFooterView(footerView);
 		getListView().setHeaderDividersEnabled(false);
 		dismissFooterView();
