@@ -1,5 +1,7 @@
 package com.beanu.arad;
 
+import com.beanu.arad.utils.DeviceInformant;
+
 import android.app.Application;
 
 public class AradApplication extends Application {
@@ -11,6 +13,7 @@ public class AradApplication extends Application {
 		Arad.db = DB.getInstance(getApplicationContext());
 		Arad.http = Http.create();
 		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext());
+		Arad.deviceInfo = new DeviceInformant(getApplicationContext());
 	}
 
 	@Override
