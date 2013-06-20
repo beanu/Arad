@@ -1,8 +1,9 @@
 Arad
 ====
 
-Arad-android rapid application development
-android快速应用开发框架
+<p>Arad-android rapid application development
+
+<p>android快速应用开发框架
 
 Arad的特性
 =========
