@@ -16,6 +16,7 @@
 package net.tsz.afinal.http;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.UnknownHostException;
 
 import net.tsz.afinal.http.entityhandler.StringEntityHandler;
