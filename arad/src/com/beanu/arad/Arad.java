@@ -1,6 +1,5 @@
 package com.beanu.arad;
 
-import com.beanu.arad.utils.DeviceInformant;
 
 /**
  * Arad-Android Rapid Application Development
@@ -13,5 +12,4 @@ public class Arad {
 	public static DB db;
 	public static Http http;
 	public static ImageLoader imageLoader;
-	public static DeviceInformant deviceInfo;
 }

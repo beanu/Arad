@@ -6,6 +6,8 @@ import android.app.Application;
 
 public class AradApplication extends Application {
 
+	public DeviceInformant deviceInfo;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -13,7 +15,7 @@ public class AradApplication extends Application {
 		Arad.db = DB.getInstance(getApplicationContext());
 		Arad.http = Http.create();
 		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext());
-		Arad.deviceInfo = new DeviceInformant(getApplicationContext());
+		deviceInfo = new DeviceInformant(getApplicationContext());
 	}
 
 	@Override
