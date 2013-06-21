@@ -15,34 +15,31 @@
  */
 package net.tsz.afinal;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.widget.ImageView;
-
-import java.io.ObjectInputStream.GetField;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-
+import net.tsz.afinal.bitmap.core.BitmapCache;
 import net.tsz.afinal.bitmap.core.BitmapCommonUtils;
 import net.tsz.afinal.bitmap.core.BitmapDisplayConfig;
 import net.tsz.afinal.bitmap.core.BitmapProcess;
-import net.tsz.afinal.bitmap.core.BitmapCache;
 import net.tsz.afinal.bitmap.display.Displayer;
 import net.tsz.afinal.bitmap.display.SimpleDisplayer;
 import net.tsz.afinal.bitmap.download.Downloader;
 import net.tsz.afinal.bitmap.download.SimpleHttpDownloader;
 import net.tsz.afinal.core.AsyncTask;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.widget.ImageView;
 
 public class FinalBitmap {
 	

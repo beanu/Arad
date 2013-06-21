@@ -1,6 +1,7 @@
 package com.beanu.arad;
 
 import net.tsz.afinal.FinalBitmap;
+import net.tsz.afinal.bitmap.core.BitmapCommonUtils;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -13,7 +14,7 @@ public class ImageLoader implements IImageLoader {
 	private FinalBitmap finalBitmap;
 
 	private ImageLoader(Context ctx) {
-		finalBitmap = FinalBitmap.create(ctx);
+		finalBitmap = FinalBitmap.create(ctx, BitmapCommonUtils.getDiskCacheDir(ctx, "aradCache").getAbsolutePath());
 	}
 
 	public static ImageLoader getInstance(Context ctx) {
@@ -26,6 +27,7 @@ public class ImageLoader implements IImageLoader {
 	@Override
 	public void display(String url, ImageView imageView, int loadingImage) {
 		finalBitmap.configLoadingImage(loadingImage);
+		finalBitmap.configLoadfailImage(loadingImage);
 		finalBitmap.display(imageView, url);
 	}
 
