@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,7 @@ public class JsonUtil {
 	}
 	private static final ObjectMapper objectMapper = new ObjectMapper(jf);
 	static {
-
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		// SerializationConfig sf = objectMapper.getSerializationConfig();
 		// objectMapper.configure(sf.with(new SimpleDateFormat(DATE_FORMAT)), true);
 		// DeserializationConfig df = objectMapper.getDeserializationConfig();
