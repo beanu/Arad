@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -99,6 +100,24 @@ public class JsonUtil {
 		try {
 			jp = json.traverse();
 			return objectMapper.readValue(jp, pojoClass);
+		} finally {
+			if (jp != null) {
+				try {
+					jp.close();
+				} catch (IOException ioe) {
+				}
+			}
+		}
+	}
+	
+	public static <T> T node2pojo(JsonNode json,TypeReference<T> type) throws JsonProcessingException, IOException {
+		if (json == null) {
+			return null;
+		}
+		JsonParser jp = null;
+		try {
+			jp = json.traverse();
+			return objectMapper.readValue(jp, type);
 		} finally {
 			if (jp != null) {
 				try {

@@ -31,4 +31,9 @@ public class ImageLoader implements IImageLoader {
 		finalBitmap.display(imageView, url);
 	}
 
+	@Override
+	public void display(String url, ImageView imageView) {
+		finalBitmap.display(imageView, url);
+	}
+
 }
