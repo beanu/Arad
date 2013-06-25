@@ -1,20 +1,27 @@
 package com.beanu.arad;
 
+import android.app.Application;
+import android.content.Context;
+
 import com.beanu.arad.utils.DeviceInformant;
 
-import android.app.Application;
-
-public class AradApplication extends Application {
+public abstract class AradApplication extends Application {
 
 	public DeviceInformant deviceInfo;
+
+	public AradApplicationConfig config;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		config = appConfig();
+		config.daoConfig.setContext(getApplicationContext());
+
 		Arad.app = this;
-		Arad.db = DB.getInstance(getApplicationContext());
+		Arad.db = DB.getInstance(config.daoConfig);
 		Arad.http = Http.create();
-		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext());
+		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext(), config.imageCacheFolder);
+		Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
 		deviceInfo = new DeviceInformant(getApplicationContext());
 	}
 
@@ -23,4 +30,5 @@ public class AradApplication extends Application {
 		super.onLowMemory();
 	}
 
+	protected abstract AradApplicationConfig appConfig();
 }

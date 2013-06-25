@@ -12,4 +12,5 @@ public class Arad {
 	public static DB db;
 	public static Http http;
 	public static ImageLoader imageLoader;
+	public static Preferences preferences;
 }

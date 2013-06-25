@@ -1,7 +1,7 @@
 package com.beanu.arad;
 
 import net.tsz.afinal.FinalDb;
-import android.content.Context;
+import net.tsz.afinal.FinalDb.DaoConfig;
 
 import com.beanu.arad.core.IDB;
 
@@ -11,13 +11,13 @@ public class DB implements IDB {
 
 	private FinalDb db;
 
-	private DB(Context ctx) {
-		db = FinalDb.create(ctx);
+	private DB(DaoConfig config) {
+		db = FinalDb.create(config);
 	}
 
-	public static DB getInstance(Context ctx) {
+	public static DB getInstance(DaoConfig config) {
 		if (instance == null)
-			instance = new DB(ctx);
+			instance = new DB(config);
 		return instance;
 	}
 

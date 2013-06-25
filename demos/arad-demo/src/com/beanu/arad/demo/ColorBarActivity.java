@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.beanu.arad.base.BaseActivity;
-import com.beanu.arad.support.ColorAnimationDrawable;
+import com.beanu.arad.widget.ColorAnimationDrawable;
 
 public class ColorBarActivity extends BaseActivity {
 	private final Handler mHandler = new Handler();

@@ -13,13 +13,13 @@ public class ImageLoader implements IImageLoader {
 
 	private FinalBitmap finalBitmap;
 
-	private ImageLoader(Context ctx) {
-		finalBitmap = FinalBitmap.create(ctx, BitmapCommonUtils.getDiskCacheDir(ctx, "aradCache").getAbsolutePath());
+	private ImageLoader(Context ctx, String cacheFolder) {
+		finalBitmap = FinalBitmap.create(ctx, BitmapCommonUtils.getDiskCacheDir(ctx, cacheFolder).getAbsolutePath());
 	}
 
-	public static ImageLoader getInstance(Context ctx) {
+	public static ImageLoader getInstance(Context ctx, String cacheFolder) {
 		if (instance == null) {
-			instance = new ImageLoader(ctx);
+			instance = new ImageLoader(ctx, cacheFolder);
 		}
 		return instance;
 	}

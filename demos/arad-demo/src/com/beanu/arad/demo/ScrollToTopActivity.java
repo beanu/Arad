@@ -30,8 +30,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.beanu.arad.support.VelocityListView;
-import com.beanu.arad.support.VelocityListView.OnVelocityListViewListener;
+import com.beanu.arad.widget.VelocityListView;
+import com.beanu.arad.widget.VelocityListView.OnVelocityListViewListener;
 
 @SuppressLint("NewApi")
 public class ScrollToTopActivity extends Activity {
