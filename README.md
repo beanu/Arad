@@ -36,3 +36,7 @@ TODO
 ====
 * 加入异常处理
 * 解决UI事件和数据的分离
+
+github上好的解决方案
+===================
+*ImageViewZoom https://github.com/sephiroth74/ImageViewZoom
