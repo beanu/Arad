@@ -15,6 +15,7 @@ public class ImageLoader implements IImageLoader {
 
 	private ImageLoader(Context ctx, String cacheFolder) {
 		finalBitmap = FinalBitmap.create(ctx, BitmapCommonUtils.getDiskCacheDir(ctx, cacheFolder).getAbsolutePath());
+//		finalBitmap.configCompressFormat(CompressFormat.PNG);
 	}
 
 	public static ImageLoader getInstance(Context ctx, String cacheFolder) {
