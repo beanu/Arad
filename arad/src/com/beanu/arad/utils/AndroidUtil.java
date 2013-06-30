@@ -92,6 +92,22 @@ public class AndroidUtil {
 	}
 
 	/**
+	 * 获取PhoneNumber
+	 * 
+	 * @param context
+	 * @return 当获取到的TelephonyManager为null时，将返回"null"
+	 */
+	public static String getPhoneNumber(Context context) {
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		if (tm == null) {
+			return "null";
+		} else {
+			String number = tm.getLine1Number();
+			return number == null ? "null" : number;
+		}
+	}
+	
+	/**
 	 * 显示或隐藏IME
 	 * 
 	 * @param context

@@ -33,6 +33,7 @@ public class DeviceInformant {
 	private int appVerCode;
 	private String countryCode;
 	private String deviceID;
+	private String phoneNumber;
 	private int screenHeight;
 	private int screenWidth;
 	private int densityDpi;
@@ -47,6 +48,7 @@ public class DeviceInformant {
 
 			version = AndroidUtil.getVerName(context);
 			deviceID = AndroidUtil.getDeviceId(context);
+			phoneNumber=AndroidUtil.getPhoneNumber(context);
 			appVerCode = AndroidUtil.getVerCode(context);
 			screenWidth = context.getResources().getDisplayMetrics().widthPixels;
 			screenHeight = context.getResources().getDisplayMetrics().heightPixels;
@@ -146,6 +148,14 @@ public class DeviceInformant {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }

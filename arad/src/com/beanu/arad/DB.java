@@ -1,5 +1,7 @@
 package com.beanu.arad;
 
+import java.util.List;
+
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.FinalDb.DaoConfig;
 
@@ -24,6 +26,31 @@ public class DB implements IDB {
 	@Override
 	public void save(Object entity) {
 		db.save(entity);
+	}
+
+	@Override
+	public <T> List<T> findAll(Class<T> clazz) {
+		return db.findAll(clazz);
+	}
+
+	@Override
+	public <T> List<T> findAll(Class<T> clazz, String orderBy) {
+		return db.findAll(clazz, orderBy);
+	}
+
+	@Override
+	public void update(Object entity) {
+		db.update(entity);
+	}
+
+	@Override
+	public void delete(Object entity) {
+		db.delete(entity);
+	}
+
+	@Override
+	public <T> void deleteById(Class<T> clazz, String id) {
+		db.deleteById(clazz, id);
 	}
 
 }
