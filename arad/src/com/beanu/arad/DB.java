@@ -53,4 +53,9 @@ public class DB implements IDB {
 		db.deleteById(clazz, id);
 	}
 
+	@Override
+	public <T> T findById(Class<T> clazz, Object id) {
+		return db.findById(id, clazz);
+	}
+
 }

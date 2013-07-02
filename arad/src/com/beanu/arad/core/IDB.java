@@ -9,6 +9,8 @@ public interface IDB {
 	public <T> List<T> findAll(Class<T> clazz);
 	
 	public <T> List<T> findAll(Class<T> clazz,String orderBy);
+	
+	public <T> T findById(Class<T> clazz,Object id);
 
 	public void update(Object entity);
 

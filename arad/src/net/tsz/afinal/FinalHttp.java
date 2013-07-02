@@ -66,6 +66,10 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.SyncBasicHttpContext;
 
+import android.util.Log;
+
+import com.beanu.arad.BuildConfig;
+
 public class FinalHttp {
 
     private static final int DEFAULT_SOCKET_BUFFER_SIZE = 8 * 1024; //8KB
@@ -405,6 +409,7 @@ public class FinalHttp {
             String paramString = params.getParamString();
             url += "?" + paramString;
         }
+        if(BuildConfig.DEBUG)Log.d("URL", url);
         return url;
     }
 
