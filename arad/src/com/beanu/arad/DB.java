@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.FinalDb.DaoConfig;
+import net.tsz.afinal.db.sqlite.DbModel;
+import net.tsz.afinal.db.table.TableInfo;
 
 import com.beanu.arad.core.IDB;
 
@@ -56,6 +58,16 @@ public class DB implements IDB {
 	@Override
 	public <T> T findById(Class<T> clazz, Object id) {
 		return db.findById(id, clazz);
+	}
+
+	@Override
+	public <T> int countByWhere(Class<T> clazz, String strWhere) {
+		TableInfo table=TableInfo.get(clazz);
+		DbModel model = db.findDbModelBySQL(clazz,"select count(*) count from " + table.getTableName() + " where " + strWhere);
+		if (model != null) {
+			return model.getInt("count");
+		}
+		return 0;
 	}
 
 }

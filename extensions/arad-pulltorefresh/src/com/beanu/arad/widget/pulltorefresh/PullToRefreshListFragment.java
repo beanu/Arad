@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
  *
@@ -64,9 +63,11 @@ public class PullToRefreshListFragment extends BaseFragment {
 		progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 		pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.listView);
 
+		getListView().setHeaderDividersEnabled(false);
+		getListView().setScrollingCacheEnabled(false);
+		
 		footerView = inflater.inflate(R.layout.pull_to_refresh_listview_footer_layout, null);
 		getListView().addFooterView(footerView);
-		getListView().setHeaderDividersEnabled(false);
 		dismissFooterView();
 
 		return view;

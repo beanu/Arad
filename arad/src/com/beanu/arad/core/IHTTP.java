@@ -8,4 +8,5 @@ public interface IHTTP {
 	public void get(String url, AjaxParams params, AjaxCallBack<? extends Object> callBack);
 
 	public void post(String url, AjaxParams params, AjaxCallBack<? extends Object> callBack);
+
 }

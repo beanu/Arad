@@ -516,6 +516,11 @@ public class FinalDb {
 		return null;
 	}
 	
+	public <T> DbModel findDbModelBySQL(Class<T> clazz,String strSQL){
+		checkTableExist(clazz);
+		return findDbModelBySQL(strSQL);
+	}
+	
 	public List<DbModel> findDbModelListBySQL(String strSQL){
 		debugSql(strSQL);
 		Cursor cursor = db.rawQuery(strSQL,null);

@@ -75,7 +75,7 @@ public class ScrollToTopActivity extends Activity {
 	private OnClickListener mOnClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			mListView.requestPositionToScreen(0, true);
+			mListView.requestPositionToScreen(4, true);
 		}
 	};
 
