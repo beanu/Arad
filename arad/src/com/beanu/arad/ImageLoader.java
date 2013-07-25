@@ -1,9 +1,7 @@
 package com.beanu.arad;
 
 import net.tsz.afinal.FinalBitmap;
-import net.tsz.afinal.bitmap.core.BitmapCommonUtils;
 import android.content.Context;
-import android.graphics.Bitmap.CompressFormat;
 import android.widget.ImageView;
 
 import com.beanu.arad.core.IImageLoader;
@@ -15,8 +13,7 @@ public class ImageLoader implements IImageLoader {
 	private FinalBitmap finalBitmap;
 
 	private ImageLoader(Context ctx, String cacheFolder) {
-		finalBitmap = FinalBitmap.create(ctx, BitmapCommonUtils.getDiskCacheDir(ctx, cacheFolder).getAbsolutePath());
-		finalBitmap.configCompressFormat(CompressFormat.PNG);
+		finalBitmap = FinalBitmap.create(ctx);// TODO 缓存的目录
 	}
 
 	public static ImageLoader getInstance(Context ctx, String cacheFolder) {

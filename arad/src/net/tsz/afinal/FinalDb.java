@@ -28,9 +28,11 @@ import net.tsz.afinal.db.table.KeyValue;
 import net.tsz.afinal.db.table.ManyToOne;
 import net.tsz.afinal.db.table.OneToMany;
 import net.tsz.afinal.db.table.TableInfo;
+import net.tsz.afinal.exception.DbException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -46,9 +48,9 @@ public class FinalDb {
 	
 	private FinalDb(DaoConfig config){
 		if(config == null)
-			throw new RuntimeException("daoConfig is null");
+			throw new DbException("daoConfig is null");
 		if(config.getContext() == null)
-			throw new RuntimeException("android context is null");
+			throw new DbException("android context is null");
 		this.db = new SqliteDbHelper(config.getContext().getApplicationContext(), config.getDbName(), config.getDbVersion(),config.getDbUpdateListener()).getWritableDatabase();
 		this.config = config;
 	}
@@ -242,6 +244,27 @@ public class FinalDb {
 		String sql = SqlBuilder.buildDeleteSql(clazz, strWhere);
 		debugSql(sql);
 		db.execSQL(sql);
+	}
+	/**
+	 * 删除所有数据表
+	 */
+	public void dropDb() {
+		Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type ='table'", null);
+		if(cursor!=null){
+			while(cursor.moveToNext()){
+				//添加异常捕获.忽略删除所有表时出现的异常:
+				//table sqlite_sequence may not be dropped
+				try {
+					db.execSQL("DROP TABLE "+cursor.getString(0));
+				} catch (SQLException e) {
+					Log.e(TAG, e.getMessage());
+				}
+			}
+		}
+		if(cursor!=null){
+			cursor.close();
+			cursor=null;
+		}
 	}
 	
 	
@@ -445,7 +468,7 @@ public class FinalDb {
 	 */
 	public <T> List<T> findAll(Class<T> clazz,String orderBy){
 		checkTableExist(clazz);
-		return findAllBySql(clazz,SqlBuilder.getSelectSQL(clazz)+" ORDER BY "+orderBy+" DESC");
+		return findAllBySql(clazz,SqlBuilder.getSelectSQL(clazz)+" ORDER BY "+orderBy);
 	}
 	
 	/**
@@ -466,7 +489,7 @@ public class FinalDb {
 	 */
 	public <T> List<T> findAllByWhere(Class<T> clazz,String strWhere,String orderBy){
 		checkTableExist(clazz);
-		return findAllBySql(clazz,SqlBuilder.getSelectSQLByWhere(clazz,strWhere)+" ORDER BY "+orderBy+" DESC");
+		return findAllBySql(clazz,SqlBuilder.getSelectSQLByWhere(clazz,strWhere)+" ORDER BY "+orderBy);
 	}
 	
 	/**
@@ -514,11 +537,6 @@ public class FinalDb {
 			cursor.close();
 		}
 		return null;
-	}
-	
-	public <T> DbModel findDbModelBySQL(Class<T> clazz,String strSQL){
-		checkTableExist(clazz);
-		return findDbModelBySQL(strSQL);
 	}
 	
 	public List<DbModel> findDbModelListBySQL(String strSQL){
@@ -585,27 +603,24 @@ public class FinalDb {
 	
 	
 	
-	
-	
-	
 	public static class DaoConfig{
-		private Context context = null;//android上下文
-		private String dbName = "afinal.db";//数据库名字
-		private int dbVersion = 1;//数据库版本
-		private boolean debug = true;
+		private Context 	mContext 	= null;			//android上下文
+		private String 		mDbName 	= "afinal.db";	//数据库名字
+		private int 		dbVersion 	= 1;			//数据库版本
+		private boolean 	debug = true;				//是否是调试模式（调试模式  增删改查的时候显示SQL语句）
 		private DbUpdateListener dbUpdateListener;
 		
 		public Context getContext() {
-			return context;
+			return mContext;
 		}
 		public void setContext(Context context) {
-			this.context = context;
+			this.mContext = context;
 		}
 		public String getDbName() {
-			return dbName;
+			return mDbName;
 		}
 		public void setDbName(String dbName) {
-			this.dbName = dbName;
+			this.mDbName = dbName;
 		}
 		public int getDbVersion() {
 			return dbVersion;
@@ -644,16 +659,7 @@ public class FinalDb {
 			if(mDbUpdateListener!=null){
 				mDbUpdateListener.onUpgrade(db, oldVersion, newVersion);
 			}else{ //清空所有的数据信息
-				Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type ='table'", null);
-				if(cursor!=null){
-					while(cursor.moveToNext()){
-						db.execSQL("DROP TABLE "+cursor.getString(0));
-					}
-				}
-				if(cursor!=null){
-					cursor.close();
-					cursor=null;
-				}
+				dropDb();
 			}
 		}
 

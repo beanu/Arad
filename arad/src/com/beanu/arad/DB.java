@@ -63,8 +63,8 @@ public class DB implements IDB {
 	@Override
 	public <T> int countByWhere(Class<T> clazz, String strWhere) {
 		TableInfo table = TableInfo.get(clazz);
-		DbModel model = db.findDbModelBySQL(clazz, "select count(*) count from " + table.getTableName() + " where "
-				+ strWhere);
+		DbModel model = db
+				.findDbModelBySQL("select count(*) count from " + table.getTableName() + " where " + strWhere);
 		if (model != null) {
 			return model.getInt("count");
 		}

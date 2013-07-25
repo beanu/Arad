@@ -66,9 +66,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.SyncBasicHttpContext;
 
-import android.util.Log;
-
-import com.beanu.arad.BuildConfig;
+import com.beanu.arad.utils.Log;
 
 public class FinalHttp {
 
@@ -409,7 +407,7 @@ public class FinalHttp {
             String paramString = params.getParamString();
             url += "?" + paramString;
         }
-        if(BuildConfig.DEBUG)Log.d("URL", url);
+        Log.d(url);
         return url;
     }
 
