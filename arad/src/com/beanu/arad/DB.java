@@ -62,12 +62,29 @@ public class DB implements IDB {
 
 	@Override
 	public <T> int countByWhere(Class<T> clazz, String strWhere) {
-		TableInfo table=TableInfo.get(clazz);
-		DbModel model = db.findDbModelBySQL(clazz,"select count(*) count from " + table.getTableName() + " where " + strWhere);
+		TableInfo table = TableInfo.get(clazz);
+		DbModel model = db.findDbModelBySQL(clazz, "select count(*) count from " + table.getTableName() + " where "
+				+ strWhere);
 		if (model != null) {
 			return model.getInt("count");
 		}
 		return 0;
+	}
+
+	@Override
+	public void update(Object entity, String strWhere) {
+		db.update(entity, strWhere);
+	}
+
+	@Override
+	public <T> List<T> findAllByWhere(Class<T> clazz, String strWhere) {
+		return db.findAllByWhere(clazz, strWhere);
+	}
+
+	@Override
+	public <T> void deleteByWhere(Class<?> clazz, String strWhere) {
+		db.deleteByWhere(clazz, strWhere);
+
 	}
 
 }
