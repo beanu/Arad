@@ -2,16 +2,15 @@ package com.beanu.arad.base;
 
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.beanu.arad.utils.AnimUtil;
 
 /**
  * BaseActivity add GestureDetector function.Provides a sliding left-right
- * gestures to monitor.
- * 1.增加activity的左右手势监听
- * 2.增加返回键的监听
+ * gestures to monitor. 1.增加activity的左右手势监听 2.增加返回键的监听
+ * 
  * @author beanu
  * 
  */

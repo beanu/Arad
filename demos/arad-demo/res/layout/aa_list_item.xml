@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="48dp"
-    android:textColor="@color/abs__primary_text_disable_only_holo_light" >
+    android:textColor="@color/holo_blue_light" >
 
 </TextView>

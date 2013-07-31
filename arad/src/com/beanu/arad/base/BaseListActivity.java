@@ -1,7 +1,7 @@
 package com.beanu.arad.base;
 
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.view.MenuItem;
+import android.app.ListActivity;
+import android.view.MenuItem;
 
 /**
  * 检测Actionbar的home 事件
@@ -9,7 +9,7 @@ import com.actionbarsherlock.view.MenuItem;
  * @author beanu
  * 
  */
-public class BaseListActivity extends SherlockListActivity {
+public class BaseListActivity extends ListActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -21,6 +21,5 @@ public class BaseListActivity extends SherlockListActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
 
 }

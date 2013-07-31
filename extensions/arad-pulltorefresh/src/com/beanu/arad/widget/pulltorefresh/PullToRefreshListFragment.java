@@ -65,7 +65,7 @@ public class PullToRefreshListFragment extends BaseFragment {
 
 		getListView().setHeaderDividersEnabled(false);
 		getListView().setScrollingCacheEnabled(false);
-		
+
 		footerView = inflater.inflate(R.layout.pull_to_refresh_listview_footer_layout, null);
 		getListView().addFooterView(footerView);
 		dismissFooterView();
@@ -117,6 +117,23 @@ public class PullToRefreshListFragment extends BaseFragment {
 		footerView.findViewById(R.id.refresh).clearAnimation();
 		footerView.findViewById(R.id.listview_footer).setVisibility(View.GONE);
 		isFooterDisplay = false;
+	}
+
+	/**
+	 * 如果数据为空这显示空view
+	 */
+	protected void showEmptyView(String emptyTips) {
+		// TextView emptyView = new TextView(getSherlockActivity());
+		// LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,
+		// LayoutParams.MATCH_PARENT);
+		// emptyView.setLayoutParams(params);
+		// emptyView.setText(emptyTips);
+		// emptyView.setVisibility(View.GONE);
+		// ((ViewGroup) getListView().getParent()).addView(emptyView);
+		// getListView().setEmptyView(emptyView);
+
+		empty.setText(emptyTips);
+		empty.setVisibility(View.VISIBLE);
 	}
 
 }

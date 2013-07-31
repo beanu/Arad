@@ -1,10 +1,9 @@
 package com.beanu.arad.base;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
-public class BaseFragment extends SherlockFragment {
+public class BaseFragment extends Fragment {
 	/**
 	 * when activity is recycled by system, isFirstTimeStartFlag will be reset
 	 * to default true, when activity is recreated because a configuration

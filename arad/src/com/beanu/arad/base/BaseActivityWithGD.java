@@ -2,9 +2,9 @@ package com.beanu.arad.base;
 
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.beanu.arad.utils.AnimUtil;
 
 /**
