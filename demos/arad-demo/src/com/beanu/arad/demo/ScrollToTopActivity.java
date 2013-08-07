@@ -56,6 +56,8 @@ public class ScrollToTopActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
+
 		super.onCreate(savedInstanceState);
 
 		mVelocityAbsoluteThreshold = (int) (VELOCITY_ABSOLUTE_THRESHOLD * getResources().getDisplayMetrics().density + 0.5f);

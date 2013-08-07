@@ -41,10 +41,12 @@ public class NewsListFragment extends BaseListFragment {
 		setListAdapter(adapter);
 
 		AjaxParams params = new AjaxParams();
-		params.put("act", "newsList");
-		params.put("subsiteCode", "201300001");
-		params.put("rowCountPerPage", "10");
-		Arad.http.get("http://192.168.1.210:8088/appserver2/mobile.do", params, new AjaxCallBack<String>() {
+		params.put("k", "lists");
+		params.put("pageNum", "3");
+		params.put("t", "cat");
+		params.put("cid", "0");
+		Log.d("TIME", "Afinal http begin!");
+		Arad.http.get("http://api.eoe.cn/client/news", params, new AjaxCallBack<String>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -54,20 +56,22 @@ public class NewsListFragment extends BaseListFragment {
 			@Override
 			public void onSuccess(String t) {
 				try {
-					JSONObject response = new JSONObject(t);
-					String datalist = response.getString("dataList");
+					JSONObject response = new JSONObject(t).getJSONObject("response");
+					String datalist = response.getString("items");
+
 					JSONArray dataListList = new JSONArray(datalist);
 					for (int i = 0; i < dataListList.length(); i++) {
 						Map<String, String> map = new HashMap<String, String>();
 						JSONObject news = dataListList.getJSONObject(i);
 						map.put("title", news.getString("title"));
-						map.put("url", news.getString("imgPath"));
+						map.put("url", news.getString("thumbnail_url"));
 						data.add(map);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				adapter.notifyDataSetChanged();
+				Log.d("TIME", "Afinal http end!");
 			}
 
 		});

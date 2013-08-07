@@ -17,6 +17,7 @@ public class AAActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.aa_activity);
 
@@ -27,6 +28,8 @@ public class AAActivity extends BaseActivity {
 		adapter.add(MainActivity.class);
 		adapter.add(ScrollToTopActivity.class);
 		adapter.add(ColorBarActivity.class);
+		adapter.add(VolleyTestActivity.class);
+		adapter.add(LoadMoreActivity.class);
 
 		listView.setAdapter(adapter);
 

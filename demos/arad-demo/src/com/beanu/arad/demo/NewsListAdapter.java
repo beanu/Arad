@@ -62,8 +62,7 @@ public class NewsListAdapter extends BaseAdapter {
 		}
 
 		ViewHolder holder = (ViewHolder) view.getTag();
-		Arad.imageLoader.display("http://192.168.1.210:8088/appserver2/" + news.get("url"), holder.img,
-				R.drawable.ic_launcher);
+		Arad.imageLoader.display(news.get("url"), holder.img, R.drawable.ic_launcher);
 
 		holder.title.setText(news.get("title"));
 		holder.img.setScaleType(ScaleType.CENTER_CROP);
