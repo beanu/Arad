@@ -19,8 +19,8 @@ public abstract class AradApplication extends Application {
 
 		Arad.app = this;
 		Arad.db = DB.getInstance(config.daoConfig);
-		Arad.http = Http.create();
-		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext(), config.imageCacheFolder);
+		Arad.http = Http.create(getApplicationContext());
+		Arad.imageLoader = ImageLoader.getInstance(getApplicationContext());
 		Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
 		deviceInfo = new DeviceInformant(getApplicationContext());
 	}
