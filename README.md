@@ -7,35 +7,32 @@ Arad
 
 Arad的特性
 =========
-* BaseActivity支持IOC，通过注解来引用TextView,Button,ImageView等基本控件，不再需要findViewById
-* Http的封装
-* Imageloader异步加载图片
+* 全注解的开发，参考androidannotations，大大简化代码，注重业务的开发。并且是编译时的注解解析，对运行时速度没有任何影响
+* Http使用Volley框架（google I/O 大会上推荐的）一个比喻成快如箭的http访问框架，支持缓存
+* Imageloader异步加载图片（依赖Volley）
 * 数据库模块，android中的orm框架，一行代码就可以进行增删改查。支持一对多，多对一等查询
-* 支持页面的手势滑动检测
-* 多个控件的支持（如果控件带有资源文件，则被分配到library-project中，不需要的时候，不用加入依赖工程）
+* Util 常用方法的集合
+* 多个控件的支持（如果控件带有资源文件，则被分配到library-project中，需要的时候，再加入依赖工程）
 
 Arad快速上手
 ===========
-  1.继承AradApplication
+  1.继承AradApplication，配置ApplicationConfig
   ---------------------
   
-  2.继承AradActivity
+  2.继承
 
-Arad依赖项目
+Arad使用到的依赖包
 ===========
-* ActionBarSherlock: https://github.com/JakeWharton/ActionBarSherlock
-* Jackson jar解析json文件
+* ActionBarCompat: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
+* androidannotations https://github.com/excilys/androidannotations
+* Volley https://android.googlesource.com/platform/frameworks/volley
+* Jackson https://github.com/FasterXML
 
 感谢以下项目的支持
 ==================
-* afinal: https://github.com/yangfuhai/afinal(再次封装afinal的四个模块)
+* afinal: https://github.com/yangfuhai/afinal(afinal的数据库orm)
 * akita: https://github.com/xjanker/akita(工具的支持)
 
-
-TODO
-====
-* 加入异常处理
-* 解决UI事件和数据的分离
 
 github上好的解决方案
 ===================
