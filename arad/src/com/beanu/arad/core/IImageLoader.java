@@ -6,5 +6,7 @@ public interface IImageLoader {
 
 	public void display(String url, ImageView imageView);
 
-	public void display(String url, ImageView imageView, int loadingImage);
+	public void display(String url, ImageView imageView, int defaultImageResId);
+
+	public void display(String url, ImageView imageView, int defaultImageResId, int errorImageResId);
 }

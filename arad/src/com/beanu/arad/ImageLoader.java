@@ -29,14 +29,21 @@ public class ImageLoader implements IImageLoader {
 	}
 
 	@Override
-	public void display(String url, ImageView imageView, int loadingImage) {
-		mImageLoader.get(url,
-				com.android.volley.toolbox.ImageLoader.getImageListener(imageView, loadingImage, loadingImage));
+	public void display(String url, ImageView imageView, int defaultImageResId) {
+		mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, defaultImageResId,
+				defaultImageResId));
 	}
 
 	@Override
 	public void display(String url, ImageView imageView) {
 		mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, 0, 0));
+	}
+
+	@Override
+	public void display(String url, ImageView imageView, int defaultImageResId, int errorImageResId) {
+		mImageLoader.get(url,
+				com.android.volley.toolbox.ImageLoader.getImageListener(imageView, defaultImageResId, errorImageResId));
+
 	}
 
 }
