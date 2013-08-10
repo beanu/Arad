@@ -1,9 +1,7 @@
 package com.beanu.arad.core;
 
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
-
-
+import com.beanu.arad.http.AjaxCallBack;
+import com.beanu.arad.http.AjaxParams;
 
 public interface IHTTP {
 
