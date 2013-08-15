@@ -204,41 +204,6 @@ public class AndroidUtil {
 		}
 	}
 
-	/**
-	 * Note: Make sure isDownloadManagerAvailable return is true before use this
-	 * method.
-	 * 
-	 * @param apkName
-	 *            Apk File Name
-	 * @param fullApkUrl
-	 *            url of full
-	 * @param context
-	 *            Context
-	 */
-	// public static void downloadApkByDownloadManager(String apkName, String
-	// fullApkUrl, Context context) {
-	// DownloadManager.Request request = new
-	// DownloadManager.Request(Uri.parse(fullApkUrl));
-	// request.setDescription(fullApkUrl);
-	// request.setTitle(apkName);
-	//
-	// // in order for this if to run, you must use the android 3.2 to compile
-	// // your app
-	// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-	// request.allowScanningByMediaScanner();
-	// request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-	// }
-	// request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
-	// apkName);
-	// request.setVisibleInDownloadsUi(false);
-	// request.setMimeType("application/vnd.android.package-archive");
-	//
-	// // get download service and enqueue file
-	// DownloadManager manager = (DownloadManager)
-	// context.getSystemService(Context.DOWNLOAD_SERVICE);
-	// manager.enqueue(request);
-	// }
-
 	public static boolean networkStatusOK(final Context context) {
 		boolean netStatus = false;
 
@@ -281,6 +246,14 @@ public class AndroidUtil {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void shareText(Context context, String title, String text) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_SUBJECT, title);
+		intent.putExtra(Intent.EXTRA_TEXT, text);
+		context.startActivity(Intent.createChooser(intent, title));
 	}
 
 	public static boolean isActionBarAvailable() {

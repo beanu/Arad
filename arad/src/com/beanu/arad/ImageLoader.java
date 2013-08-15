@@ -13,7 +13,7 @@ public class ImageLoader implements IImageLoader {
 	private static final int MAX_IMAGE_CACHE_ENTIRES = 5 * 1024 * 1024;// 5MB
 	private static ImageLoader instance;
 	private RequestQueue mRequestQueue;
-	private static com.android.volley.toolbox.ImageLoader mImageLoader;
+	public static com.android.volley.toolbox.ImageLoader mImageLoader;
 
 	private ImageLoader(Context ctx) {
 		mRequestQueue = Volley.newRequestQueue(ctx);
