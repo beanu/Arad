@@ -5,12 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <application
         android:name="com.beanu.arad.demo.DemoApplication"
@@ -36,6 +38,7 @@
         <activity android:name="com.beanu.arad.demo.VolleyTestActivity" >
         </activity>
         <activity android:name="com.beanu.arad.demo.LoadMoreActivity" />
+        <activity android:name="com.beanu.arad.demo.DownloadManagerActivity" />
     </application>
 
 </manifest>

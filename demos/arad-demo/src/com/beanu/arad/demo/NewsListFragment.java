@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +19,8 @@ import android.widget.Toast;
 
 import com.beanu.arad.Arad;
 import com.beanu.arad.base.BaseListFragment;
+import com.beanu.arad.http.AjaxCallBack;
+import com.beanu.arad.http.AjaxParams;
 
 public class NewsListFragment extends BaseListFragment {
 

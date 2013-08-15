@@ -30,6 +30,7 @@ public class AAActivity extends BaseActivity {
 		adapter.add(ColorBarActivity.class);
 		adapter.add(VolleyTestActivity.class);
 		adapter.add(LoadMoreActivity.class);
+		adapter.add(DownloadManagerActivity.class);
 
 		listView.setAdapter(adapter);
 

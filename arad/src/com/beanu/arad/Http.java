@@ -2,8 +2,6 @@ package com.beanu.arad;
 
 import java.util.Map;
 
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
 import android.content.Context;
 
 import com.android.volley.AuthFailureError;
@@ -15,6 +13,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.beanu.arad.core.IHTTP;
+import com.beanu.arad.http.AjaxCallBack;
+import com.beanu.arad.http.AjaxParams;
 import com.beanu.arad.http.OkHttpStack;
 import com.beanu.arad.utils.Log;
 

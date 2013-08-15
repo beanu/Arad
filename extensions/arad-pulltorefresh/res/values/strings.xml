@@ -1,8 +1,0 @@
-<resources>
-
-    <string name="app_name">arad-pulltorefresh</string>
-    <string name="refreshing">刷新中……</string>
-    <string name="empty">空</string>
-    <string name="loading">加载中</string>
-
-</resources>
