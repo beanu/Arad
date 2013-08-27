@@ -71,13 +71,19 @@ public class AndroidUtil {
 		}
 	}
 
-	// public static String getAppName(Context context) {
-	// String verName = context.getResources().getString(R.string.app_name);
-	// return verName;
-	// }
+	// Imsi
+	public static String getDeviceImsi(Context context) {
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		if (tm == null) {
+			return "null";
+		} else {
+			String id = tm.getSubscriberId();
+			return id == null ? "null" : id;
+		}
+	}
 
 	/**
-	 * 获取DeviceId
+	 * 获取DeviceId 唯一的设备ID： GSM手机的 IMEI 和 CDMA手机的 MEID.
 	 * 
 	 * @param context
 	 * @return 当获取到的TelephonyManager为null时，将返回"null"

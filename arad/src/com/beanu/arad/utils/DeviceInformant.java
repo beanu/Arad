@@ -26,30 +26,35 @@ import android.telephony.TelephonyManager;
  */
 public class DeviceInformant {
 
-	private String deviceMode;
-	private String osSystem;
-	private String osSystemVer;
-	private String romVer;
-	private int appVerCode;
+	private String osSystem;// 手机操作系统
+	private String osSystemVer;// 手机系统版本
+
+	private String deviceMode;// 设备型号
+
+	private int versionCode;
+	private String versionName;
+
 	private String countryCode;
 	private String deviceID;
+	private String deveiceImsi;// SIM卡的IMSI码
 	private String phoneNumber;
+
 	private int screenHeight;
 	private int screenWidth;
 	private int densityDpi;
-	private String version;
 
 	public DeviceInformant(Context context) {
 		try {
 			osSystem = "Android";
 			osSystemVer = Build.VERSION.RELEASE;
 			deviceMode = Build.MODEL;
-			romVer = Build.FINGERPRINT;
 
-			version = AndroidUtil.getVerName(context);
+			versionName = AndroidUtil.getVerName(context);
 			deviceID = AndroidUtil.getDeviceId(context);
-			phoneNumber=AndroidUtil.getPhoneNumber(context);
-			appVerCode = AndroidUtil.getVerCode(context);
+			deveiceImsi = AndroidUtil.getDeviceImsi(context);
+			phoneNumber = AndroidUtil.getPhoneNumber(context);
+			versionCode = AndroidUtil.getVerCode(context);
+			versionName = AndroidUtil.getVerName(context);
 			screenWidth = context.getResources().getDisplayMetrics().widthPixels;
 			screenHeight = context.getResources().getDisplayMetrics().heightPixels;
 			densityDpi = context.getResources().getDisplayMetrics().densityDpi;
@@ -62,100 +67,52 @@ public class DeviceInformant {
 		}
 	}
 
-	public String getDeviceMode() {
-		return deviceMode;
-	}
-
-	public void setDeviceMode(String deviceMode) {
-		this.deviceMode = deviceMode;
+	public String getDeveiceImsi() {
+		return deveiceImsi;
 	}
 
 	public String getOsSystem() {
 		return osSystem;
 	}
 
-	public void setOsSystem(String osSystem) {
-		this.osSystem = osSystem;
-	}
-
 	public String getOsSystemVer() {
 		return osSystemVer;
 	}
 
-	public void setOsSystemVer(String osSystemVer) {
-		this.osSystemVer = osSystemVer;
+	public String getDeviceMode() {
+		return deviceMode;
 	}
 
-	public String getRomVer() {
-		return romVer;
+	public int getVersionCode() {
+		return versionCode;
 	}
 
-	public void setRomVer(String romVer) {
-		this.romVer = romVer;
-	}
-
-	public int getAppVerCode() {
-		return appVerCode;
-	}
-
-	public void setAppVerCode(int appVerCode) {
-		this.appVerCode = appVerCode;
+	public String getVersionName() {
+		return versionName;
 	}
 
 	public String getCountryCode() {
 		return countryCode;
 	}
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-
 	public String getDeviceID() {
 		return deviceID;
-	}
-
-	public void setDeviceID(String deviceID) {
-		this.deviceID = deviceID;
-	}
-
-	public int getScreenHeight() {
-		return screenHeight;
-	}
-
-	public void setScreenHeight(int screenHeight) {
-		this.screenHeight = screenHeight;
-	}
-
-	public int getScreenWidth() {
-		return screenWidth;
-	}
-
-	public void setScreenWidth(int screenWidth) {
-		this.screenWidth = screenWidth;
-	}
-
-	public int getDensityDpi() {
-		return densityDpi;
-	}
-
-	public void setDensityDpi(int densityDpi) {
-		this.densityDpi = densityDpi;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public int getDensityDpi() {
+		return densityDpi;
 	}
 
 }
