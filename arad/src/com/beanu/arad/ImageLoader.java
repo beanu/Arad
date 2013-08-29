@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.beanu.arad.core.IImageLoader;
 import com.beanu.arad.image.BitmapLruCache;
 
@@ -12,18 +11,15 @@ public class ImageLoader implements IImageLoader {
 
 	private static final int MAX_IMAGE_CACHE_ENTIRES = 5 * 1024 * 1024;// 5MB
 	private static ImageLoader instance;
-	private RequestQueue mRequestQueue;
-	public static com.android.volley.toolbox.ImageLoader mImageLoader;
+	public com.android.volley.toolbox.ImageLoader mImageLoader;
 
-	private ImageLoader(Context ctx) {
-		mRequestQueue = Volley.newRequestQueue(ctx);
-		mImageLoader = new com.android.volley.toolbox.ImageLoader(mRequestQueue, new BitmapLruCache(
-				MAX_IMAGE_CACHE_ENTIRES));
+	private ImageLoader(Context ctx, RequestQueue rq) {
+		mImageLoader = new com.android.volley.toolbox.ImageLoader(rq, new BitmapLruCache(MAX_IMAGE_CACHE_ENTIRES));
 	}
 
-	public static ImageLoader getInstance(Context ctx) {
+	public static ImageLoader getInstance(Context ctx, RequestQueue rq) {
 		if (instance == null) {
-			instance = new ImageLoader(ctx);
+			instance = new ImageLoader(ctx, rq);
 		}
 		return instance;
 	}

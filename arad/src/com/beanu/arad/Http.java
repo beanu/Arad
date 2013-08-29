@@ -34,6 +34,10 @@ public class Http implements IHTTP {
 		return instance;
 	}
 
+	public RequestQueue getRequestQueue() {
+		return requestQueue;
+	}
+
 	@Override
 	public void get(String url, AjaxParams params, final AjaxCallBack<String> callBack) {
 
