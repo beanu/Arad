@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.beanu.arad.core.IHTTP;
 import com.beanu.arad.http.AjaxCallBack;
 import com.beanu.arad.http.AjaxParams;
+import com.beanu.arad.http.FileUploadHttp;
 import com.beanu.arad.http.OkHttpStack;
 import com.beanu.arad.utils.Log;
 
@@ -60,25 +61,31 @@ public class Http implements IHTTP {
 
 	@Override
 	public void post(String url, final AjaxParams params, final AjaxCallBack<String> callBack) {
-		requestQueue.add(new StringRequest(Method.POST, url, new Listener<String>() {
+		if (params.getFileParams().isEmpty()) {
+			requestQueue.add(new StringRequest(Method.POST, url, new Listener<String>() {
 
-			@Override
-			public void onResponse(String response) {
-				callBack.onSuccess(response);
-			}
-		}, new ErrorListener() {
+				@Override
+				public void onResponse(String response) {
+					callBack.onSuccess(response);
+				}
+			}, new ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				int statusCode = error.networkResponse == null ? 0 : error.networkResponse.statusCode;
-				callBack.onFailure(error, statusCode, error.getMessage());
-			}
-		}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				return params.getUrlParams();
-			}
-		});
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					int statusCode = error.networkResponse == null ? 0 : error.networkResponse.statusCode;
+					callBack.onFailure(error, statusCode, error.getMessage());
+				}
+			}) {
+				@Override
+				protected Map<String, String> getParams() throws AuthFailureError {
+					return params.getUrlParams();
+				}
+			});
+		} else {
+			FileUploadHttp fileHttp = new FileUploadHttp(params.getEntity(), callBack);
+			fileHttp.execute(url);
+		}
+
 	}
 
 	private String getUrlWithQueryString(String url, AjaxParams params) {

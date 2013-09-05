@@ -40,7 +40,8 @@ public class MessageUtil {
 
 	public static void showLongToast(Context context, String text) {
 		try {
-			Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+			if (!text.equals(""))
+				Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
 		}
 
@@ -48,7 +49,8 @@ public class MessageUtil {
 
 	public static void showShortToast(Context context, String text) {
 		try {
-			Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+			if (!text.equals(""))
+				Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
 		}
 
