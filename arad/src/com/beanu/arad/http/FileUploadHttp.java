@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +18,7 @@ import android.os.AsyncTask;
  * @author beanu
  * 
  */
-public class FileUploadHttp extends AsyncTask<String, Void, HttpResponse> {
+public class FileUploadHttp extends AsyncTask<String, Void, String> {
 
 	private HttpEntity mEntity;
 	private AjaxCallBack<String> callBack;
@@ -30,34 +29,27 @@ public class FileUploadHttp extends AsyncTask<String, Void, HttpResponse> {
 	}
 
 	@Override
-	protected HttpResponse doInBackground(String... params) {
+	protected String doInBackground(String... params) {
 		HttpPost post = new HttpPost(params[0]);
 		HttpClient client = new DefaultHttpClient();
 		post.setEntity(mEntity);
-		HttpResponse response = null;
+		String result = null;
 
 		try {
-			response = client.execute(post);
+			HttpResponse response = client.execute(post);
+			result = EntityUtils.toString(response.getEntity());
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return response;
+		return result;
 	}
 
 	@Override
-	protected void onPostExecute(HttpResponse result) {
+	protected void onPostExecute(String result) {
 		if (result != null) {
-			String response = "";
-			try {
-				response = EntityUtils.toString(result.getEntity());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			callBack.onSuccess(response);
+			callBack.onSuccess(result);
 		} else {
 			callBack.onFailure(null, 0, "请求错误");
 		}
