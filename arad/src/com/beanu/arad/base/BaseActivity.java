@@ -1,8 +1,7 @@
 package com.beanu.arad.base;
 
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
-
-import com.beanu.arad.base.progress.ProgressActivity;
 
 /**
  * 检测Actionbar的home 事件
@@ -10,7 +9,7 @@ import com.beanu.arad.base.progress.ProgressActivity;
  * @author beanu
  * 
  */
-public class BaseActivity extends ProgressActivity {
+public class BaseActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

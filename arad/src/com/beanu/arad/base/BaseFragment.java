@@ -1,10 +1,9 @@
 package com.beanu.arad.base;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
-import com.beanu.arad.base.progress.ProgressFragment;
-
-public class BaseFragment extends ProgressFragment {
+public class BaseFragment extends Fragment {
 	/**
 	 * when activity is recycled by system, isFirstTimeStartFlag will be reset
 	 * to default true, when activity is recreated because a configuration
@@ -46,7 +45,7 @@ public class BaseFragment extends ProgressFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setRetainInstance(true);
+		// setRetainInstance(true);
 	}
 
 }
