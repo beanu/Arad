@@ -6,6 +6,7 @@ package com.beanu.arad.base;
  * @author beanu
  * 
  */
+@Deprecated
 public interface INetActivity {
 
 	public void onRefresh(Object... param);

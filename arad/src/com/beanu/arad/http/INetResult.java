@@ -9,9 +9,11 @@ package com.beanu.arad.http;
 public interface INetResult {
 
 	/**
+	 * 访问网络成功后更新UI
 	 * 
-	 * @param success
-	 *            网络访问成功还是失败
+	 * @param type
+	 *            第几个网络请求
+	 * 
 	 */
 	public void onSuccess(int type);
 
