@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ACTIVITY_ENTRY_NAME</string>
+
     <string name="scan_tip">请将二维码置于取景框内扫描</string>
     <string name="scan_title">扫一扫</string>
+
 </resources>

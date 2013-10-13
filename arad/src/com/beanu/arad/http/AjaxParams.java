@@ -224,6 +224,10 @@ public class AjaxParams {
 		return urlParams;
 	}
 
+	public ConcurrentHashMap<String, FileWrapper> getFileParams() {
+		return fileParams;
+	}
+
 	private static class FileWrapper {
 		public InputStream inputStream;
 		public String fileName;
