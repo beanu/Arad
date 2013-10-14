@@ -42,6 +42,7 @@ public class ImageLoader implements IImageLoader {
 		else
 			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, defaultImageResId,
 					defaultImageResId));
+
 	}
 
 	@Override
@@ -50,6 +51,16 @@ public class ImageLoader implements IImageLoader {
 		} else {
 			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, 0, 0));
 		}
+	}
+
+	@Override
+	public void display(String url, ImageView imageView, int defaultImageResId, int maxWidth, int maxHeight) {
+		if (!loadingWhen3G && !AndroidUtil.isWifiNetworkAvailable(context)) {
+		} else {
+			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, 0, 0), maxWidth,
+					maxHeight);
+		}
+
 	}
 
 	@Override
@@ -67,4 +78,5 @@ public class ImageLoader implements IImageLoader {
 		loadingWhen3G = load;
 		return loadingWhen3G;
 	}
+
 }
