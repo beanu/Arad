@@ -4,7 +4,7 @@
     <facet type="android" name="Android">
       <configuration>
         <option name="LIBRARY_PROJECT" value="true" />
-        <option name="UPDATE_PROPERTY_FILES" value="true" />
+        <option name="UPDATE_PROPERTY_FILES" value="false" />
       </configuration>
     </facet>
   </component>
@@ -14,10 +14,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="arad_libs" level="project" />
+    <orderEntry type="library" exported="" name="appcompat_libs" level="project" />
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
-    <orderEntry type="library" exported="" name="arad_zxing_libs" level="project" />
+    <orderEntry type="module" module-name="appcompat" exported="" />
   </component>
 </module>
 
