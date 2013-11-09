@@ -11,11 +11,12 @@ public interface INetResult {
 	/**
 	 * 访问网络成功后更新UI
 	 * 
-	 * @param type
-	 *            第几个网络请求
+	 * @param NetRequestOrderNum
+	 *            网络请求顺序号，第一个请求，NetRequestOrderNum=0,处理第一条请求的结果。如果等于1,
+	 *            表示处理此页面的第二条请求
 	 * 
 	 */
-	public void onSuccess(int type);
+	public void onSuccess(int NetRequestOrderNum);
 
 	public void onFaild(String errorMessage);
 }

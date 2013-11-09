@@ -8,6 +8,8 @@ public interface IImageLoader {
 
 	public void display(String url, ImageView imageView, int defaultImageResId);
 
+	public void display(String url, ImageView imageView, int defaultImageResId, int maxWidth, int maxHeight);
+
 	public void display(String url, ImageView imageView, int defaultImageResId, int errorImageResId);
 
 	/**
