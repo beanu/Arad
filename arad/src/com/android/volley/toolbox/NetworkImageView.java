@@ -16,6 +16,10 @@
 package com.android.volley.toolbox;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
@@ -30,6 +34,8 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
  * associated request.
  */
 public class NetworkImageView extends ImageView {
+
+    private static final int FADE_IN_TIME_MS = 250;
     /** The URL of the network image to load */
     private String mUrl;
 
@@ -164,7 +170,14 @@ public class NetworkImageView extends ImageView {
                         }
 
                         if (response.getBitmap() != null) {
-                            setImageBitmap(response.getBitmap());
+//                            setImageBitmap(response.getBitmap());
+                            TransitionDrawable td = new TransitionDrawable(new Drawable[]{
+                                    new ColorDrawable(android.R.color.transparent),
+                                    new BitmapDrawable(getContext().getResources(), response.getBitmap())
+                            });
+
+                            setImageDrawable(td);
+                            td.startTransition(FADE_IN_TIME_MS);
                         } else if (mDefaultImageId != 0) {
                             setImageResource(mDefaultImageId);
                         }

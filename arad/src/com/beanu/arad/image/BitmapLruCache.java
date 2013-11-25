@@ -21,6 +21,7 @@ import android.support.v4.util.LruCache;
 
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 
+@Deprecated
 public class BitmapLruCache extends LruCache<String, Bitmap> implements ImageCache {
 	public BitmapLruCache(int maxSize) {
 		super(maxSize);

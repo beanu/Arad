@@ -1,13 +1,25 @@
 package com.beanu.arad;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.beanu.arad.core.IImageLoader;
 import com.beanu.arad.image.BitmapLruCache;
 import com.beanu.arad.utils.AndroidUtil;
 
+/**
+ * @see com.squareup.picasso.Picasso instead of {@link com.beanu.arad.ImageLoader}
+ */
+@Deprecated
 public class ImageLoader implements IImageLoader {
 
 	private static final int MAX_IMAGE_CACHE_ENTIRES = 5 * 1024 * 1024;// 5MB
@@ -40,8 +52,8 @@ public class ImageLoader implements IImageLoader {
 		if (!loadingWhen3G && !AndroidUtil.isWifiNetworkAvailable(context))
 			imageView.setImageResource(defaultImageResId);
 		else
-			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, defaultImageResId,
-					defaultImageResId));
+			mImageLoader.get(url, getImageListener(imageView, defaultImageResId,
+                    defaultImageResId, true));
 
 	}
 
@@ -49,7 +61,7 @@ public class ImageLoader implements IImageLoader {
 	public void display(String url, ImageView imageView) {
 		if (!loadingWhen3G && !AndroidUtil.isWifiNetworkAvailable(context)) {
 		} else {
-			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, 0, 0));
+			mImageLoader.get(url, getImageListener(imageView, 0, 0, true));
 		}
 	}
 
@@ -57,7 +69,7 @@ public class ImageLoader implements IImageLoader {
 	public void display(String url, ImageView imageView, int defaultImageResId, int maxWidth, int maxHeight) {
 		if (!loadingWhen3G && !AndroidUtil.isWifiNetworkAvailable(context)) {
 		} else {
-			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, 0, 0), maxWidth,
+			mImageLoader.get(url, getImageListener(imageView, 0, 0, true), maxWidth,
 					maxHeight);
 		}
 
@@ -68,8 +80,7 @@ public class ImageLoader implements IImageLoader {
 		if (!loadingWhen3G && !AndroidUtil.isWifiNetworkAvailable(context))
 			imageView.setImageResource(defaultImageResId);
 		else
-			mImageLoader.get(url, com.android.volley.toolbox.ImageLoader.getImageListener(imageView, defaultImageResId,
-					errorImageResId));
+			mImageLoader.get(url, getImageListener(imageView, defaultImageResId, errorImageResId, true));
 
 	}
 
@@ -78,5 +89,48 @@ public class ImageLoader implements IImageLoader {
 		loadingWhen3G = load;
 		return loadingWhen3G;
 	}
+
+    public static com.android.volley.toolbox.ImageLoader.ImageListener getImageListener(final ImageView view, final int defaultImageResId, final int errorImageResId, final boolean shouldAnimate) {
+
+        final long ANIMATION_DURATION_MS = 300;
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            final Resources mResources = view.getContext().getResources();
+//        }
+        return new com.android.volley.toolbox.ImageLoader.ImageListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (errorImageResId != 0) {
+                    view.setImageResource(errorImageResId);
+                }
+            }
+
+            @SuppressLint("NewApi")
+            @Override
+            public void onResponse(com.android.volley.toolbox.ImageLoader.ImageContainer response, boolean isImmediate) {
+                if (response.getBitmap() != null) {
+                    if (shouldAnimate && !isImmediate) {
+                        // Animation
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            view.setAlpha(0f);
+                            view.setImageBitmap(response.getBitmap());
+                            view.animate().alpha(1f).setDuration(ANIMATION_DURATION_MS);
+                        } else {
+                            TransitionDrawable td = new TransitionDrawable(new Drawable[] {
+                                    new ColorDrawable(android.R.color.transparent),
+                                    new BitmapDrawable(mResources, response.getBitmap())
+                            });
+                            view.setImageDrawable(td);
+                            td.startTransition((int) ANIMATION_DURATION_MS);
+                        }
+                    } else {
+                        view.setImageBitmap(response.getBitmap());
+                    }
+                } else if (defaultImageResId != 0) {
+                    view.setImageResource(defaultImageResId);
+                }
+            }
+        };
+    }
 
 }

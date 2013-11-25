@@ -19,8 +19,8 @@ public class AradApplicationConfig {
 		daoConfig.setDbName("arad.db");
 	}
 
-	/**
-	 * 如果SD卡存在，则存在SD/Android/PACKAGE_NAME/cache/aradCache
+    /**
+     * 如果SD卡存在，则存在SD/Android/PACKAGE_NAME/cache/aradCache
 	 * 如果没有SD卡，则存在/data/data/PACKAGE_NAME/cache/aradCache
 	 * */
 	public String imageCacheFolder = "aradCache"; // TODO
