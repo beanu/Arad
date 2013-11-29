@@ -13,6 +13,9 @@ import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.view.animation.AnimationUtils;
 
+/**
+ * 可以实时变换颜色的Drawable
+ */
 public class ColorAnimationDrawable extends Drawable implements Animatable {
 	private static final long FRAME_DURATION = 1000 / 60;
 	private static final long ANIMATION_DURATION = 1500;
