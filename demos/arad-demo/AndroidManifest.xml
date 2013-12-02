@@ -33,12 +33,9 @@
         </activity>
         <activity android:name="com.beanu.arad.demo.ColorBarActivity" >
         </activity>
-        <activity android:name="com.beanu.arad.demo.ScrollToTopActivity" >
-        </activity>
         <activity android:name="com.beanu.arad.demo.VolleyTestActivity" >
         </activity>
         <activity android:name="com.beanu.arad.demo.LoadMoreActivity" />
-        <activity android:name="com.beanu.arad.demo.DownloadManagerActivity" />
     </application>
 
 </manifest>

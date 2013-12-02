@@ -26,11 +26,9 @@ public class AAActivity extends BaseActivity {
 		adapter = new ArrayAdapter<Class<?>>(getApplicationContext(), R.layout.aa_list_item);
 
 		adapter.add(MainActivity.class);
-		adapter.add(ScrollToTopActivity.class);
 		adapter.add(ColorBarActivity.class);
 		adapter.add(VolleyTestActivity.class);
 		adapter.add(LoadMoreActivity.class);
-		adapter.add(DownloadManagerActivity.class);
 
 		listView.setAdapter(adapter);
 
