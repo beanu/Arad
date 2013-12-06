@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class IDao {
+public abstract class IDao<T> {
 
     protected INetResult mResult;
     protected IHttpConfig mHttpConfig;
@@ -28,7 +28,7 @@ public abstract class IDao {
      * @param type
      * @throws java.io.IOException
      */
-    public abstract void onRequestSuccess(JsonNode result, int type) throws IOException;
+    public abstract void onRequestSuccess(T result, int type) throws IOException;
 
 
     /**
@@ -36,25 +36,32 @@ public abstract class IDao {
      *
      * @param params
      */
-    protected void getRequest(Map<String, String> params) {
-        _getRequest(params, 0);
+    protected void getRequest(String url, Map<String, String> params) {
+        _getRequest(url, params, 0);
     }
 
-    protected void getRequestForResult(Map<String, String> params, int requestCode) {
-        _getRequest(params, requestCode);
+    /**
+     * get请求网络，带有请求编号
+     *
+     * @param params
+     */
+    protected void getRequestForResult(String url, Map<String, String> params, int requestCode) {
+        _getRequest(url, params, requestCode);
     }
 
 
-    private void _getRequest(Map<String, String> params, final int type) {
+    private void _getRequest(String url, Map<String, String> params, final int type) {
 
         AjaxParams ajaxParams = new AjaxParams(params);
-        Arad.http.get(mHttpConfig.requestUrl(), ajaxParams, new AjaxCallBack<String>() {
+        Arad.http.get(url, ajaxParams, new AjaxCallBack<String>() {
             @Override
             public void onSuccess(String t) {
 
                 try {
-                    JsonNode node = mHttpConfig.handleResult(t);
-                    onRequestSuccess(node, type);
+                    if (mHttpConfig != null) {
+                        Object node = mHttpConfig.handleResult(t);
+                        onRequestSuccess((T) node, type);
+                    }
                     mResult.onSuccess(type);
                 } catch (AradException e) {
                     mResult.onFaild(e.getError_code(), e.getMessage());
@@ -84,8 +91,11 @@ public abstract class IDao {
             @Override
             public void onSuccess(String t) {
                 try {
-                    JsonNode node = mHttpConfig.handleResult(t);
-                    onRequestSuccess(node, type);
+                    if (mHttpConfig != null) {
+                        Object node = mHttpConfig.handleResult(t);
+                        onRequestSuccess((T) node, type);
+
+                    }
                     mResult.onSuccess(type);
                 } catch (AradException e) {
                     mResult.onFaild(e.getError_code(), e.getMessage());

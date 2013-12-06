@@ -8,14 +8,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 
 /**
+ * 默认的HTTP 处理,统一处理接口的一些共性的问题.比如 succeed==000是成功
  * Created by beanu on 13-11-29.
  */
 public class DefaultHttpConfig implements IHttpConfig {
 
-    @Override
-    public String requestUrl() {
-        return null;
-    }
 
     @Override
     public JsonNode handleResult(String result) throws AradException {
