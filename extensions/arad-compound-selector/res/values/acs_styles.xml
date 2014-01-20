@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="selector_list_left_item">
-        <item name="android:background">@drawable/acs_selector_left_item</item>
-        <item name="android:minWidth">36dp</item>
-    </style>
-
-</resources>
