@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pitch8">8dp</dimen>
+    <dimen name="popupWindow_width">280dp</dimen>
+    <dimen name="popupWindow_height">300dp</dimen>
+</resources>

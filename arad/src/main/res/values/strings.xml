@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Arad</string>
+
+    <!-- error -->
+    <string name="unknown_error_code">未知错误</string>
+
+</resources>
