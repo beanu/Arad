@@ -2,26 +2,46 @@ apply plugin: 'android-library'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+    }
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 15
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.4"
     }
-    release {
-        runProguard false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'com.android.support:support-v4:19.+'
     compile 'com.squareup.picasso:picasso:2.1.1'
     compile 'com.squareup.okhttp:okhttp:1.3.0'
     compile 'com.loopj.android:android-async-http:1.4.4'
     compile 'com.fasterxml.jackson.core:jackson-core:2.3.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.1'
+    compile 'com.github.johnkil.android-progressfragment:progressfragment-native:1.4.+'
 }
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository url: "file://${your_repository_location}"
+//            pom.version = version
+//            pom.groupId = groupId
+//            pom.artifactId = 'arad'
+//        }
+//    }
+//}

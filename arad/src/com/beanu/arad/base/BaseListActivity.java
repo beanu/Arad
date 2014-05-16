@@ -242,8 +242,8 @@ public class BaseListActivity extends BaseActivity {
      * @see android.app.Activity#onContentChanged()
      */
     @Override
-    public void onSupportContentChanged() {
-        super.onSupportContentChanged();
+    public void onContentChanged() {
+        super.onContentChanged();
         View emptyView = findViewById(R.id.empty);
         mList = (ListView)findViewById(R.id.list);
         if (mList == null) {

@@ -5,11 +5,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.10.+'
     }
 }
 
 allprojects {
+    groupId = 'com.beanu.arad'
+    version = '0.0.4'
+
     repositories {
         mavenCentral()
     }

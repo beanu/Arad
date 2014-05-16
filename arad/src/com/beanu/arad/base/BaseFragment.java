@@ -1,9 +1,9 @@
 package com.beanu.arad.base;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 
-public class BaseListFragment extends ListFragment {
+public class BaseFragment extends Fragment {
 	/**
 	 * when activity is recycled by system, isFirstTimeStartFlag will be reset
 	 * to default true, when activity is recreated because a configuration
@@ -41,4 +41,11 @@ public class BaseListFragment extends ListFragment {
 		else
 			return false;
 	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// setRetainInstance(true);
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.beanu.arad.base;
 
-import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
+import android.app.Activity;
 
 /**
  * 检测Actionbar的home 事件
@@ -9,7 +8,7 @@ import android.view.MenuItem;
  * @author beanu
  * 
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends Activity {
 
 //	@Override
 //	public boolean onOptionsItemSelected(MenuItem item) {
