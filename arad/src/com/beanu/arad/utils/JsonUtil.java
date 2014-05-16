@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import org.json.JSONArray;
+
 /**
  * JSON Mapper
  * 
@@ -68,6 +70,10 @@ public class JsonUtil {
 	public static JsonNode json2node(Reader reader) throws JsonProcessingException, IOException {
 		return objectMapper.readTree(reader);
 	}
+
+    public static JSONArray json2Array(String jsonAsString){
+        return objectMapper.read
+    }
 
 	public static <T> T json2value(Reader reader, Class<T> type) throws IOException, JsonParseException,
 			JsonMappingException {

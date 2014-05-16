@@ -1,5 +1,7 @@
 package com.beanu.arad;
 
+import com.beanu.arad.support.HttpConfig;
+
 import net.tsz.afinal.FinalDb.DaoConfig;
 
 /**
@@ -28,5 +30,7 @@ public class AradApplicationConfig {
      * 如果没有SD卡，则存在/data/data/PACKAGE_NAME/cache/aradCache
      */
     public String imageCacheFolder = "aradCache";
+
+    public HttpConfig httpConfig = new HttpConfig();
 
 }

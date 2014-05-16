@@ -18,21 +18,19 @@ import java.util.Map;
 public abstract class IDao<T> {
 
     protected INetResult mResult;
-    protected IHttpConfig mHttpConfig;
 
-    public IDao(INetResult activity, IHttpConfig httpConfig) {
+    public IDao(INetResult activity) {
         this.mResult = activity;
-        this.mHttpConfig = httpConfig;
     }
 
     /**
      * 得到结果后，对结果处理逻辑
      *
      * @param result
-     * @param type
+     * @param requestCode
      * @throws java.io.IOException
      */
-    public abstract void onRequestSuccess(T result, int type) throws IOException;
+    public abstract void onRequestSuccess(T result, int requestCode) throws IOException;
 
 
     /**
@@ -49,23 +47,23 @@ public abstract class IDao<T> {
      *
      * @param params
      */
-    protected void getRequestForResult(String url, Map<String, String> params, int requestCode) {
+    protected void getRequestForCode(String url, Map<String, String> params, int requestCode) {
         _getRequest(url, params, requestCode);
     }
 
 
-    private void _getRequest(String url, Map<String, String> params, final int type) {
+    private void _getRequest(String url, Map<String, String> params, final int requestCode) {
 
         RequestParams ajaxParams = new RequestParams(params);
         Arad.http.get(url, ajaxParams, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
-                    if (mHttpConfig != null) {
-                        Object node = mHttpConfig.handleResult(responseBody);
-                        onRequestSuccess((T) node, type);
+                    if (Arad.app.config.httpConfig != null) {
+                        Object node = Arad.app.config.httpConfig.handleResult(responseBody);
+                        onRequestSuccess((T) node, requestCode);
                     }
-                    mResult.onSuccess(type);
+                    mResult.onSuccess(requestCode);
                 } catch (AradException e) {
                     mResult.onFaild(e.getError_code(), e.getMessage());
                 } catch (JsonProcessingException e) {
@@ -86,19 +84,19 @@ public abstract class IDao<T> {
     /**
      * POST 请求
      *
-     * @param type 自定义这是第几个post请求，用于结果的区分
+     * @param requestCode 自定义这是第几个post请求，用于结果的区分
      */
-    public void postRequest(String url, RequestParams ajaxParams, final int type) {
+    public void postRequest(String url, RequestParams ajaxParams, final int requestCode) {
 
         Arad.http.post(url, ajaxParams, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
-                    if (mHttpConfig != null) {
-                        Object node = mHttpConfig.handleResult(responseBody);
-                        onRequestSuccess((T) node, type);
+                    if (Arad.app.config.httpConfig != null) {
+                        Object node = Arad.app.config.httpConfig.handleResult(responseBody);
+                        onRequestSuccess((T) node, requestCode);
                     }
-                    mResult.onSuccess(type);
+                    mResult.onSuccess(requestCode);
                 } catch (AradException e) {
                     mResult.onFaild(e.getError_code(), e.getMessage());
                 } catch (JsonProcessingException e) {
