@@ -71,10 +71,6 @@ public class JsonUtil {
 		return objectMapper.readTree(reader);
 	}
 
-    public static JSONArray json2Array(String jsonAsString){
-        return objectMapper.read
-    }
-
 	public static <T> T json2value(Reader reader, Class<T> type) throws IOException, JsonParseException,
 			JsonMappingException {
 		return objectMapper.readValue(reader, type);

@@ -3,8 +3,11 @@ package com.beanu.arad.support;
 import com.beanu.arad.Arad;
 import com.beanu.arad.error.AradException;
 import com.beanu.arad.http.INetResult;
+import com.beanu.arad.utils.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -15,7 +18,7 @@ import org.apache.http.Header;
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class IDao<T> {
+public abstract class IDao {
 
     protected INetResult mResult;
 
@@ -30,7 +33,7 @@ public abstract class IDao<T> {
      * @param requestCode
      * @throws java.io.IOException
      */
-    public abstract void onRequestSuccess(T result, int requestCode) throws IOException;
+    public abstract void onRequestSuccess(JsonNode result, int requestCode) throws IOException;
 
 
     /**
@@ -60,8 +63,8 @@ public abstract class IDao<T> {
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
                     if (Arad.app.config.httpConfig != null) {
-                        Object node = Arad.app.config.httpConfig.handleResult(responseBody);
-                        onRequestSuccess((T) node, requestCode);
+                        JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
+                        onRequestSuccess(node, requestCode);
                     }
                     mResult.onSuccess(requestCode);
                 } catch (AradException e) {
@@ -93,8 +96,8 @@ public abstract class IDao<T> {
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
                     if (Arad.app.config.httpConfig != null) {
-                        Object node = Arad.app.config.httpConfig.handleResult(responseBody);
-                        onRequestSuccess((T) node, requestCode);
+                        JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
+                        onRequestSuccess(node, requestCode);
                     }
                     mResult.onSuccess(requestCode);
                 } catch (AradException e) {
