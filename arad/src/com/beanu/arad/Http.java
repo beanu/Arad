@@ -3,6 +3,7 @@ package com.beanu.arad;
 import com.beanu.arad.core.IHTTP;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class Http implements IHTTP {
@@ -27,6 +28,11 @@ public class Http implements IHTTP {
     @Override
     public void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.post(url, params, responseHandler);
+    }
+
+    @Override
+    public void download(String url, BinaryHttpResponseHandler responseHandler) {
+        client.get(url,responseHandler);
     }
 
 }
