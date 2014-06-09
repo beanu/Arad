@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author zhe.yangz
  * 
  */
-public final class StringUtil {
+public final class StringUtils {
 	public static final String TAG = "StringUtil";
 
 	public static final String CHARSET_NAME_UTF8 = "UTF-8";
@@ -23,7 +23,7 @@ public final class StringUtil {
 			+ "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
 	public static final String EMPTY_STRING = "";
 
-	private StringUtil() {
+	private StringUtils() {
 	}
 
 	public static boolean isNull(String str) {

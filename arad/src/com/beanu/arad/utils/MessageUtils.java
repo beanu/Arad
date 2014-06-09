@@ -21,7 +21,7 @@ import android.widget.Toast;
  * 
  * @author zhe.yangz
  */
-public class MessageUtil {
+public class MessageUtils {
 	public static void showLongToast(Context context, int res) {
 		try {
 			Toast.makeText(context, res, Toast.LENGTH_LONG).show();
