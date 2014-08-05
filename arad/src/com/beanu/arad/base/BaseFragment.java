@@ -1,7 +1,7 @@
 package com.beanu.arad.base;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 public class BaseFragment extends Fragment {
 	/**

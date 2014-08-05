@@ -66,9 +66,9 @@ public abstract class IDao {
                         JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
                         onRequestSuccess(node, requestCode);
                     }
-                    mResult.onSuccess(requestCode);
+                    mResult.onRequestSuccess(requestCode);
                 } catch (AradException e) {
-                    mResult.onFaild(e.getError_code(), e.getMessage());
+                    mResult.onRequestFaild(e.getError_code(), e.getMessage());
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -78,7 +78,10 @@ public abstract class IDao {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
-                mResult.onFaild("mResult" + statusCode, responseBody);
+                if (statusCode == 0)
+                    mResult.onNoConnect();
+                else
+                    mResult.onRequestFaild("mResult" + statusCode, responseBody);
             }
         });
 
@@ -99,9 +102,9 @@ public abstract class IDao {
                         JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
                         onRequestSuccess(node, requestCode);
                     }
-                    mResult.onSuccess(requestCode);
+                    mResult.onRequestSuccess(requestCode);
                 } catch (AradException e) {
-                    mResult.onFaild(e.getError_code(), e.getMessage());
+                    mResult.onRequestFaild(e.getError_code(), e.getMessage());
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -111,7 +114,10 @@ public abstract class IDao {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
-                mResult.onFaild("mResult" + statusCode, responseBody);
+                if (statusCode == 0)
+                    mResult.onNoConnect();
+                else
+                    mResult.onRequestFaild("mResult" + statusCode, responseBody);
             }
         });
 

@@ -4,8 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import com.beanu.arad.utils.DeviceInformant;
-import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
+
+import de.greenrobot.event.EventBus;
 
 public abstract class AradApplication extends Application {
 
@@ -24,7 +25,7 @@ public abstract class AradApplication extends Application {
         Arad.imageLoader = Picasso.with(getApplicationContext());
         Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
         deviceInfo = new DeviceInformant(getApplicationContext());
-        Arad.bus=new Bus();
+        Arad.bus=new EventBus();
     }
 
     @Override

@@ -25,7 +25,8 @@ public class Http implements IHTTP {
     public static Http instance() {
         if (instance == null)
             instance = new Http();
-        ((DefaultHttpClient)client.getHttpClient()).addResponseInterceptor(new HttpResponseInterceptor() {
+        //TODO http拦截器-增加全局错误处理机制
+        ((DefaultHttpClient) client.getHttpClient()).addResponseInterceptor(new HttpResponseInterceptor() {
             @Override
             public void process(HttpResponse httpResponse, HttpContext httpContext) throws HttpException, IOException {
 
@@ -46,7 +47,7 @@ public class Http implements IHTTP {
 
     @Override
     public void download(String url, BinaryHttpResponseHandler responseHandler) {
-        client.get(url,responseHandler);
+        client.get(url, responseHandler);
     }
 
 }

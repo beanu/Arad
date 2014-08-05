@@ -1,8 +1,8 @@
 package com.beanu.arad;
 
 
-import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
+import de.greenrobot.event.EventBus;
 
 /**
  * Arad-Android Rapid Application Development
@@ -15,5 +15,5 @@ public class Arad {
     public static Http http;
     public static Picasso imageLoader;
     public static Preferences preferences;
-    public static Bus bus;
+    public static EventBus bus;
 }
