@@ -1,1 +1,2 @@
 include ':arad', ':arad-compound-selector'
+project(':arad-compound-selector').projectDir = new File('extensions/arad-compound-selector')

@@ -179,6 +179,7 @@ import android.widget.ListView;
  * @see #setListAdapter
  * @see android.widget.ListView
  */
+@Deprecated
 public class BaseListActivity extends BaseActivity {
     /**
      * This field should be made private, so it is hidden from the SDK.

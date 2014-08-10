@@ -15,6 +15,7 @@ import com.beanu.arad.utils.AnimUtil;
  * @author beanu
  * 
  */
+@Deprecated
 //TODO 写到一个类里面
 public class BaseActivityWithGD extends BaseActivity implements GestureDetector.OnGestureListener {
 

@@ -4,10 +4,11 @@ import android.app.Activity;
 
 /**
  * 检测Actionbar的home 事件
- * 
+ *
  * @author beanu
- * 
+ *
  */
+//TODO 继承ActionBarActiviy
 public class BaseActivity extends Activity {
 
 //	@Override

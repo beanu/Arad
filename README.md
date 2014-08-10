@@ -35,6 +35,6 @@ Arad使用到的依赖包
 * akita: https://github.com/xjanker/akita(工具的支持)
 
 
-github上好的解决方案
+常用的依赖包
 ===================
 *ImageViewZoom https://github.com/sephiroth74/ImageViewZoom

@@ -14,6 +14,7 @@ import com.beanu.arad.utils.AnimUtil;
  * @author beanu
  * 
  */
+@Deprecated
 public class BaseListActivityWithGD extends BaseListActivity implements GestureDetector.OnGestureListener {
 
 	private GestureDetector mDetector;
