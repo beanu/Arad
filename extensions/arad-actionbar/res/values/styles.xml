@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="actionbar_title" parent="android:Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+</resources>

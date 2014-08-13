@@ -1,9 +1,8 @@
 Arad
 ====
+##Arad-android rapid application development
 
-<p>Arad-android rapid application development
-
-<p>android快速应用开发框架
+###android快速应用开发框架
 
 Arad的特性
 =========
@@ -38,3 +37,4 @@ Arad使用到的依赖包
 常用的依赖包
 ===================
 *ImageViewZoom https://github.com/sephiroth74/ImageViewZoom
+*Android-ViewPagerIndicator https://github.com/JakeWharton/Android-ViewPagerIndicator
