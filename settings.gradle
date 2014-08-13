@@ -1,2 +1,3 @@
-include ':arad', ':arad-compound-selector'
+include ':arad', ':arad-compound-selector', ':arad-zxing'
 project(':arad-compound-selector').projectDir = new File('extensions/arad-compound-selector')
+project(':arad-zxing').projectDir = new File('extensions/arad-zxing')
