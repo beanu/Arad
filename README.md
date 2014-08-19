@@ -1,30 +1,44 @@
 Arad
 ====
-##Arad-android rapid application development
+##android快速应用开发框架
 
-###android快速应用开发框架
+`android rapid application development`
 
 Arad的特性
 =========
-* 全注解的开发，参考androidannotations，大大简化代码，注重业务的开发。并且是编译时的注解解析，对运行时速度没有任何影响
-* Http使用Volley框架（google I/O 大会上推荐的）一个比喻成快如箭的http访问框架，支持缓存
+* 注解开发，参考[Butterknife](https://github.com/JakeWharton/butterknife)，大大简化代码，注重业务的开发
+* Http使用[android-async-http](https://github.com/loopj/android-async-http)，标杆应用，异步http请求，多媒体文件上传下载，request线程池，大小只有60KB
 * Imageloader异步加载图片（Picasso）
 * 数据库模块，android中的orm框架，一行代码就可以进行增删改查。支持一对多，多对一等查询
 * Util 常用方法的集合
-* 多个控件的支持（如果控件带有资源文件，则被分配到library-project中，需要的时候，再加入依赖工程）
+* 多控件的支持（如果控件带有资源文件，则被分配到library-project中，需要的时候，再加入依赖工程）
 
 Arad快速上手
 ===========
-  1.继承AradApplication，配置ApplicationConfig
-  ---------------------
-  
-  2.继承
+  1. 继承AradApplication，配置ApplicationConfig
+  ```java
+  public class MyApplication extends AradApplication {
+    @Override
+    protected AradApplicationConfig appConfig() {
+        return new AradApplicationConfig();
+    }
+  }
+  ```
+  2. 开始使用Arad，在全局的任何地方
+  ```java
+  //http请求
+
+  //图片下载
+
+  //数据库访问
+
+  //view注解开发
+
+  ```
 
 Arad使用到的依赖包
 ===========
 * ActionBarCompat: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
-* androidannotations https://github.com/excilys/androidannotations
-* Volley https://android.googlesource.com/platform/frameworks/volley
 * Jackson https://github.com/FasterXML
 * Picasso https://github.com/square/picasso
 
@@ -34,7 +48,7 @@ Arad使用到的依赖包
 * akita: https://github.com/xjanker/akita(工具的支持)
 
 
-常用的依赖包
+推荐项目
 ===================
 *ImageViewZoom https://github.com/sephiroth74/ImageViewZoom
 *Android-ViewPagerIndicator https://github.com/JakeWharton/Android-ViewPagerIndicator
