@@ -1,8 +1,9 @@
 Arad
 ====
+
 ##android快速应用开发框架
 
-`android rapid application development`
+android rapid application development的简写`arad`
 
 Arad的特性
 =========
@@ -15,7 +16,9 @@ Arad的特性
 
 Arad快速上手
 ===========
+  
   1. 继承AradApplication，配置ApplicationConfig
+  
   ```java
   public class MyApplication extends AradApplication {
     @Override
@@ -24,7 +27,9 @@ Arad快速上手
     }
   }
   ```
+  
   2. 开始使用Arad，在全局的任何地方
+  
   ```java
   //http请求
 
@@ -36,14 +41,11 @@ Arad快速上手
 
   ```
 
-Arad使用到的依赖包
-===========
+感谢以下项目的支持
+==================
 * ActionBarCompat: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
 * Jackson https://github.com/FasterXML
 * Picasso https://github.com/square/picasso
-
-感谢以下项目的支持
-==================
 * afinal: https://github.com/yangfuhai/afinal(afinal的数据库orm)
 * akita: https://github.com/xjanker/akita(工具的支持)
 
