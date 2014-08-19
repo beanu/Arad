@@ -8,7 +8,7 @@ import android.widget.ImageView;
  *
  * @author beanu
  */
-public class MyFragment extends _MyFragment {
+public class ActionBarFragment extends _MyFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

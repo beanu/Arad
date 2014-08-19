@@ -8,7 +8,7 @@ import android.widget.ImageView;
  * @author beanu
  * 
  */
-public class MyListFragment extends _MyListFragment {
+public class ActionBarListFragment extends _MyListFragment {
 
 	@Override
 	protected String getActionBarTitle() {

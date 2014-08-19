@@ -3,7 +3,9 @@ package com.beanu.arad.actionbar;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.beanu.arad.http.INetResult;
 import com.beanu.arad.utils.AnimUtil;
+import com.beanu.arad.utils.MessageUtils;
 
 /**
  * 添加自定义头部
@@ -12,7 +14,7 @@ import com.beanu.arad.utils.AnimUtil;
  *
  * @author beanu
  */
-public class MyActivity extends _MyActivity {
+public class ActionBarActivity extends _MyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,4 +45,5 @@ public class MyActivity extends _MyActivity {
     protected boolean setActionBarRightButton(ImageView rightButton) {
         return false;
     }
+
 }

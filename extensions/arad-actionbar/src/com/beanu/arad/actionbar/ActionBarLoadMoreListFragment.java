@@ -7,7 +7,7 @@ import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
 /**
  * Created by beanu on 14-3-23.
  */
-public abstract class MyLoadMoreListFragment extends MyListFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ActionBarLoadMoreListFragment extends ActionBarListFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
 
     protected int lastItem;
 
