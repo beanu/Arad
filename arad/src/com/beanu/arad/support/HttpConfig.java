@@ -16,14 +16,9 @@ public class HttpConfig {
     private String errorKey = "error_code";
 
     public HttpConfig() {
-
     }
 
-    HttpConfig(String errorKey) {
-        this.errorKey = errorKey;
-    }
-
-    public void setErrorKey(String errorKey) {
+    public HttpConfig(String errorKey) {
         this.errorKey = errorKey;
     }
 

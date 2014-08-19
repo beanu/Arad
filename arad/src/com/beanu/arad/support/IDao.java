@@ -81,7 +81,7 @@ public abstract class IDao {
                 if (statusCode == 0)
                     mResult.onNoConnect();
                 else
-                    mResult.onRequestFaild("mResult" + statusCode, responseBody);
+                    mResult.onRequestFaild("" + statusCode, responseBody);
             }
         });
 
@@ -117,7 +117,7 @@ public abstract class IDao {
                 if (statusCode == 0)
                     mResult.onNoConnect();
                 else
-                    mResult.onRequestFaild("mResult" + statusCode, responseBody);
+                    mResult.onRequestFaild("" + statusCode, responseBody);
             }
         });
 
