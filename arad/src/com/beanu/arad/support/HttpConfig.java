@@ -6,20 +6,27 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 默认的HTTP 处理,统一处理接口的错误信息
+ * 接口每个人的处理方式不一样，表达的方式也不一样。所以这个类最好是复写
  * Created by beanu on 13-11-29.
  */
 public class HttpConfig {
 
     private String errorKey = "error_code";
 
+    private List<String> errorCodes = new ArrayList<String>();
+
     public HttpConfig() {
+        handleInErrorCode(errorCodes);
     }
 
     public HttpConfig(String errorKey) {
         this.errorKey = errorKey;
+        handleInErrorCode(errorCodes);
     }
 
     public JsonNode handleResult(String result) throws AradException {
@@ -27,7 +34,7 @@ public class HttpConfig {
         try {
             JsonNode node = JsonUtil.json2node(result);
             JsonNode error = node.findValue(errorKey);
-            if (error == null) {
+            if (error == null || errorCodes.contains(error)) {
                 return node;
             } else {
                 String statue = error.asText();
@@ -44,5 +51,11 @@ public class HttpConfig {
             AradException exception = new AradException(e1.getMessage());
             throw exception;
         }
+    }
+
+    /**
+     * 返回的状态值中 不是错误信息的，需要也去去处理数据的，单独提出来
+     */
+    public void handleInErrorCode(List<String> errorCodes) {
     }
 }
