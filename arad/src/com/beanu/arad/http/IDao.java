@@ -1,15 +1,10 @@
-package com.beanu.arad.support;
+package com.beanu.arad.http;
 
 import com.beanu.arad.Arad;
 import com.beanu.arad.error.AradException;
 import com.beanu.arad.http.INetResult;
-import com.beanu.arad.utils.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -92,8 +87,9 @@ public abstract class IDao {
      *
      * @param requestCode 自定义这是第几个post请求，用于结果的区分
      */
-    public void postRequest(String url, RequestParams ajaxParams, final int requestCode) {
+    public void postRequest(String url, Map<String, Object> params, final int requestCode) {
 
+        RequestParams ajaxParams = new RequestParams(params);
         Arad.http.post(url, ajaxParams, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {

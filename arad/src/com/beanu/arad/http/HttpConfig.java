@@ -1,4 +1,4 @@
-package com.beanu.arad.support;
+package com.beanu.arad.http;
 
 import com.beanu.arad.error.AradException;
 import com.beanu.arad.utils.JsonUtil;
@@ -34,7 +34,7 @@ public class HttpConfig {
         try {
             JsonNode node = JsonUtil.json2node(result);
             JsonNode error = node.findValue(errorKey);
-            if (error == null || errorCodes.contains(error)) {
+            if (error == null || errorCodes.contains(error.asText())) {
                 return node;
             } else {
                 String statue = error.asText();
