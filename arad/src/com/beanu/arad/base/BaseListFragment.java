@@ -3,6 +3,7 @@ package com.beanu.arad.base;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 
+@Deprecated
 public class BaseListFragment extends ListFragment {
     /**
      * when activity is recycled by system, isFirstTimeStartFlag will be reset

@@ -9,6 +9,7 @@ import android.app.Activity;
  *
  */
 //TODO 继承ActionBarActiviy
+    @Deprecated
 public class BaseActivity extends Activity {
 
 //	@Override

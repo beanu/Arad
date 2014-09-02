@@ -2,9 +2,10 @@ package com.beanu.arad.http;
 
 import com.beanu.arad.Arad;
 import com.beanu.arad.error.AradException;
-import com.beanu.arad.http.INetResult;
+import com.beanu.arad.utils.Log;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -53,9 +54,12 @@ public abstract class IDao {
     private void _getRequest(String url, Map<String, String> params, final int requestCode) {
 
         RequestParams ajaxParams = new RequestParams(params);
+        Log.d(AsyncHttpClient.getUrlWithQueryString(true, url, ajaxParams));
+
         Arad.http.get(url, ajaxParams, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                Log.d(responseBody);
                 try {
                     if (Arad.app.config.httpConfig != null) {
                         JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
@@ -73,6 +77,7 @@ public abstract class IDao {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                Log.d("statusCode:" + statusCode + " Body:" + responseBody);
                 if (statusCode == 0)
                     mResult.onNoConnect();
                 else
@@ -90,6 +95,7 @@ public abstract class IDao {
     public void postRequest(String url, Map<String, Object> params, final int requestCode) {
 
         RequestParams ajaxParams = new RequestParams(params);
+        Log.d(url + " params:" + ajaxParams.toString());
         Arad.http.post(url, ajaxParams, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
@@ -118,6 +124,5 @@ public abstract class IDao {
         });
 
     }
-
 
 }

@@ -84,7 +84,6 @@ public class DB implements IDB {
 	@Override
 	public <T> void deleteByWhere(Class<?> clazz, String strWhere) {
 		db.deleteByWhere(clazz, strWhere);
-
 	}
 
 }

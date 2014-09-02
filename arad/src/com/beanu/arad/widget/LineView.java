@@ -11,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -72,11 +71,11 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 
             ValueAnimator animatorX = ObjectAnimator.ofFloat(this, "currentX", dataX);
             animatorX.setDuration(2000);
-            animatorX.setInterpolator(new DecelerateInterpolator());
+            animatorX.setInterpolator(new LinearInterpolator());
 
             ValueAnimator animatorY = ObjectAnimator.ofFloat(this, "currentY", dataY);
             animatorY.setDuration(2000);
-            animatorY.setInterpolator(new DecelerateInterpolator());
+            animatorY.setInterpolator(new LinearInterpolator());
             animatorY.addUpdateListener(this);
 
             if (animatorSet != null)
@@ -85,6 +84,7 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 
             animatorSet = new AnimatorSet();
             animatorSet.playTogether(animatorX, animatorY);
+            animatorSet.setStartDelay(1000);
             animatorSet.start();
         }
     }
@@ -125,7 +125,7 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
     @Override
     public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
-        Log.d("TEST", "currentX:" + currentX + " currentY:" + currentY);
+//        Log.d("TEST", "currentX:" + currentX + " currentY:" + currentY);
         path.lineTo(currentX, currentY);
         invalidate();
     }

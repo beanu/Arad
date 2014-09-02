@@ -41,7 +41,7 @@ public class Log {
 	 * @param msg
 	 */
 	public static void d(String msg) {
-		if (BuildConfig.DEBUG)
+//		if (BuildConfig.DEBUG)
 			android.util.Log.d(TAG, buildMessage(msg));
 	}
 

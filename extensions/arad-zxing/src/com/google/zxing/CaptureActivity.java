@@ -1,7 +1,6 @@
 
 package com.google.zxing;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -11,10 +10,11 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v7.app.ActionBarActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.view.Window;
+
 import com.google.zxing.camera.CameraManager;
 import com.google.zxing.decoding.CaptureActivityHandler;
 import com.google.zxing.decoding.InactivityTimer;
@@ -31,7 +31,7 @@ import java.util.Vector;
  * @author yeungeek
  * @date 2013-4-28 下午12:59:44
  */
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends ActionBarActivity implements Callback {
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
@@ -51,7 +51,6 @@ public class CaptureActivity extends Activity implements Callback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.zxing_code_scan);
 
         CameraManager.init(getApplication());

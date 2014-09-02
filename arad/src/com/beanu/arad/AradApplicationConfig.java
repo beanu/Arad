@@ -1,6 +1,6 @@
 package com.beanu.arad;
 
-import com.beanu.arad.support.HttpConfig;
+import com.beanu.arad.http.HttpConfig;
 
 import net.tsz.afinal.FinalDb.DaoConfig;
 
