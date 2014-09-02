@@ -52,6 +52,6 @@ Arad快速上手
 
 推荐项目
 ===================
-* [ImageViewZoom](https://github.com/sephiroth74/ImageViewZoom)
+* [PhotoView](https://github.com/chrisbanes/PhotoView) 图片手势缩放库
 * [Android-ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
-* [android-crop](https://github.com/jdamcd/android-crop)
+* [android-crop](https://github.com/jdamcd/android-crop) 图片剪切类库
