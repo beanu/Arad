@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="listview_item_normal">#eef0ed</color>
-    <color name="listview_item_pressed">#d4d4d4</color>
+    <color name="listview_item_normal">#ffffff</color>
+    <color name="listview_item_pressed">#ededed</color>
 </resources>

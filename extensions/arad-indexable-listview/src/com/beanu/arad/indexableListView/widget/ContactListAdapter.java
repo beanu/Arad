@@ -34,7 +34,7 @@ public class ContactListAdapter extends ArrayAdapter<ContactItemInterface> {
     }
 
     // get the section textview from row view
-    // the section view will only be shown for the first item
+// the section view will only be shown for the first item
     public TextView getSectionTextView(View rowView) {
         TextView sectionTextView = (TextView) rowView
                 .findViewById(R.id.sectionTextView);
@@ -64,7 +64,7 @@ public class ContactListAdapter extends ArrayAdapter<ContactItemInterface> {
     }
 
     // do all the data population for the row here
-    // subclass overwrite this to draw more items
+// subclass overwrite this to draw more items
     public void populateDataForRow(View parentView, ContactItemInterface item,
                                    int position) {
         // default just draw the item only
