@@ -54,4 +54,4 @@ Arad快速上手
 ===================
 * [PhotoView](https://github.com/chrisbanes/PhotoView) 图片手势缩放库
 * [Android-ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
-* [android-crop](https://github.com/jdamcd/android-crop) 图片剪切类库
+* [android-crop](https://github.com/jdamcd/android-crop) 图片剪切类库 (有 OOM bug,所以自写了一个，使用arad-crop)
