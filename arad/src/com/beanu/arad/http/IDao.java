@@ -94,7 +94,13 @@ public abstract class IDao {
      */
     public void postRequest(String url, Map<String, Object> params, final int requestCode) {
 
-        RequestParams ajaxParams = new RequestParams(params);
+        RequestParams ajaxParams = new RequestParams();
+        if (params != null) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                ajaxParams.put(entry.getKey(), entry.getValue());
+            }
+        }
+
         Log.d(url + " params:" + ajaxParams.toString());
         Arad.http.post(url, ajaxParams, new TextHttpResponseHandler() {
             @Override

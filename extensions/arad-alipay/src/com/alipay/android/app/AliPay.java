@@ -18,7 +18,7 @@ import java.util.Date;
  * 支付宝支付
  * Created by beanu on 14-9-12.
  */
-public abstract class AliPay implements IPay {
+public class AliPay implements IPay {
 
     public static final String TAG = "alipay";
 
@@ -96,6 +96,16 @@ public abstract class AliPay implements IPay {
         }
     }
 
+    @Override
+    public void paySuccess(String result) {
+
+    }
+
+    @Override
+    public void payFaild(String result) {
+
+    }
+
 
     private String getNewOrderInfo(String subject, String body, String price) {
         StringBuilder sb = new StringBuilder();
@@ -109,10 +119,9 @@ public abstract class AliPay implements IPay {
         sb.append(body);
         sb.append("\"&total_fee=\"");
         sb.append(price);
-        sb.append("\"&notify_url=\"");
-
+//        sb.append("\"&notify_url=\"");
         // 网址需要做URL编码
-        sb.append(URLEncoder.encode("http://notify.java.jpxx.org/index.jsp"));
+//        sb.append(URLEncoder.encode("http://notify.java.jpxx.org/index.jsp"));
         sb.append("\"&service=\"mobile.securitypay.pay");
         sb.append("\"&_input_charset=\"UTF-8");
         sb.append("\"&return_url=\"");

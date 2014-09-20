@@ -7,8 +7,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathEffect;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -120,6 +122,18 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
         super.onDraw(canvas);
         canvas.translate(8, 8);
         canvas.drawPath(path, paint);
+
+        Paint p1 = new Paint();
+        p1.setStyle(Paint.Style.STROKE);
+        p1.setAntiAlias(true);
+        p1.setColor(Color.WHITE);
+        p1.setStrokeWidth(2);
+
+        initTable();
+        drawXLine(canvas, p1);
+        drawYLine(canvas, p1);
+        drawTable(canvas);
+
     }
 
     @Override
@@ -161,5 +175,88 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 
     public void setDataY(float[] dataY) {
         this.dataY = dataY;
+    }
+
+    // 默认边距
+    private int Margin = 40;
+    // 原点坐标
+    private int Xpoint;
+    private int Ypoint;
+    // X,Y轴的单位长度
+    private int Xscale = 20;
+    private int Yscale = 20;
+    // X,Y轴上面的显示文字
+    private String[] Xlabel = {"04", "05", "06", "07", "08", "09", "10"};
+    private String[] Ylabel = {"10", "15", "20", "25", "30", "35"};
+
+    // 画表格
+    private void drawTable(Canvas canvas) {
+        Paint paintText = new Paint();
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.WHITE);
+        Path path = new Path();
+        PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 1);
+        paint.setPathEffect(effects);
+
+        paintText.setColor(Color.WHITE);
+        paintText.setTextSize(this.Margin / 2);
+        canvas.drawText("月份", Xpoint, Ypoint+this.Margin / 4, paintText);
+
+        // 纵向线
+        for (int i = 1; i * Xscale <= (this.getWidth() - this.Margin); i++) {
+            int startX = Xpoint + i * Xscale;
+            int startY = Ypoint;
+//            int stopY = Ypoint - (this.Ylabel.length - 1) * Yscale;
+//            path.moveTo(startX, startY);
+//            path.lineTo(startX, stopY);
+//            canvas.drawPath(path, paint);
+
+            paintText.setColor(Color.WHITE);
+            paintText.setTextSize(this.Margin / 2);
+            canvas.drawText(this.Xlabel[i], startX - this.Margin / 4, startY + this.Margin / 4, paintText);
+        }
+        // 横向线
+        for (int i = 1; (Ypoint - i * Yscale) >= this.Margin; i++) {
+            int startX = Xpoint;
+            int startY = Ypoint - i * Yscale;
+            int stopX = Xpoint + (this.Xlabel.length - 1) * Xscale;
+            path.moveTo(startX, startY);
+            path.lineTo(stopX, startY);
+            paint.setColor(Color.WHITE);
+            canvas.drawPath(path, paint);
+
+            paintText.setColor(Color.WHITE);
+            paintText.setTextSize(this.Margin / 2);
+            canvas.drawText(this.Ylabel[i], this.Margin / 4, startY
+                    + this.Margin / 4, paintText);
+        }
+    }
+
+    // 画横纵轴
+    private void drawXLine(Canvas canvas, Paint p) {
+//        canvas.drawLine(Xpoint, Ypoint, this.Margin, this.Margin, p);
+//        canvas.drawLine(Xpoint, this.Margin, Xpoint - Xpoint / 3, this.Margin
+//                + this.Margin / 3, p);
+//        canvas.drawLine(Xpoint, this.Margin, Xpoint + Xpoint / 3, this.Margin
+//                + this.Margin / 3, p);
+    }
+
+    private void drawYLine(Canvas canvas, Paint p) {
+//        canvas.drawLine(Xpoint, Ypoint, this.getWidth() - this.Margin, Ypoint,
+//                p);
+//        canvas.drawLine(this.getWidth() - this.Margin, Ypoint, this.getWidth()
+//                - this.Margin - this.Margin / 3, Ypoint - this.Margin / 3, p);
+//        canvas.drawLine(this.getWidth() - this.Margin, Ypoint, this.getWidth()
+//                - this.Margin - this.Margin / 3, Ypoint + this.Margin / 3, p);
+    }
+
+    // 初始化数据值
+    public void initTable() {
+        Xpoint = this.Margin;
+        Ypoint = this.getHeight() - this.Margin;
+        Xscale = (this.getWidth() - 2 * this.Margin) / (this.Xlabel.length - 1);
+        Yscale = (this.getHeight() - 2 * this.Margin)
+                / (this.Ylabel.length - 1);
     }
 }
