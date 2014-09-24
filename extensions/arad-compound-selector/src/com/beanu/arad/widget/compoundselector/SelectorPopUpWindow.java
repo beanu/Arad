@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 
-import com.beanu.arad.R;
+import com.beanu.arad.widget.compoundselector.R;
 import com.beanu.arad.widget.compoundselector.adapter.SelectorLeftAdapter;
 import com.beanu.arad.widget.compoundselector.adapter.SelectorRightAdapter;
 

@@ -11,7 +11,10 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 public abstract class IDao {
@@ -97,7 +100,17 @@ public abstract class IDao {
         RequestParams ajaxParams = new RequestParams();
         if (params != null) {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
-                ajaxParams.put(entry.getKey(), entry.getValue());
+                if (entry.getValue() instanceof InputStream) {
+                    ajaxParams.put(entry.getKey(), (InputStream) entry.getValue());
+                } else if (entry.getValue() instanceof File) {
+                    try {
+                        ajaxParams.put(entry.getKey(), (File) entry.getValue());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ajaxParams.put(entry.getKey(), entry.getValue());
+                }
             }
         }
 

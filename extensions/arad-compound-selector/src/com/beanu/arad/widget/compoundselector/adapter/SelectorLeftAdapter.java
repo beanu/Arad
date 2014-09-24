@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.beanu.arad.widget.compoundselector.R;
 
-import com.beanu.arad.R;
 
 import java.util.List;
 
