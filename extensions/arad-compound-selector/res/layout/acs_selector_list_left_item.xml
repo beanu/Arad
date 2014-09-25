@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/selector_list_left_item">
+<RelativeLayout
+    style="@style/selector_list_left_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/selector_list_left_item_textview"
@@ -23,3 +24,4 @@
         android:src="@drawable/acs_common_arror"/>
 
 </RelativeLayout>
+
