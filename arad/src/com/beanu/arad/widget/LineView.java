@@ -186,8 +186,16 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
     private int Xscale = 20;
     private int Yscale = 20;
     // X,Y轴上面的显示文字
-    private String[] Xlabel = {"04", "05", "06", "07", "08", "09", "10"};
-    private String[] Ylabel = {"10", "15", "20", "25", "30", "35"};
+    private String[] Xlabel = {};
+    private String[] Ylabel = {};
+
+    public void setXlabel(String[] xlabel) {
+        Xlabel = xlabel;
+    }
+
+    public void setYlabel(String[] ylabel) {
+        Ylabel = ylabel;
+    }
 
     // 画表格
     private void drawTable(Canvas canvas) {
@@ -201,35 +209,37 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(this.Margin / 2);
-        canvas.drawText("月份", Xpoint, Ypoint+this.Margin / 4, paintText);
+        canvas.drawText("月", Xpoint, Ypoint + this.Margin / 2+ this.Margin / 4, paintText);
 
         // 纵向线
-        for (int i = 1; i * Xscale <= (this.getWidth() - this.Margin); i++) {
-            int startX = Xpoint + i * Xscale;
-            int startY = Ypoint;
+        if (Xlabel.length != 0 && Ylabel.length != 0) {
+            for (int i = 0; i < Xlabel.length; i++) {
+                int startX = Xpoint + i * Xscale;
+                int startY = Ypoint + Margin / 2;
 //            int stopY = Ypoint - (this.Ylabel.length - 1) * Yscale;
 //            path.moveTo(startX, startY);
 //            path.lineTo(startX, stopY);
 //            canvas.drawPath(path, paint);
 
-            paintText.setColor(Color.WHITE);
-            paintText.setTextSize(this.Margin / 2);
-            canvas.drawText(this.Xlabel[i], startX - this.Margin / 4, startY + this.Margin / 4, paintText);
-        }
-        // 横向线
-        for (int i = 1; (Ypoint - i * Yscale) >= this.Margin; i++) {
-            int startX = Xpoint;
-            int startY = Ypoint - i * Yscale;
-            int stopX = Xpoint + (this.Xlabel.length - 1) * Xscale;
-            path.moveTo(startX, startY);
-            path.lineTo(stopX, startY);
-            paint.setColor(Color.WHITE);
-            canvas.drawPath(path, paint);
+                paintText.setColor(Color.WHITE);
+                paintText.setTextSize(this.Margin / 2);
+                canvas.drawText(this.Xlabel[i], startX - this.Margin / 4, startY + this.Margin / 4, paintText);
+            }
+            // 横向线
+            for (int i = 0; i < Ylabel.length; i++) {
+                int startX = Xpoint;
+                int startY = Ypoint - i * Yscale;
+                int stopX = Xpoint + (this.Xlabel.length - 1) * Xscale;
+                path.moveTo(startX, startY);
+                path.lineTo(stopX, startY);
+                paint.setColor(Color.WHITE);
+                canvas.drawPath(path, paint);
 
-            paintText.setColor(Color.WHITE);
-            paintText.setTextSize(this.Margin / 2);
-            canvas.drawText(this.Ylabel[i], this.Margin / 4, startY
-                    + this.Margin / 4, paintText);
+                paintText.setColor(Color.WHITE);
+                paintText.setTextSize(this.Margin / 2);
+                canvas.drawText(this.Ylabel[i], this.Margin / 4, startY
+                        + this.Margin / 4, paintText);
+            }
         }
     }
 

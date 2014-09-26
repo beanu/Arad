@@ -32,10 +32,16 @@ public class Crop {
     private Activity activity;
     private Fragment fragment;
     private ImageView mImageView;
+    private int outputX, outputY;
+    private int aspectX, aspectY;
 
-    public Crop(Context context) {
+    public Crop(Context context, int outputX, int outputY, int aspectX, int aspectY) {
         if (context instanceof Activity) {
             activity = (Activity) context;
+            this.outputX = outputX;
+            this.outputY = outputY;
+            this.aspectX = aspectX;
+            this.aspectY = aspectY;
         }
     }
 
@@ -135,10 +141,10 @@ public class Crop {
             Intent _intent = new Intent(activity, CropImage.class);
             _intent.putExtra("image-path", mImageCaptureUri.getPath());
             _intent.putExtra("scale", true);
-            _intent.putExtra("outputX", 200);
-            _intent.putExtra("outputY", 200);
-            _intent.putExtra("aspectX", 1);
-            _intent.putExtra("aspectY", 1);
+            _intent.putExtra("outputX", outputX);
+            _intent.putExtra("outputY", outputY);
+            _intent.putExtra("aspectX", aspectX);
+            _intent.putExtra("aspectY", aspectY);
             _intent.putExtra("return-data", true);
             if (fragment != null)
                 fragment.startActivityForResult(_intent, CROP_FROM_CAMERA);
@@ -148,10 +154,10 @@ public class Crop {
         } else {
             intent.setData(mImageCaptureUri);
 
-            intent.putExtra("outputX", 200);
-            intent.putExtra("outputY", 200);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", outputX);
+            intent.putExtra("outputY", outputY);
+            intent.putExtra("aspectX", aspectX);
+            intent.putExtra("aspectY", aspectY);
             intent.putExtra("scale", true);
             intent.putExtra("return-data", true);
 
