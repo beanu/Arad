@@ -101,13 +101,15 @@ public abstract class IDao {
         if (params != null) {
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 if (entry.getValue() instanceof InputStream) {
-                    ajaxParams.put(entry.getKey(), (InputStream) entry.getValue());
+                    ajaxParams.put(entry.getKey(), (InputStream) entry.getValue(), "photo.jpg");
                 } else if (entry.getValue() instanceof File) {
                     try {
                         ajaxParams.put(entry.getKey(), (File) entry.getValue());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                } else if (entry.getValue() instanceof String) {
+                    ajaxParams.put(entry.getKey(), (String) entry.getValue());
                 } else {
                     ajaxParams.put(entry.getKey(), entry.getValue());
                 }
