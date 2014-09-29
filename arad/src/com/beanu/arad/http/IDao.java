@@ -95,29 +95,9 @@ public abstract class IDao {
      *
      * @param requestCode 自定义这是第几个post请求，用于结果的区分
      */
-    public void postRequest(String url, Map<String, Object> params, final int requestCode) {
+    public void postRequest(String url, RequestParams params, final int requestCode) {
 
-        RequestParams ajaxParams = new RequestParams();
-        if (params != null) {
-            for (Map.Entry<String, Object> entry : params.entrySet()) {
-                if (entry.getValue() instanceof InputStream) {
-                    ajaxParams.put(entry.getKey(), (InputStream) entry.getValue(), "photo.jpg");
-                } else if (entry.getValue() instanceof File) {
-                    try {
-                        ajaxParams.put(entry.getKey(), (File) entry.getValue());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                } else if (entry.getValue() instanceof String) {
-                    ajaxParams.put(entry.getKey(), (String) entry.getValue());
-                } else {
-                    ajaxParams.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-
-        Log.d(url + " params:" + ajaxParams.toString());
-        Arad.http.post(url, ajaxParams, new TextHttpResponseHandler() {
+        Arad.http.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
