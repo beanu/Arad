@@ -33,7 +33,7 @@ public class HttpConfig {
 
         try {
             JsonNode node = JsonUtil.json2node(result);
-            JsonNode error = node.findValue(errorKey);
+            JsonNode error = node.get(errorKey);
             if (error == null || errorCodes.contains(error.asText())) {
                 return node;
             } else {
