@@ -8,7 +8,7 @@ import java.util.List;
 public class ContactsSectionIndexer implements SectionIndexer {
 
     private static String OTHER = "#";
-    private static String[] mSections = {OTHER, "A", "B", "C", "D", "E", "F",
+    private static String[] mSections = {"定位",OTHER, "A", "B", "C", "D", "E", "F",
             "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
             "T", "U", "V", "W", "X", "Y", "Z"};
 

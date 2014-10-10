@@ -209,7 +209,8 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(this.Margin / 2);
-        canvas.drawText("月", Xpoint, Ypoint + this.Margin / 2+ this.Margin / 4, paintText);
+        canvas.drawText("月", Xpoint, Ypoint + this.Margin / 2 + this.Margin / 4, paintText);
+        canvas.drawText("张", Xpoint - (this.Margin / 2), Ypoint + this.Margin / 4, paintText);
 
         // 纵向线
         if (Xlabel.length != 0 && Ylabel.length != 0) {
