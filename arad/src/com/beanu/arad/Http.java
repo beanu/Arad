@@ -17,9 +17,10 @@ import java.io.IOException;
 public class Http implements IHTTP {
 
     private static Http instance;
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static AsyncHttpClient client;
 
     private Http() {
+        client = new AsyncHttpClient();
     }
 
     public static Http instance() {
