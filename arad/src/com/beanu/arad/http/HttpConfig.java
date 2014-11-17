@@ -58,4 +58,12 @@ public class HttpConfig {
      */
     public void handleInErrorCode(List<String> errorCodes) {
     }
+
+    public List<String> getErrorCodes() {
+        return errorCodes;
+    }
+
+    public String getErrorKey() {
+        return errorKey;
+    }
 }

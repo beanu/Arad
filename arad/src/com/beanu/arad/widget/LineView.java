@@ -117,13 +117,13 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
         }
     }
 
+    Paint p1 = new Paint();
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.translate(8, 8);
         canvas.drawPath(path, paint);
 
-        Paint p1 = new Paint();
         p1.setStyle(Paint.Style.STROKE);
         p1.setAntiAlias(true);
         p1.setColor(Color.WHITE);
@@ -210,7 +210,7 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(this.Margin / 2);
         canvas.drawText("月", Xpoint, Ypoint + this.Margin / 2 + this.Margin / 4, paintText);
-        canvas.drawText("张", Xpoint - (this.Margin / 2), Ypoint + this.Margin / 4, paintText);
+//        canvas.drawText("张", Xpoint - (this.Margin / 2), Ypoint + this.Margin / 4, paintText);
 
         // 纵向线
         if (Xlabel.length != 0 && Ylabel.length != 0) {

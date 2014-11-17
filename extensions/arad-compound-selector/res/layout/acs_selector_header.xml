@@ -38,7 +38,7 @@
         android:drawableEnd="@drawable/acs_selector_down_icon"
         android:drawableRight="@drawable/acs_selector_down_icon"
         android:paddingRight="8dp"
-        android:text="默认排序"
+        android:text="智能排序"
         android:textSize="14sp" />
 
 </LinearLayout>

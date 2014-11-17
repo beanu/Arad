@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20"
+    compileSdkVersion 21
+    buildToolsVersion "21.1"
 
     sourceSets {
         main {
