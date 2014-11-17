@@ -8,8 +8,6 @@ import android.app.Activity;
  * @author beanu
  *
  */
-//TODO 继承ActionBarActiviy
-    @Deprecated
 public class BaseActivity extends Activity {
 
 //	@Override
