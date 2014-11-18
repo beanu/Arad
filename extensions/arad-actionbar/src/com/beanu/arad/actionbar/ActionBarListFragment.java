@@ -8,6 +8,7 @@ import android.widget.ImageView;
  * @author beanu
  * 
  */
+@Deprecated
 public class ActionBarListFragment extends _MyListFragment {
 
 	@Override

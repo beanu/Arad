@@ -3,16 +3,19 @@ package com.beanu.arad.actionbar;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beanu.arad.base.BaseActivity;
+
 
 /**
  * @author beanu
+ *
  */
-public abstract class _MyActivity extends ActionBarActivity {
+@Deprecated
+public abstract class _MyActivity extends BaseActivity {
 
     private TextView mTitle;
     private ImageView mLeftButton;
@@ -27,7 +30,8 @@ public abstract class _MyActivity extends ActionBarActivity {
 
         View homeIcon = findViewById(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? android.R.id.home
                 : R.id.home);
-        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+        if (homeIcon != null)
+            ((View) homeIcon.getParent()).setVisibility(View.GONE);
 
         View view = getSupportActionBar().getCustomView();
         mTitle = (TextView) view.findViewById(R.id.actionbar_title);

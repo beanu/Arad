@@ -3,9 +3,7 @@ package com.beanu.arad.actionbar;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.beanu.arad.http.INetResult;
 import com.beanu.arad.utils.AnimUtil;
-import com.beanu.arad.utils.MessageUtils;
 
 /**
  * 添加自定义头部
@@ -13,7 +11,9 @@ import com.beanu.arad.utils.MessageUtils;
  * 单个页面如果继承了MyActivity,则可以修改ActionBar的title,左右按钮
  *
  * @author beanu
+ * @deprecated use ToolBarActivity
  */
+@Deprecated
 public class ActionBarActivity extends _MyActivity {
 
     @Override
