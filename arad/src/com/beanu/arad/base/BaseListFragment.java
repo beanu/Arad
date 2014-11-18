@@ -1,45 +1,42 @@
 package com.beanu.arad.base;
 
 import android.support.v4.app.ListFragment;
-import android.os.Bundle;
 
-@Deprecated
-public class BaseListFragment extends ListFragment {
-    /**
-     * when activity is recycled by system, isFirstTimeStartFlag will be reset
-     * to default true, when activity is recreated because a configuration
-     * change for example screen rotate, isFirstTimeStartFlag will stay false
-     */
-    private boolean isFirstTimeStartFlag = true;
+import com.beanu.arad.http.INetResult;
+import com.beanu.arad.widget.dialog.ProgressHUD;
+import com.beanu.arad.utils.MessageUtils;
 
-    // when activity is first time start
-    protected final int FIRST_TIME_START = 0;
-    // when activity is destroyed and recreated because a configuration change,
-    // see setRetainInstance(boolean retain)
-    protected final int SCREEN_ROTATE = 1;
-    // when activity is destroyed because memory is too low, recycled by android
-    // system
-    protected final int ACTIVITY_DESTROY_AND_CREATE = 2;
+public class BaseListFragment extends ListFragment implements INetResult {
+    ProgressHUD mProgressHUD;
 
-    protected int getCurrentState(Bundle savedInstanceState) {
+    @Override
+    public void onRequestSuccess(int requestCode) {
 
-        if (savedInstanceState != null) {
-            isFirstTimeStartFlag = false;
-            return ACTIVITY_DESTROY_AND_CREATE;
-        }
-
-        if (!isFirstTimeStartFlag) {
-            return SCREEN_ROTATE;
-        }
-
-        isFirstTimeStartFlag = false;
-        return FIRST_TIME_START;
     }
 
-    protected boolean isFirstTimeStart(Bundle savedInstanceState) {
-        if (getCurrentState(savedInstanceState) == FIRST_TIME_START)
-            return true;
-        else
-            return false;
+    @Override
+    public void onRequestFaild(String errorNo, String errorMessage) {
+        showProgress(false);
+        MessageUtils.showShortToast(getActivity(), errorMessage);
+    }
+
+    @Override
+    public void onNoConnect() {
+        showProgress(false);
+        MessageUtils.showShortToast(getActivity(), "无网络连接");
+    }
+
+    public void showProgress(boolean show) {
+        showProgressWithText(show, "加载中...");
+    }
+
+    public void showProgressWithText(boolean show, String message) {
+        if (show) {
+            mProgressHUD = ProgressHUD.show(getActivity(), message, true, true, null);
+        } else {
+            if (mProgressHUD != null) {
+                mProgressHUD.dismiss();
+            }
+        }
     }
 }
