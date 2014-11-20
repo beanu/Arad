@@ -22,6 +22,8 @@ public class ActionBarActivity extends _MyActivity {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled(false);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
     }
 
     @Override

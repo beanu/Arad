@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import com.beanu.arad.utils.AnimUtil;
 
 /**
- *Tool
+ *ToolBar
  */
 public class ToolBarActivity extends _ToolBarActivity {
 

@@ -42,12 +42,14 @@ public abstract class _ToolBarActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mTitle.setText(setupToolBarTitle());
-        if (!setupToolBarLeftButton(mLeftButton)) {
-            mLeftButton.setVisibility(View.GONE);
+        if (mTitle != null && setupToolBarTitle() != null)
+            mTitle.setText(setupToolBarTitle());
+
+        if (mLeftButton != null && setupToolBarLeftButton(mLeftButton)) {
+            mLeftButton.setVisibility(View.VISIBLE);
         }
-        if (!setupToolBarRightButton(mRightButton)) {
-            mRightButton.setVisibility(View.GONE);
+        if (mRightButton != null && setupToolBarRightButton(mRightButton)) {
+            mRightButton.setVisibility(View.VISIBLE);
         }
     }
 
