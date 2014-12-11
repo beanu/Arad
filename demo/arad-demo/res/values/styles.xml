@@ -2,7 +2,18 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/toolbar</item>
+        <item name="colorPrimaryDark">@color/toolbar_darker</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- ActionModeを使うのに必要（後述） -->
+        <item name="windowActionModeOverlay">true</item>
+        <!--<item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
     </style>
 
+    <!--styling color for arrow-->
+    <!--<style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">-->
+    <!--<item name="spinBars">true</item>-->
+    <!--<item name="color">@android:color/white</item>-->
+    <!--</style>-->
 </resources>
