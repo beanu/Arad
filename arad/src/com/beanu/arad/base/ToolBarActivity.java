@@ -1,16 +1,19 @@
-package com.beanu.arad.toolbar;
+package com.beanu.arad.base;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.beanu.arad.utils.AnimUtil;
+
 /**
- * @author beanu
+ *ToolBar
  */
-public class ToolBarFragment extends _ToolBarFragment {
+public class ToolBarActivity extends _ToolBarActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        AnimUtil.intentSlidOut(this);
     }
 
     @Override

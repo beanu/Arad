@@ -2,12 +2,14 @@ package com.beanu.arad.support.loadmore;
 
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import com.beanu.arad.base.BaseActivity;
+
+import com.beanu.arad.base.ToolBarActivity;
 
 /**
+ * 加载更多
  * Created by beanu on 13-11-29.
  */
-public abstract class LoadMoreActivity extends BaseActivity implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILoadMoreAdapter, AbsListView.OnScrollListener {
 
     protected int lastItem;
 

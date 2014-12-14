@@ -1,4 +1,4 @@
-package com.beanu.arad.toolbar;
+package com.beanu.arad.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.beanu.arad.actionbar.R;
-import com.beanu.arad.base.BaseFragment;
+import com.beanu.arad.R;
 
 /**
  * @author beanu

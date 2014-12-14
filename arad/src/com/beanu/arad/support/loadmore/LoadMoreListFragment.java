@@ -1,12 +1,13 @@
 package com.beanu.arad.support.loadmore;
 
-import android.support.v4.app.ListFragment;
 import android.widget.AbsListView;
+
+import com.beanu.arad.base.ToolBarListFragment;
 
 /**
  * Created by beanu on 13-11-29.
  */
-public abstract class LoadMoreListFragment extends ListFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class LoadMoreListFragment extends ToolBarListFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
 
     protected int lastItem;
 

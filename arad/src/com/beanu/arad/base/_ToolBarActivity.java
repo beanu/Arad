@@ -1,12 +1,12 @@
-package com.beanu.arad.toolbar;
+package com.beanu.arad.base;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.beanu.arad.actionbar.R;
-import com.beanu.arad.base.BaseActivity;
+import com.beanu.arad.R;
+
 
 /**
  * @author beanu
