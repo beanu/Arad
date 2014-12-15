@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.beanu.arad.toolbar.ToolBarActivity;
+import com.beanu.arad.base.ToolBarActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

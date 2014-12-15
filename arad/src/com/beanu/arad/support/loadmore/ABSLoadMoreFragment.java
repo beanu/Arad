@@ -6,9 +6,10 @@ import android.widget.BaseAdapter;
 import com.beanu.arad.base.ToolBarFragment;
 
 /**
+ * 加载更多
  * Created by beanu on 13-11-29.
  */
-public abstract class LoadMoreFragment extends ToolBarFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
 
     protected int lastItem;
 
