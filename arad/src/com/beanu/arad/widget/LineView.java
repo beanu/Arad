@@ -118,6 +118,7 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
     }
 
     Paint p1 = new Paint();
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -221,10 +222,11 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
 //            path.moveTo(startX, startY);
 //            path.lineTo(startX, stopY);
 //            canvas.drawPath(path, paint);
-
-                paintText.setColor(Color.WHITE);
-                paintText.setTextSize(this.Margin / 2);
-                canvas.drawText(this.Xlabel[i], startX - this.Margin / 4, startY + this.Margin / 4, paintText);
+                if (i % 2 == 0) {
+                    paintText.setColor(Color.WHITE);
+                    paintText.setTextSize(this.Margin / 2);
+                    canvas.drawText(this.Xlabel[i], startX - this.Margin / 4, startY + this.Margin / 4, paintText);
+                }
             }
             // 横向线
             for (int i = 0; i < Ylabel.length; i++) {
@@ -236,10 +238,12 @@ public class LineView extends View implements ValueAnimator.AnimatorUpdateListen
                 paint.setColor(Color.WHITE);
                 canvas.drawPath(path, paint);
 
+
                 paintText.setColor(Color.WHITE);
                 paintText.setTextSize(this.Margin / 2);
                 canvas.drawText(this.Ylabel[i], this.Margin / 4, startY
                         + this.Margin / 4, paintText);
+
             }
         }
     }

@@ -21,6 +21,7 @@ public final class StringUtils {
     public final static Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
             + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
     public static final String EMPTY_STRING = "";
+    public final static Pattern PHONE_PATTERN = Pattern.compile("^(1[3,4,5,7,8][0-9])\\d{8}$");
 
     private StringUtils() {
     }
@@ -329,4 +330,9 @@ public final class StringUtils {
     public static boolean isEmailFormat(String email) {
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
+
+    public static boolean isPhoneFormat(String phoneNumber) {
+        return PHONE_PATTERN.matcher(phoneNumber).matches();
+    }
+
 }
