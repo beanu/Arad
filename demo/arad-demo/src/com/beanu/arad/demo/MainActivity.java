@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.beanu.arad.base.ToolBarActivity;
 
@@ -23,6 +24,8 @@ public class MainActivity extends ToolBarActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
+    @InjectView(R.id.toolbar_title)
+    TextView toolbar_title;
     ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -30,7 +33,7 @@ public class MainActivity extends ToolBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-
+        toolbar_title.setText("首页");
         //设置DrawerToggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getActionBarToolbar(), R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
