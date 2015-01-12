@@ -18,8 +18,10 @@ import butterknife.InjectView;
 public class MainActivity extends ToolBarActivity {
 
 
-    @InjectView(R.id.main_fragment_container) FrameLayout mMainFragmentContainer;
-    @InjectView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @InjectView(R.id.main_fragment_container)
+    FrameLayout mMainFragmentContainer;
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
 
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -32,7 +34,6 @@ public class MainActivity extends ToolBarActivity {
         //设置DrawerToggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getActionBarToolbar(), R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        int i=1/0;
     }
 
 
