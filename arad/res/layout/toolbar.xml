@@ -12,8 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/toolbar_leftbtn"
@@ -23,14 +22,15 @@
             android:layout_centerVertical="true"
             android:padding="13dp"
             android:src="@drawable/ic_back"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/toolbar_title"
             style="@style/actionbar_title"
+            android:textColor="@color/material_blue_grey_800"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
         <ImageView
             android:id="@+id/toolbar_rightbtn"
@@ -40,7 +40,7 @@
             android:layout_centerVertical="true"
             android:padding="13dp"
             android:src="@drawable/ic_add"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 
