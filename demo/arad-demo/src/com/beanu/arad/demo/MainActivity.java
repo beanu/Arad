@@ -11,8 +11,11 @@ import android.widget.FrameLayout;
 
 import com.beanu.arad.base.ToolBarActivity;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends ToolBarActivity {
@@ -32,9 +35,14 @@ public class MainActivity extends ToolBarActivity {
         //设置DrawerToggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getActionBarToolbar(), R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        int i=1/0;
     }
 
+    @OnClick(R.id.button)
+    public void onClick() {
+        ArrayList<String> list = new ArrayList<>();
+        String result = list.get(0);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
