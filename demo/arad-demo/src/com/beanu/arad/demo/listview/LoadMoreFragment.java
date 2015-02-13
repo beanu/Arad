@@ -82,6 +82,13 @@ public abstract class LoadMoreFragment<T> extends ABSLoadMoreListFragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getListView().setOnScrollListener(this);
+
+    }
+
+    @Override
     protected void loadMore() {
         loadMoreMode.loadMore();
     }
