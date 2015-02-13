@@ -1,5 +1,9 @@
 package com.beanu.arad.http;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.app.Fragment;
+
 import com.beanu.arad.Arad;
 import com.beanu.arad.error.AradException;
 import com.beanu.arad.utils.Log;
@@ -14,19 +18,30 @@ import org.apache.http.Header;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * 公用的网络请求辅助类
+ * 网路请求的第一层过滤（统一处理错误结果）
+ */
 public abstract class IDao {
 
     protected INetResult mResult;
+    protected Context context;
 
-    public IDao(INetResult activity) {
-        this.mResult = activity;
+    public IDao(INetResult iNetResult) {
+        mResult = iNetResult;
+
+        if (iNetResult instanceof Fragment) {
+            context = ((Fragment) iNetResult).getActivity();
+        } else if (iNetResult instanceof Activity) {
+            context = (Activity) iNetResult;
+        }
     }
 
     /**
      * 得到结果后，对结果处理逻辑
      *
-     * @param result
-     * @param requestCode
+     * @param result      网络请求返回的结果
+     * @param requestCode 区别请求号码
      * @throws java.io.IOException
      */
     public abstract void onRequestSuccess(JsonNode result, int requestCode) throws IOException;
@@ -56,7 +71,18 @@ public abstract class IDao {
         RequestParams ajaxParams = new RequestParams(params);
         Log.d(AsyncHttpClient.getUrlWithQueryString(true, url, ajaxParams));
 
-        Arad.http.get(url, ajaxParams, new TextHttpResponseHandler() {
+        Arad.http.get(context, url, ajaxParams, new TextHttpResponseHandler() {
+
+            @Override
+            public void onProgress(int bytesWritten, int totalSize) {
+                super.onProgress(bytesWritten, totalSize);
+            }
+
+            @Override
+            public void onCancel() {
+                super.onCancel();
+            }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 Log.d(responseBody);
@@ -94,7 +120,7 @@ public abstract class IDao {
      */
     public void postRequest(String url, RequestParams params, final int requestCode) {
 
-        Arad.http.post(url, params, new TextHttpResponseHandler() {
+        Arad.http.post(context, url, params, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 try {
