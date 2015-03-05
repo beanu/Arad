@@ -65,8 +65,7 @@ public class ContactListAdapter extends ArrayAdapter<ContactItemInterface> {
 
     // do all the data population for the row here
 // subclass overwrite this to draw more items
-    public void populateDataForRow(View parentView, ContactItemInterface item,
-                                   int position) {
+    public void populateDataForRow(View parentView, ContactItemInterface item,int position) {
         // default just draw the item only
         View infoView = parentView.findViewById(R.id.infoRowContainer);
         TextView nameView = (TextView) infoView.findViewById(R.id.cityName);

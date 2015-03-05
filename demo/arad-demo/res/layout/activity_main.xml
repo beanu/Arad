@@ -16,17 +16,19 @@
         <FrameLayout
             android:id="@+id/main_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+        </FrameLayout>
 
         <!-- Nav drawer -->
-        <fragment
+        <FrameLayout
             android:id="@+id/fragment_drawer"
-            android:name="com.beanu.arad.demo.NavFragment"
             android:layout_width="@dimen/drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            tools:layout="@layout/fragment_nav"/>
+            >
+        </FrameLayout>
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

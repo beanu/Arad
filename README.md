@@ -32,12 +32,19 @@ Arad快速上手
   
   ```java
   //http请求
+    Arad.http.get(url,params,responseHandler);
+    Arad.http.post(url,params,responseHandler);
 
   //图片下载
+    Arad.imageLoader.load(url).into(imageView);
 
   //数据库访问
+    Arad.db.findAll(Classname);
+    Arad.db.save(entity);
+    Arad.db.update(entity,strWhere);
 
   //view注解开发
+    @InjectView(R.id.toolbar_title) TextView toolbar_title;
 
   ```
 

@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.beanu.arad.Arad;
+import com.beanu.arad.demo.support.event.NavEvent;
+
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -36,5 +40,20 @@ public class NavFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    @OnClick({R.id.nav_nav, R.id.nav_list, R.id.nav_widget, R.id.nav_network, R.id.nav_pic, R.id.nav_anim})
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.nav_nav) {
+            clickEvent(MainActivity.Fragments.nav.name());
+        } else if (id == R.id.nav_list) {
+            clickEvent(MainActivity.Fragments.listView.name());
+        }
+    }
+
+    private void clickEvent(String tag) {
+        Arad.bus.post(new NavEvent(tag));
     }
 }

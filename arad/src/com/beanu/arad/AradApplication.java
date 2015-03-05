@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.beanu.arad.utils.DeviceInformant;
-import com.bugsnag.android.Bugsnag;
 import com.squareup.picasso.Picasso;
 
 import de.greenrobot.event.EventBus;
@@ -33,7 +32,7 @@ public abstract class AradApplication extends Application {
          * 账号注册地址https://bugsnag.com
          * 现在bugsnag的android版本有大神loopj维护
          */
-        Bugsnag.init(this, "d56179c1199b428569f9e606eeceafe7");
+//        Bugsnag.init(this, "d56179c1199b428569f9e606eeceafe7");
     }
 
     @Override
