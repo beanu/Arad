@@ -1,40 +1,61 @@
 package com.beanu.arad.demo.module;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.beanu.arad.base.ToolBarActivity;
 import com.beanu.arad.demo.R;
+import com.beanu.arad.http.IDao;
+import com.beanu.arad.http.INetResult;
+import com.fasterxml.jackson.databind.JsonNode;
 
-public class NetWorkActivity extends ActionBarActivity {
+import java.io.IOException;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+public class NetWorkActivity extends ToolBarActivity {
+
+    Dao dao = new Dao(this);
+    @InjectView(R.id.result_textView) TextView mResultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_work);
+        ButterKnife.inject(this);
+        dao.newsList();
+        showProgress(true);
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_net_work, menu);
-        return true;
+    public void onRequestSuccess(int requestCode) {
+        if (requestCode == 0) {
+            mResultTextView.setText(dao.getStrResult());
+            showProgress(false);
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private static class Dao extends IDao {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        private String strResult;
+
+        public Dao(INetResult iNetResult) {
+            super(iNetResult);
         }
 
-        return super.onOptionsItemSelected(item);
+        public void newsList() {
+            getRequest("http://api.yi18.net/news/list", null);
+        }
+
+        @Override
+        public void onRequestSuccess(JsonNode result, int requestCode) throws IOException {
+            strResult = result.toString();
+        }
+
+        public String getStrResult() {
+            return strResult;
+        }
     }
 }

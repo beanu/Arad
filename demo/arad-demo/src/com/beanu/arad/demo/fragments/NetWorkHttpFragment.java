@@ -1,6 +1,7 @@
 package com.beanu.arad.demo.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beanu.arad.demo.R;
+import com.beanu.arad.demo.module.NetWorkActivity;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  */
 public class NetWorkHttpFragment extends Fragment {
 
@@ -23,9 +28,16 @@ public class NetWorkHttpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_net_work_http, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_net_work_http, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
 
+    @OnClick(R.id.button)
+    public void onClick() {
+        Intent intent = new Intent(getActivity(), NetWorkActivity.class);
+        startActivity(intent);
+    }
 }
