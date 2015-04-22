@@ -2,9 +2,10 @@ package com.beanu.arad.base;
 
 import android.support.v7.app.ActionBarActivity;
 
+import com.beanu.arad.Arad;
 import com.beanu.arad.http.INetResult;
-import com.beanu.arad.widget.dialog.ProgressHUD;
 import com.beanu.arad.utils.MessageUtils;
+import com.beanu.arad.widget.dialog.ProgressHUD;
 
 /**
  * 基础类
@@ -30,6 +31,12 @@ public class BaseActivity extends ActionBarActivity implements INetResult {
     public void onNoConnect() {
         showProgress(false);
         MessageUtils.showShortToast(this, "无网络连接");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Arad.http.cancelRequests(this);
     }
 
     public void showProgress(boolean show) {

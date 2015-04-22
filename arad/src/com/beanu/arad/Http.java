@@ -60,4 +60,13 @@ public class Http implements IHTTP {
         client.get(context, url, responseHandler);
     }
 
+    @Override
+    public void cancelRequests(Context context) {
+        client.cancelRequests(context, true);
+    }
+
+    @Override
+    public void cancelAllRequests() {
+        client.cancelAllRequests(true);
+    }
 }

@@ -21,4 +21,8 @@ public interface IHTTP {
 
     public void download(Context context, String url, BinaryHttpResponseHandler responseHandler);
 
+    public void cancelRequests(Context context);
+
+    public void cancelAllRequests();
+
 }

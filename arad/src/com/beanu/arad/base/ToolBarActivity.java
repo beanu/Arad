@@ -81,7 +81,6 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
 
     // 动态改变
 
-
     @Override
     public String setupToolBarTitle() {
         return null;
