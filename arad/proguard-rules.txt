@@ -15,11 +15,19 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+#picasso
 -dontwarn com.squareup.okhttp.**
+
+#jackson
 -dontwarn com.fasterxml.jackson.**
+
+#EventBus
 -keepclassmembers class ** {
     public void onEvent*(**);
 }
+
+#Butterknife
 -dontwarn butterknife.internal.**
 -keep class **$$ViewInjector { *; }
 -keepnames class * { @butterknife.InjectView *;}

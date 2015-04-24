@@ -15,7 +15,7 @@ public class FragmentsManager {
 
     private final FragmentActivity mActivity;
     private final int mContainerId;
-    private final HashMap<String, FragmentInfo> mTabs = new HashMap<>();
+    private final HashMap<String, FragmentInfo> mTabs = new HashMap<String, FragmentInfo>();
     FragmentInfo mLastFragment;
 
     static final class FragmentInfo {

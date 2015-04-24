@@ -121,7 +121,7 @@ public abstract class LoadMoreFragment<T> extends ABSLoadMoreListFragment {
     //数据获取
     private class LoadMoreMode extends IDao {
 
-        private List<T> dataList = new ArrayList<>();
+        private List<T> dataList = new ArrayList<T>();
         private int currentPage = 1;
         private boolean hasMore = true;
 

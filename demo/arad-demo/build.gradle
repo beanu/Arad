@@ -1,14 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/Users/beanu/Documents/git/common-library/Arad-dev/demo/arad-demo/ZhangXing.keystore')
+            storePassword 'shidai123'
+        }
+    }
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "com.beanu.arad.demo"
         minSdkVersion 8
         targetSdkVersion 21
         versionCode 1
-        versionName "0.05"
+        versionName "0.06"
+        buildConfigField "boolean", "AUTO_UPDATES", "true"
     }
     packagingOptions {
         exclude 'META-INF/LICENSE'
@@ -19,15 +26,21 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
         }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {
+        beanu {
+            applicationId "com.zx.hd2015"
+            buildConfigField "boolean", "AUTO_UPDATES", "false"
+        }
     }
 }
 

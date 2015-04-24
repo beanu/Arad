@@ -37,7 +37,7 @@ public class SimpleAdapterUtil {
     public static List<? extends Map<String, ?>> beanToMap(List<Object> list) {
         if (list != null) {
             ObjectMapper mapper = new ObjectMapper();
-            List data = new ArrayList<>();
+            List data = new ArrayList<Map<String, Object>>();
             for (Object bean : list) {
                 Class<?> pomclass = bean.getClass();
                 Map<String, Object> props = mapper.convertValue(bean, Map.class);

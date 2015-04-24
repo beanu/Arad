@@ -1,21 +1,31 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
-
+    buildToolsVersion '21.1.2'
+    resourcePrefix 'arad_'
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
         }
     }
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 21
         versionCode 1
-        versionName "0.0.5"
+        versionName version
     }
     buildTypes {
         release {
@@ -26,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.android.support:appcompat-v7:22.0.+'
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
@@ -34,18 +44,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.bugsnag:bugsnag-android:+'
     //optional
     compile 'com.jakewharton:butterknife:6.0.0'
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository url: "file://${your_repository_location}"
-//            pom.version = version
-//            pom.groupId = groupId
-//            pom.artifactId = 'arad'
-//        }
-//    }
-//}
+apply from: '../bintray.gradle'
