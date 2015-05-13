@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="ProgressHUD" parent="@android:style/Theme.Dialog">
+    <style name="arad_ProgressHUD" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -10,18 +10,18 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="actionbar_title" parent="android:Widget.TextView">
+    <style name="arad_actionbar_title" parent="android:Widget.TextView">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="AnimBottomDialog" parent="@android:style/Animation">
+    <style name="arad_AnimBottomDialog" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_up</item>
         <item name="android:windowExitAnimation">@anim/push_out</item>
     </style>
 
 
-    <style name="Theme.Dialog.Bottom" parent="Theme.AppCompat.Dialog">
+    <style name="arad_Theme.Dialog.Bottom" parent="Theme.AppCompat.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>

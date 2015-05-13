@@ -27,7 +27,7 @@ public abstract class PopupWindowBottom {
         popupWindow.setBackgroundDrawable(new ColorDrawable(0xb0000000));
         popupWindow.setFocusable(true);
         //设置popwindow出现和消失动画
-        popupWindow.setAnimationStyle(R.style.AnimBottomDialog);
+        popupWindow.setAnimationStyle(R.style.arad_AnimBottomDialog);
         onViewCreated(popupView);
     }
 

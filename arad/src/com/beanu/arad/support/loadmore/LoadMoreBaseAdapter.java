@@ -96,7 +96,7 @@ public abstract class LoadMoreBaseAdapter<T> extends BaseAdapter {
 		if (getItemViewType(position) == VIEW_TYPE_LOADING) {
 
 			if (view == null) {
-				view = mlinflater.inflate(R.layout.list_item_stream_status, viewGroup, false);
+				view = mlinflater.inflate(R.layout.arad_list_item_stream_status, viewGroup, false);
 			}
 
 			if (listener.hasError()) {

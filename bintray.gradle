@@ -71,7 +71,7 @@ publishing {
 
 bintray {
     user = 'beanu'
-    key = 'bintray.com-key'
+    key = '71d1633a5399b5d66f82641887f2a9500f07e069'
 
     configurations = ['archives']
     publications = ['mavenJava']

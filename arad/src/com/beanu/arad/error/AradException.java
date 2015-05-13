@@ -51,7 +51,7 @@ public class AradException extends Exception {
 				if (!TextUtils.isEmpty(oriError)) {
 					result = oriError;
 				} else {
-					result = Arad.app.getString(R.string.unknown_error_code) + error_code;
+					result = Arad.app.getString(R.string.arad_unknown_error_code) + error_code;
 				}
 			}
 		}

@@ -5,7 +5,7 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/arad_toolbar"/>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

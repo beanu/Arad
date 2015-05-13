@@ -19,7 +19,7 @@ public class BottomDialog {
 
     public BottomDialog(Context context, View view) {
         if (view != null) {
-            dialog = new Dialog(context, R.style.Theme_Dialog_Bottom);
+            dialog = new Dialog(context, R.style.arad_Theme_Dialog_Bottom);
             dialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             dialog.setCanceledOnTouchOutside(true);
@@ -27,7 +27,7 @@ public class BottomDialog {
             Window window = dialog.getWindow();
             window.getAttributes().width = context.getResources().getDisplayMetrics().widthPixels;
             window.setGravity(Gravity.BOTTOM);  //此处可以设置dialog显示的位置
-            window.setWindowAnimations(R.style.AnimBottomDialog);  //添加动画
+            window.setWindowAnimations(R.style.arad_AnimBottomDialog);  //添加动画
         }
     }
 

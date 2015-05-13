@@ -38,9 +38,9 @@ public class ProgressHUD extends Dialog {
 
     public static ProgressHUD show(Context context, CharSequence message, boolean indeterminate, boolean cancelable,
                                    OnCancelListener cancelListener) {
-        ProgressHUD dialog = new ProgressHUD(context, R.style.ProgressHUD);
+        ProgressHUD dialog = new ProgressHUD(context, R.style.arad_ProgressHUD);
         dialog.setTitle("");
-        dialog.setContentView(R.layout.progress_hud);
+        dialog.setContentView(R.layout.arad_progress_hud);
         if (message == null || message.length() == 0) {
             dialog.findViewById(R.id.message).setVisibility(View.GONE);
         } else {
