@@ -17,6 +17,10 @@ Arad的特性
 Arad快速上手
 ===========
   
+  ```
+  compile 'com.beanu.arad:arad:0.2.1@aar'
+  ```
+  
   1. 继承AradApplication，配置ApplicationConfig
   
   ```java
