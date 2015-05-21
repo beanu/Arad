@@ -1,6 +1,6 @@
 package com.beanu.arad.base;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.beanu.arad.Arad;
 import com.beanu.arad.http.INetResult;
@@ -12,7 +12,7 @@ import com.beanu.arad.widget.dialog.ProgressHUD;
  * 1.继承了INetResult 具备了网络处理能力
  * 2.添加了ProgressHUD 可以显示等待progress
  */
-public class BaseActivity extends ActionBarActivity implements INetResult {
+public class BaseActivity extends AppCompatActivity implements INetResult {
 
     ProgressHUD mProgressHUD;
 

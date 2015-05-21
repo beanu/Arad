@@ -74,11 +74,6 @@ public abstract class IDao {
         Arad.http.get(context, url, ajaxParams, new TextHttpResponseHandler() {
 
             @Override
-            public void onProgress(int bytesWritten, int totalSize) {
-                super.onProgress(bytesWritten, totalSize);
-            }
-
-            @Override
             public void onCancel() {
                 super.onCancel();
             }

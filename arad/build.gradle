@@ -1,17 +1,16 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
-    }
-}
-
+//buildscript {
+//    repositories {
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+//    }
+//}
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '22.0.1'
     resourcePrefix 'arad_'
     sourceSets {
         main {
@@ -36,16 +35,19 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.0.+'
-    compile 'com.squareup.picasso:picasso:2.4.0'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'com.loopj.android:android-async-http:1.4.6'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.4.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.0'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    //optional
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:support-v4:22.1.1'
+
+//    compile 'com.squareup.picasso:picasso:2.5.2'
+//    compile 'com.squareup.okhttp:okhttp:2.3.0'
+//    compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
+//    compile 'com.loopj.android:android-async-http:1.4.7'
+//    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0'
+//    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+//    compile 'de.greenrobot:eventbus:2.4.0'
+//    //optional
+//    compile 'com.jakewharton:butterknife:6.1.0'
 }
 
-apply from: '../bintray.gradle'
+//apply from: '../bintray.gradle'
