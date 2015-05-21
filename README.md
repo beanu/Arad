@@ -16,7 +16,7 @@ Arad的特性
 
 Arad快速上手
 ===========
-  
+  Gradle 引入方式
   ```
   compile 'com.beanu.arad:arad:0.2.1@aar'
   ```
