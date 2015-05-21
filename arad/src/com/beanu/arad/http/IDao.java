@@ -144,4 +144,40 @@ public abstract class IDao {
 
     }
 
+    /**
+     * Post json 请求
+     *
+     * @param url         接口地址
+     * @param jsonParams  请求参数 json字符串
+     * @param requestCode 请求编号，区分返回的结果
+     */
+    public void postRequest(String url, String jsonParams, final int requestCode) {
+        Arad.http.post(context, url, jsonParams, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable throwable) {
+                if (statusCode == 0)
+                    mResult.onNoConnect();
+                else
+                    mResult.onRequestFaild("" + statusCode, responseBody);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                try {
+                    if (Arad.app.config.httpConfig != null) {
+                        JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
+                        onRequestSuccess(node, requestCode);
+                    }
+                    mResult.onRequestSuccess(requestCode);
+                } catch (AradException e) {
+                    mResult.onRequestFaild(e.getError_code(), e.getMessage());
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 }
