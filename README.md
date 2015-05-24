@@ -18,7 +18,7 @@ Arad快速上手
 ===========
   Gradle 引入方式
   ```
-  compile 'com.beanu.arad:arad:0.2.1@aar'
+  compile 'com.beanu.arad:arad:0.2.2@aar'
   ```
   
   1. 继承AradApplication，配置ApplicationConfig
