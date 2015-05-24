@@ -69,6 +69,7 @@ public class Http implements IHTTP {
     public void post(Context context, String url, String jsonParams, AsyncHttpResponseHandler responseHandler) {
         try {
             StringEntity entity = new StringEntity(jsonParams);
+            entity.setContentType("application/json");
             client.post(context, url, entity, "application/json", responseHandler);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

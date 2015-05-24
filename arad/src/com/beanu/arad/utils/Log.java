@@ -1,6 +1,6 @@
 package com.beanu.arad.utils;
 
-import com.beanu.arad.BuildConfig;
+import com.beanu.arad.Arad;
 
 /**
  * Wrapper API for sending log output.
@@ -18,7 +18,7 @@ public class Log {
 	 *            The message you would like logged.
 	 */
 	public static void v(String msg) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.v(TAG, buildMessage(msg));
 	}
 
@@ -31,7 +31,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void v(String msg, Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.v(TAG, buildMessage(msg), thr);
 	}
 
@@ -41,7 +41,7 @@ public class Log {
 	 * @param msg
 	 */
 	public static void d(String msg) {
-//		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.d(TAG, buildMessage(msg));
 	}
 
@@ -54,7 +54,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void d(String msg, Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.d(TAG, buildMessage(msg), thr);
 	}
 
@@ -65,7 +65,7 @@ public class Log {
 	 *            The message you would like logged.
 	 */
 	public static void i(String msg) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.i(TAG, buildMessage(msg));
 	}
 
@@ -78,7 +78,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void i(String msg, Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.i(TAG, buildMessage(msg), thr);
 	}
 
@@ -89,7 +89,7 @@ public class Log {
 	 *            The message you would like logged.
 	 */
 	public static void e(String msg) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.e(TAG, buildMessage(msg));
 	}
 
@@ -100,7 +100,7 @@ public class Log {
 	 *            The message you would like logged.
 	 */
 	public static void w(String msg) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.w(TAG, buildMessage(msg));
 	}
 
@@ -113,7 +113,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void w(String msg, Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.w(TAG, buildMessage(msg), thr);
 	}
 
@@ -124,7 +124,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void w(Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.w(TAG, buildMessage(""), thr);
 	}
 
@@ -137,7 +137,7 @@ public class Log {
 	 *            An exception to log
 	 */
 	public static void e(String msg, Throwable thr) {
-		if (BuildConfig.DEBUG)
+		if (Arad.app.config.DEBUG)
 			android.util.Log.e(TAG, buildMessage(msg), thr);
 	}
 

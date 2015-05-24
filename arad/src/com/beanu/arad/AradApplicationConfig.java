@@ -33,4 +33,9 @@ public class AradApplicationConfig {
 
     public HttpConfig httpConfig = new HttpConfig();
 
+    /**
+     * 是否开启DEBUG模式，debug模式可以打印开发日志
+     */
+    public Boolean DEBUG = false;
+
 }

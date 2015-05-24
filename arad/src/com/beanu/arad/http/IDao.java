@@ -115,9 +115,13 @@ public abstract class IDao {
      */
     public void postRequest(String url, RequestParams params, final int requestCode) {
 
+        Log.d("POST: " + AsyncHttpClient.getUrlWithQueryString(true, url, params));
+
         Arad.http.post(context, url, params, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                Log.d(responseBody);
+
                 try {
                     if (Arad.app.config.httpConfig != null) {
                         JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
@@ -135,6 +139,8 @@ public abstract class IDao {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                Log.d("statusCode:" + statusCode + " Body:" + responseBody);
+
                 if (statusCode == 0)
                     mResult.onNoConnect();
                 else
@@ -152,9 +158,13 @@ public abstract class IDao {
      * @param requestCode 请求编号，区分返回的结果
      */
     public void postRequest(String url, String jsonParams, final int requestCode) {
+        Log.d("POST: " + url + " JSONParams:" + jsonParams);
+
         Arad.http.post(context, url, jsonParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable throwable) {
+                Log.d("statusCode:" + statusCode + " Body:" + responseBody);
+
                 if (statusCode == 0)
                     mResult.onNoConnect();
                 else
@@ -163,6 +173,8 @@ public abstract class IDao {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                Log.d(responseBody);
+
                 try {
                     if (Arad.app.config.httpConfig != null) {
                         JsonNode node = Arad.app.config.httpConfig.handleResult(responseBody);
