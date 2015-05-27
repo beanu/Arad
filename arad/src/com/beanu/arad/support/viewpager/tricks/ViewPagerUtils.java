@@ -15,8 +15,9 @@ public class ViewPagerUtils {
     /**
      * set the duration between two slider changes.
      *
-     * @param period
-     * @param interpolator
+     * @param viewPager
+     * @param period 周期
+     * @param interpolator 比如DecelerateInterpolator
      */
     public static void setSliderTransformDuration(ViewPager viewPager, int period, Interpolator interpolator) {
         try {
