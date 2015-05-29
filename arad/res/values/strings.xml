@@ -4,4 +4,11 @@
     <!-- error -->
     <string name="arad_unknown_error_code">未知错误</string>
 
+    <string name="arad_newUpdateAvailable">发现新版本</string>
+    <string name="arad_dialogPositiveButton">立即下载</string>
+    <string name="arad_dialogNegativeButton">以后再说</string>
+    <string name="arad_app_no_new_update">没有发现新版本</string>
+    <string name="arad_download_progress">正在下载:%1$d%%</string>
+    <string name="arad_download_success">下载完成，点击安装</string>
+
 </resources>
