@@ -51,7 +51,7 @@ public class DownloadService extends IntentService {
         int icon = getApplicationInfo().icon;
 
         mBuilder.setContentTitle(appName).setSmallIcon(icon);
-        String urlStr = intent.getStringExtra(Constants.APK_DOWNLOAD_URL);
+        String urlStr = intent.getStringExtra(UpdateChecker.APP_UPDATE_URL);
         InputStream in = null;
         FileOutputStream out = null;
         try {
