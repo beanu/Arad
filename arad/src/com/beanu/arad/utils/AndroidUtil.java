@@ -347,7 +347,7 @@ public class AndroidUtil {
 		return hasHoneycomb() && isTablet(context);
 	}
 
-	public static long getCurrentTime(final Context context) {
+	public static long getCurrentTime() {
 		return System.currentTimeMillis();
 	}
 }

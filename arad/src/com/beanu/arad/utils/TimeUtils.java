@@ -16,7 +16,9 @@
 
 package com.beanu.arad.utils;
 
-import android.content.Context;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimeUtils {
 
@@ -25,14 +27,14 @@ public class TimeUtils {
     private static final int HOUR = 60 * MINUTE;
     private static final int DAY = 24 * HOUR;
 
-    public static String getTimeAgo(long time, Context ctx) {
+    public static String getTimeAgo(long time) {
         // TODO: use DateUtils methods instead
         if (time < 1000000000000L) {
             // if timestamp given in seconds, convert to millis
             time *= 1000;
         }
 
-        long now = AndroidUtil.getCurrentTime(ctx);
+        long now = AndroidUtil.getCurrentTime();
         if (time > now || time <= 0) {
             return null;
         }
@@ -53,6 +55,43 @@ public class TimeUtils {
         } else {
             return diff / DAY + " 天之前";
         }
+    }
+
+    /**
+     * 字符串转Date
+     *
+     * @param user_time yyyy年MM月dd日HH时mm分ss秒
+     * @return Date
+     */
+    public static Date getTime(String user_time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+        Date date = null;
+        try {
+            date = sdf.parse(user_time);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date;
+    }
+
+    public static String countDownTime(long time) {
+        if (time < 1000000000000L) {
+            // if timestamp given in seconds, convert to millis
+            time *= 1000;
+        }
+
+        long now = AndroidUtil.getCurrentTime();
+        if (time <= now || time <= 0) {
+            return null;
+        }
+
+        final long diff = time - now;
+        long day = diff / DAY;
+        long hours = diff % DAY / HOUR;
+        long minute = diff % HOUR / MINUTE;
+        long second = diff % MINUTE / SECOND;
+
+        return day + "天" + hours + "时" + minute + "分" + second + "秒";
     }
 
 }
