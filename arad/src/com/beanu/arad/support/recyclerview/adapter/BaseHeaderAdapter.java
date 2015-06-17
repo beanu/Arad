@@ -11,17 +11,17 @@ import java.util.List;
  * 带有头部的recycler adapter
  * Created by yunhe on 2015-06-17.
  */
-public abstract class BaseHeaderRecyclerAdapter<E, VH extends RecyclerView.ViewHolder> extends BaseRecyclerAdapter<E, VH> {
+public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder> extends BaseAdapter<E, RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_HEADER = 0;
     public static final int VIEW_TYPE_ITEM = 1;
 
     private final LayoutInflater inflater;
 
-    public BaseHeaderRecyclerAdapter(Context context) {
+    public BaseHeaderAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
     }
 
-    public BaseHeaderRecyclerAdapter(Context context, List<E> list) {
+    public BaseHeaderAdapter(Context context, List<E> list) {
         this.inflater = LayoutInflater.from(context);
         this.list = list;
     }
@@ -37,12 +37,12 @@ public abstract class BaseHeaderRecyclerAdapter<E, VH extends RecyclerView.ViewH
     }
 
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return viewType == VIEW_TYPE_HEADER ? onCreateHeaderViewHolder(parent) : onCreateItemViewHolder(parent);
     }
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             onBindHeaderViewHolder((VH) holder, position);
         } else {
