@@ -22,6 +22,8 @@ public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder>
     private static final int VIEW_TYPE_LOADING = 1;
 
     protected LayoutInflater inflater;
+    protected Context context;
+
     private ILoadMoreAdapter listener;
 
     public static class LoadMoreViewHolder extends RecyclerView.ViewHolder {
@@ -35,16 +37,19 @@ public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder>
 
 
     public BaseLoadMoreAdapter(Context context) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
     public BaseLoadMoreAdapter(Context context, List<E> list) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.list = list;
     }
 
-    public BaseLoadMoreAdapter(LayoutInflater inflater, List<E> list, ILoadMoreAdapter listener) {
-        this.inflater = inflater;
+    public BaseLoadMoreAdapter(Context context, List<E> list, ILoadMoreAdapter listener) {
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
         this.listener = listener;
         this.list = list;
     }
