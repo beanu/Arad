@@ -21,16 +21,16 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="13dp"
-            android:src="@drawable/arad_ic_back"
-            android:visibility="gone" />
+            android:src="@drawable/arad_ic_back_selector"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/toolbar_title"
             style="@style/arad_actionbar_title"
-            android:textColor="@color/material_blue_grey_800"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:textColor="@color/material_blue_grey_800"/>
 
         <ImageView
             android:id="@+id/toolbar_rightbtn"
@@ -39,8 +39,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="13dp"
-            android:src="@drawable/arad_ic_add"
-            android:visibility="gone" />
+            android:src="@drawable/arad_ic_share_selector"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
