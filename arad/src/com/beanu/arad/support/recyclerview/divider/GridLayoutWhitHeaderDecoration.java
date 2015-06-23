@@ -34,12 +34,12 @@ public class GridLayoutWhitHeaderDecoration extends RecyclerView.ItemDecoration 
             outRect.top = mSizeGridSpacingPx;
         }
         if (itemPosition % mGridSize == 0) {
-            outRect.left = 0;
+            outRect.left = mSizeGridSpacingPx;
             outRect.right = padding;
             mNeedLeftSpacing = true;
         } else if ((itemPosition + 1) % mGridSize == 0) {
             mNeedLeftSpacing = false;
-            outRect.right = 0;
+            outRect.right = mSizeGridSpacingPx;
             outRect.left = padding;
         } else if (mNeedLeftSpacing) {
             mNeedLeftSpacing = false;
