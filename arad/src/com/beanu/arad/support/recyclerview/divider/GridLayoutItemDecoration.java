@@ -25,11 +25,9 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
         int frameWidth = (int) ((parent.getWidth() - (float) mSizeGridSpacingPx * (mGridSize - 1)) / mGridSize);
         int padding = parent.getWidth() / mGridSize - frameWidth;
         int itemPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewAdapterPosition();
-        if (itemPosition < mGridSize) {
-            outRect.top = 0;
-        } else {
-            outRect.top = mSizeGridSpacingPx;
-        }
+
+        outRect.top = mSizeGridSpacingPx;
+
         if (itemPosition % mGridSize == 0) {
             outRect.left = mSizeGridSpacingPx;
             outRect.right = padding;

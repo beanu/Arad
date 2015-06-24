@@ -38,7 +38,7 @@ public abstract class BaseHeadLoadMoreAdapter<E, VH extends RecyclerView.ViewHol
 
         if (position == 0) {
             return VIEW_TYPE_HEADER;
-        } else if (position >= list.size()) {
+        } else if (position > list.size()) {
             return VIEW_TYPE_LOADING;
         } else {
             return VIEW_TYPE_ITEM;
