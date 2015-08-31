@@ -13,8 +13,8 @@ import com.beanu.arad.R;
 public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
     private TextView mTitle;
-    private ImageView mLeftButton;
-    private ImageView mRightButton;
+    private View mLeftButton;
+    private View mRightButton;
 
     @Override
     public void onResume() {
@@ -26,8 +26,8 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
                 View view = parent.getWindow().getDecorView();
 
                 mTitle = (TextView) view.findViewById(R.id.toolbar_title);
-                mLeftButton = (ImageView) view.findViewById(R.id.toolbar_leftbtn);
-                mRightButton = (ImageView) view.findViewById(R.id.toolbar_rightbtn);
+                mLeftButton =  view.findViewById(R.id.toolbar_leftbtn);
+                mRightButton = view.findViewById(R.id.toolbar_rightbtn);
 
                 if (mTitle != null && setupToolBarTitle() != null)
                     mTitle.setText(setupToolBarTitle());
@@ -55,7 +55,7 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
 
     @Override
-    public ImageView getmRightButton() {
+    public View getmRightButton() {
         return mRightButton;
     }
 
@@ -65,7 +65,7 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
     }
 
     @Override
-    public ImageView getmLeftButton() {
+    public View getmLeftButton() {
         return mLeftButton;
     }
 
@@ -75,12 +75,12 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
     }
 
     @Override
-    public boolean setupToolBarLeftButton(ImageView leftButton) {
+    public boolean setupToolBarLeftButton(View leftButton) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightButton(ImageView rightButton) {
+    public boolean setupToolBarRightButton(View rightButton) {
         return false;
     }
 }

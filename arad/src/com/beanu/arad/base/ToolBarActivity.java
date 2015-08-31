@@ -15,8 +15,8 @@ import com.beanu.arad.utils.AnimUtil;
 public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
 
     private TextView mTitle;
-    private ImageView mLeftButton;
-    private ImageView mRightButton;
+    private View mLeftButton;
+    private View mRightButton;
     private Toolbar mActionBarToolbar;
 
 
@@ -31,8 +31,8 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
             mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
 
             mTitle = (TextView) findViewById(R.id.toolbar_title);
-            mLeftButton = (ImageView) findViewById(R.id.toolbar_leftbtn);
-            mRightButton = (ImageView) findViewById(R.id.toolbar_rightbtn);
+            mLeftButton =  findViewById(R.id.toolbar_leftbtn);
+            mRightButton = findViewById(R.id.toolbar_rightbtn);
             if (mActionBarToolbar != null) {
                 setSupportActionBar(mActionBarToolbar);
             }
@@ -87,12 +87,12 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     }
 
     @Override
-    public boolean setupToolBarLeftButton(ImageView leftButton) {
+    public boolean setupToolBarLeftButton(View leftButton) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightButton(ImageView rightButton) {
+    public boolean setupToolBarRightButton(View rightButton) {
         return false;
     }
 
@@ -102,12 +102,12 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     }
 
     @Override
-    public ImageView getmLeftButton() {
+    public View getmLeftButton() {
         return mLeftButton;
     }
 
     @Override
-    public ImageView getmRightButton() {
+    public View getmRightButton() {
         return mRightButton;
     }
 }
