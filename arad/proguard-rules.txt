@@ -17,6 +17,7 @@
 #}
 
 #picasso
+-dontwarn okio.**
 -dontwarn com.squareup.okhttp.**
 
 #jackson

@@ -1,3 +1,12 @@
+//buildscript {
+//    repositories {
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+//    }
+//}
+
 apply plugin: 'com.android.library'
 
 
@@ -17,7 +26,7 @@ android {
         minSdkVersion 8
         targetSdkVersion 21
         versionCode 1
-        versionName "0.0.5"
+        versionName version
     }
     buildTypes {
         release {
@@ -29,3 +38,5 @@ android {
 
 dependencies {
 }
+
+//apply from: '../../bintray.gradle'

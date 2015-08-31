@@ -185,6 +185,7 @@ public abstract class IDao {
                     mResult.onRequestFaild(e.getError_code(), e.getMessage());
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
+                    mResult.onRequestFaild("error", "");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

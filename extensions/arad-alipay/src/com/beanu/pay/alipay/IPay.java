@@ -1,4 +1,4 @@
-package com.alipay.android.app;
+package com.beanu.pay.alipay;
 
 /**
  * 支付接口（支付宝，微信，银联）
@@ -13,7 +13,7 @@ public interface IPay {
      * @param body    内容详情-商品详情
      * @param price   商品价格
      */
-    public void pay(String subject, String body, String price);
+    public void pay(String subject, String body, String price, String notify_url);
 
     /**
      * 支付成功后操作

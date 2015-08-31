@@ -1,3 +1,11 @@
+//buildscript {
+//    repositories {
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+//    }
+//}
 apply plugin: 'com.android.library'
 
 
@@ -28,6 +36,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.zxing:core:3.1.0'
 }
+
+//apply from: '../../bintray.gradle'

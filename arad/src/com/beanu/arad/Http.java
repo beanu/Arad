@@ -8,7 +8,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 
 import java.io.UnsupportedEncodingException;
@@ -68,7 +67,7 @@ public class Http implements IHTTP {
     @Override
     public void post(Context context, String url, String jsonParams, AsyncHttpResponseHandler responseHandler) {
         try {
-            StringEntity entity = new StringEntity(jsonParams);
+            StringEntity entity = new StringEntity(jsonParams, "UTF-8");
             entity.setContentType("application/json");
             client.post(context, url, entity, "application/json", responseHandler);
         } catch (UnsupportedEncodingException e) {
