@@ -33,6 +33,7 @@ import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -61,7 +62,7 @@ public class AndroidUtil {
 		try {
 			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
 		} catch (Exception e) {
-			Log.e("Cannot find package and its version info.");
+			Log.e("Arad","Cannot find package and its version info.");
 			return -1;
 		}
 	}
@@ -70,7 +71,7 @@ public class AndroidUtil {
 		try {
 			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
 		} catch (Exception e) {
-			Log.e("Cannot find package and its version info.");
+			Log.e("Arad","Cannot find package and its version info.");
 			return "no version name";
 		}
 	}
@@ -152,7 +153,7 @@ public class AndroidUtil {
 			Window window = dialog.getWindow();
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 		} catch (Exception e) {
-			Log.e(e.toString());
+			Log.e("Arad",e.toString());
 		}
 	}
 

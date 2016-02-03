@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.NetWorkActivity"
+            android:name=".ui.module.NetWorkActivity"
             android:label="@string/title_activity_net_work" >
         </activity>
     </application>

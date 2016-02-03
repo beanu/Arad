@@ -1,4 +1,4 @@
-package com.beanu.arad.demo.fragments;
+package com.beanu.arad.demo.ui.fragments;
 
 
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beanu.arad.demo.R;
-import com.beanu.arad.demo.module.NetWorkActivity;
+import com.beanu.arad.demo.ui.module.NetWorkActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,7 +30,7 @@ public class NetWorkHttpFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_net_work_http, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 

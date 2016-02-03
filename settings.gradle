@@ -1,7 +1,8 @@
-include ':arad', ':arad-compound-selector', ':arad-zxing', ':arad-demo',":arad-indexable-listview",":arad-alipay",":arad-crop"
+include ':arad', ':arad-compound-selector', ':arad-zxing', ':arad-demo', ":arad-indexable-listview", ":arad-alipay", ":arad-crop", ':arad-bottom-nav-bar'
 project(':arad-compound-selector').projectDir = new File('extensions/arad-compound-selector')
 project(':arad-zxing').projectDir = new File('extensions/arad-zxing')
 project(':arad-indexable-listview').projectDir = new File('extensions/arad-indexable-listview')
 project(':arad-alipay').projectDir = new File('extensions/arad-alipay')
 project(':arad-crop').projectDir = new File('extensions/arad-crop')
 project(':arad-demo').projectDir = new File('demo/arad-demo')
+project(':arad-bottom-nav-bar').projectDir = new File('extensions/arad-bottom-nav-bar')

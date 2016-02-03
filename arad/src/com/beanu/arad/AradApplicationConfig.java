@@ -1,7 +1,5 @@
 package com.beanu.arad;
 
-import com.beanu.arad.http.HttpConfig;
-
 import net.tsz.afinal.FinalDb.DaoConfig;
 
 /**
@@ -31,11 +29,6 @@ public class AradApplicationConfig {
      */
     public String imageCacheFolder = "aradCache";
 
-    public HttpConfig httpConfig = new HttpConfig();
-
-    /**
-     * 是否开启DEBUG模式，debug模式可以打印开发日志
-     */
-    public Boolean DEBUG = false;
+//    public HttpConfig httpConfig = new HttpConfig();
 
 }

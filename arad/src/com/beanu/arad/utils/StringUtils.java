@@ -1,5 +1,7 @@
 package com.beanu.arad.utils;
 
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -39,7 +41,7 @@ public final class StringUtils {
             SimpleDateFormat format = new SimpleDateFormat(DEFAULT_DATA_TIME_FORMAT);
             retString = format.format(date);
         } catch (Exception e) {
-            Log.e(e.toString());
+            Log.e("Arad",e.toString());
             e.printStackTrace();
         }
         return retString;
@@ -65,7 +67,7 @@ public final class StringUtils {
                 e.printStackTrace();       // 打印异常信息
             }
         } catch (Exception e) {
-            Log.e(e.toString());
+            Log.e("Arad",e.toString());
             e.printStackTrace();
         }
         return retString;

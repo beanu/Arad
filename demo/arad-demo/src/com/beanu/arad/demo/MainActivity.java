@@ -12,26 +12,32 @@ import android.widget.TextView;
 
 import com.beanu.arad.Arad;
 import com.beanu.arad.base.ToolBarActivity;
-import com.beanu.arad.demo.fragments.NetWorkHttpFragment;
 import com.beanu.arad.demo.support.event.NavEvent;
+import com.beanu.arad.demo.ui.fragments.NetWorkHttpFragment;
+import com.beanu.arad.demo.ui.fragments.RxJavaFragment;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import rx.Subscription;
+import rx.functions.Action1;
 
 
 public class MainActivity extends ToolBarActivity {
 
-    @InjectView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @InjectView(R.id.toolbar_title) TextView toolbar_title;
-    @InjectView(R.id.fragment_drawer) FrameLayout mFragmentDrawer;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.toolbar_title)
+    TextView toolbar_title;
+    @Bind(R.id.fragment_drawer)
+    FrameLayout mFragmentDrawer;
 
 
+    Subscription rxSubscription;
     ActionBarDrawerToggle mDrawerToggle;
-
     FragmentsManager fragmentsManager;
 
     public enum Fragments {
-        nav, listView, pic
+        nav, listView, pic,RxJava
     }
 
 
@@ -39,7 +45,7 @@ public class MainActivity extends ToolBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         toolbar_title.setText("首页");
         //设置DrawerToggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getActionBarToolbar(), R.string.app_name, R.string.app_name);
@@ -51,19 +57,23 @@ public class MainActivity extends ToolBarActivity {
         fragmentsManager = new FragmentsManager(this, R.id.main_fragment_container);
         fragmentsManager.addFragment(Fragments.nav.name(), NetWorkHttpFragment.class, null);
         fragmentsManager.addFragment(Fragments.listView.name(), NetWorkHttpFragment.class, null);
+        fragmentsManager.addFragment(Fragments.RxJava.name(), RxJavaFragment.class, null);
 
-        Arad.bus.register(this);
+
+        rxSubscription = Arad.bus.toObserverable(NavEvent.class).subscribe(new Action1<NavEvent>() {
+            @Override
+            public void call(NavEvent navEvent) {
+                fragmentsManager.switchFragment(navEvent.getTag());
+                mDrawerLayout.closeDrawer(mFragmentDrawer);
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                //TODO error
+            }
+        });
     }
 
-    /**
-     * 接收左侧导航栏的点击事件
-     *
-     * @param event 导航栏点击事件
-     */
-    public void onEventMainThread(NavEvent event) {
-        fragmentsManager.switchFragment(event.getTag());
-        mDrawerLayout.closeDrawer(mFragmentDrawer);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,7 +92,7 @@ public class MainActivity extends ToolBarActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                mDrawerLayout.openDrawer(Gravity.START);
+                mDrawerLayout.openDrawer(Gravity.LEFT);
                 return true;
         }
 
@@ -106,6 +116,8 @@ public class MainActivity extends ToolBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Arad.bus.unregister(this);
+        if (!rxSubscription.isUnsubscribed()) {
+            rxSubscription.unsubscribe();
+        }
     }
 }

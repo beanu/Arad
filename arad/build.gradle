@@ -9,8 +9,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -20,8 +20,8 @@ android {
         }
     }
     defaultConfig {
-        minSdkVersion 13
-        targetSdkVersion 21
+        minSdkVersion 15
+        targetSdkVersion 23
         versionCode 1
         versionName version
     }
@@ -34,24 +34,39 @@ android {
     lintOptions {
         abortOnError false
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
 
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
 
+    //rxjava
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+
+    //gson
+    compile 'com.google.code.gson:gson:2.5'
+
+    //retrofit
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+
+    //glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 //    compile 'com.squareup.picasso:picasso:2.5.2'
-//    compile 'com.squareup.okhttp:okhttp:2.3.0'
-//    compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
-//    compile 'com.loopj.android:android-async-http:1.4.7'
-//    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0'
-//    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
-//    compile 'de.greenrobot:eventbus:2.4.0'
-//    //optional
-//    compile 'com.jakewharton:butterknife:6.1.0'
+
+
+    //optional
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 
 //apply from: '../bintray.gradle'

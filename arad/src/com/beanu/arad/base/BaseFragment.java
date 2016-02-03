@@ -2,31 +2,11 @@ package com.beanu.arad.base;
 
 import android.support.v4.app.Fragment;
 
-import com.beanu.arad.http.INetResult;
 import com.beanu.arad.widget.dialog.ProgressHUD;
-import com.beanu.arad.utils.MessageUtils;
 
-public class BaseFragment extends Fragment implements INetResult {
-
+public class BaseFragment extends Fragment {
 
     ProgressHUD mProgressHUD;
-
-    @Override
-    public void onRequestSuccess(int requestCode) {
-
-    }
-
-    @Override
-    public void onRequestFaild(String errorNo, String errorMessage) {
-        showProgress(false);
-        MessageUtils.showShortToast(getActivity(), errorMessage);
-    }
-
-    @Override
-    public void onNoConnect() {
-        showProgress(false);
-        MessageUtils.showShortToast(getActivity(), "无网络连接");
-    }
 
     public void showProgress(boolean show) {
         showProgressWithText(show, "加载中...");
@@ -41,4 +21,6 @@ public class BaseFragment extends Fragment implements INetResult {
             }
         }
     }
+
+
 }

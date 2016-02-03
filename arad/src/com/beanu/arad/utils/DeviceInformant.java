@@ -17,6 +17,7 @@ package com.beanu.arad.utils;
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 /**
  * 设备信息，主要用于服务器端设备信息的统计
@@ -59,7 +60,7 @@ public class DeviceInformant {
             countryCode = tm == null ? "" : (tm.getSimCountryIso() == null ? "" : tm.getSimCountryIso().toUpperCase());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("Device Info Error", e);
+            Log.e("ERROR","Device Info Error");
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.beanu.arad.Arad;
 import com.beanu.arad.demo.support.event.NavEvent;
 
@@ -33,7 +34,7 @@ public class NavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nav, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -50,6 +51,8 @@ public class NavFragment extends Fragment {
             clickEvent(MainActivity.Fragments.nav.name());
         } else if (id == R.id.nav_list) {
             clickEvent(MainActivity.Fragments.listView.name());
+        } else if (id == R.id.nav_widget) {
+            clickEvent(MainActivity.Fragments.RxJava.name());
         }
     }
 
