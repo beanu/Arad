@@ -42,7 +42,7 @@ public class SelectorLeftAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.acs_selector_list_left_item, null);
+			convertView = inflater.inflate(R.layout.acs_selector_two_list_left_item, null);
 			holder = new ViewHolder();
 			holder.textView = (TextView) convertView.findViewById(R.id.selector_list_left_item_textview);
 			convertView.setTag(holder);

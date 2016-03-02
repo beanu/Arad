@@ -1,5 +1,6 @@
 package com.beanu.arad.base;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,11 +32,17 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
             mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
 
             mTitle = (TextView) findViewById(R.id.toolbar_title);
-            mLeftButton =  findViewById(R.id.toolbar_leftbtn);
+            mLeftButton = findViewById(R.id.toolbar_leftbtn);
             mRightButton = findViewById(R.id.toolbar_rightbtn);
             if (mActionBarToolbar != null) {
                 setSupportActionBar(mActionBarToolbar);
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                }
             }
+
+
         }
         return mActionBarToolbar;
     }
@@ -110,4 +117,14 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     public View getmRightButton() {
         return mRightButton;
     }
+
+//  //TODO
+//    http://angeldevil.me/2014/12/24/toolbar-as-actionbar-and-centered-title/
+//    @Override
+//    protected void onTitleChanged(CharSequence title, int color) {
+//        super.onTitleChanged(title, color);
+//        if (toolbarTitle != null) {
+//            toolbarTitle.setText(title);
+//        }
+//    }
 }

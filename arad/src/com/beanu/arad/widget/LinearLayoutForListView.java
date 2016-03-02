@@ -79,7 +79,7 @@ public class LinearLayoutForListView extends LinearLayout {
      *
      * @param onClickListener
      */
-    public void setOnclickLinstener(OnClickListener onClickListener) {
+    public void setOnItemClickLinstener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 

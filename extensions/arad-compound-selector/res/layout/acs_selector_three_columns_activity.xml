@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="280dp"
-              android:layout_height="450dp"
-              android:orientation="horizontal"
-              android:layoutAnimation="@anim/acs_selector_anim_layout">
+              android:layout_width="match_parent"
+              android:layout_height="400dp"
+              android:layoutAnimation="@anim/acs_selector_anim_layout"
+              android:orientation="horizontal">
 
 
     <ListView
@@ -17,16 +17,27 @@
         android:scrollbars="none">
     </ListView>
 
+
+    <ListView
+        android:id="@+id/listMiddle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:cacheColorHint="@android:color/transparent"
+        android:choiceMode="singleChoice"
+        android:divider="@null"
+        android:scrollbars="none">
+    </ListView>
+
+
     <ListView
         android:id="@+id/listRight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@android:color/white"
         android:cacheColorHint="@android:color/transparent"
+        android:choiceMode="singleChoice"
         android:divider="@null"
-        android:dividerHeight="0dp"
         android:scrollbars="none">
     </ListView>
-
 </LinearLayout>

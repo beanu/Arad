@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beanu.arad.widget.compoundselector" >
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher" >
+    <application>
     </application>
 
 </manifest>

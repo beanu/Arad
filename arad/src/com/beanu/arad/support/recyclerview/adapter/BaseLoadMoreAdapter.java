@@ -16,7 +16,7 @@ import java.util.List;
  * 带有loadmore的 recycle adapter
  * Created by beanu on 15/6/17.
  */
-public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder> extends BaseAdapter<E, RecyclerView.ViewHolder> {
+public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder> extends _BaseAdapter<E, RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_ITEM = 0;
     private static final int VIEW_TYPE_LOADING = 1;

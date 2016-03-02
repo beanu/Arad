@@ -16,7 +16,7 @@ import java.util.List;
  * 带有头部和loadmore的recyclerview
  * Created by yunhe on 2015-06-23.
  */
-public abstract class BaseHeadLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder> extends BaseAdapter<E, RecyclerView.ViewHolder> {
+public abstract class BaseHeadLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder> extends _BaseAdapter<E, RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_HEADER = 0;
     public static final int VIEW_TYPE_ITEM = 1;
     private static final int VIEW_TYPE_LOADING = 2;

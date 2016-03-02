@@ -11,11 +11,11 @@ import java.util.List;
  * 带有头部的recycler adapter
  * Created by yunhe on 2015-06-17.
  */
-public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder> extends BaseAdapter<E, RecyclerView.ViewHolder> {
+public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder> extends _BaseAdapter<E, RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_HEADER = 0;
     public static final int VIEW_TYPE_ITEM = 1;
 
-    private final LayoutInflater inflater;
+    protected final LayoutInflater inflater;
 
     public BaseHeaderAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
