@@ -9,7 +9,7 @@ Arad的特性
 =========
 * 注解开发，参考[Butterknife](https://github.com/JakeWharton/butterknife)，大大简化代码，注重业务的开发
 * Http使用[android-async-http](https://github.com/loopj/android-async-http)，标杆应用，异步http请求，多媒体文件上传下载，request线程池，大小只有60KB
-* Imageloader异步加载图片（Picasso）
+* Imageloader异步加载图片（Glide）
 * 数据库模块，android中的orm框架，一行代码就可以进行增删改查。支持一对多，多对一等查询
 * Util 常用方法的集合
 * 多控件的支持（如果控件带有资源文件，则被分配到library-project中，需要的时候，再加入依赖工程）
