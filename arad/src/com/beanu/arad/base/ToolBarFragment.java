@@ -20,9 +20,11 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
     private View mLeftButton;
     private View mRightButton;
 
+    private ActionBar mActionBar;
+    private Toolbar mToolbar;
+
     private View arad_content;
     private ContentLoadingProgressBar arad_progress;
-
 
     @Override
     public void onResume() {
@@ -31,7 +33,7 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
         View view = parent.getWindow().getDecorView();
 
         if (getParentFragment() == null && parent instanceof AppCompatActivity) {
-            ActionBar actionBar = initToolbar(parent);
+            mActionBar = initToolbar(parent);
 
             if (setupToolBarTitle() != null) {
 
@@ -41,22 +43,18 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
                 if (mTitle != null && setupToolBarTitle() != null) {
                     mTitle.setText(setupToolBarTitle());
-                    if (actionBar != null) {
-                        actionBar.setDisplayShowTitleEnabled(false);
+                    if (mActionBar != null) {
+                        mActionBar.setDisplayShowTitleEnabled(false);
                     }
                 }
 
                 if (mLeftButton != null) {
                     if (setupToolBarLeftButton(mLeftButton)) {
                         mLeftButton.setVisibility(View.VISIBLE);
-                        if (actionBar != null) {
-                            actionBar.setDisplayShowTitleEnabled(false);
-                        }
+                        hideHomeAsUp();
                     } else {
                         mLeftButton.setVisibility(View.GONE);
-                        if (actionBar != null) {
-                            actionBar.setDisplayShowTitleEnabled(true);
-                        }
+                        displayHomeAsUp();
                     }
                 }
 
@@ -79,10 +77,10 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
     private ActionBar initToolbar(FragmentActivity parent) {
         ActionBar actionBar = null;
-        Toolbar toolbar = (Toolbar) parent.getWindow().getDecorView().findViewById(R.id.toolbar);
-        if (toolbar != null) {
+        mToolbar = (Toolbar) parent.getWindow().getDecorView().findViewById(R.id.toolbar);
+        if (mToolbar != null) {
             AppCompatActivity mActivity = (AppCompatActivity) parent;
-            mActivity.setSupportActionBar(toolbar);
+            mActivity.setSupportActionBar(mToolbar);
             actionBar = mActivity.getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(false);
@@ -150,6 +148,24 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
         if (arad_progress != null && arad_content != null) {
             arad_progress.hide();
             arad_content.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void displayHomeAsUp() {
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+        }
+    }
+
+    private void hideHomeAsUp() {
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
 }
