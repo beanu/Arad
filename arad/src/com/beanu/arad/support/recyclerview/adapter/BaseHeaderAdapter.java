@@ -9,9 +9,12 @@ import java.util.List;
 
 /**
  * 带有头部的recycler adapter
- * Created by yunhe on 2015-06-17.
+ *
+ * @param <E>     item的实体类
+ * @param <VH>    头部的viewholder
+ * @param <VITEM> 每个项目的viewholder
  */
-public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder> extends _BaseAdapter<E, RecyclerView.ViewHolder> {
+public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder, VITEM extends RecyclerView.ViewHolder> extends _BaseAdapter<E, RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_HEADER = 0;
     public static final int VIEW_TYPE_ITEM = 1;
 
@@ -46,15 +49,15 @@ public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder> e
         if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             onBindHeaderViewHolder((VH) holder, position);
         } else {
-            onBindItemViewHolder((VH) holder, position - 1);
+            onBindItemViewHolder((VITEM) holder, position - 1);
         }
     }
 
-    public abstract VH onCreateItemViewHolder(ViewGroup parent);
+    public abstract VITEM onCreateItemViewHolder(ViewGroup parent);
 
     public abstract VH onCreateHeaderViewHolder(ViewGroup parent);
 
-    public abstract void onBindItemViewHolder(VH holder, int position);
+    public abstract void onBindItemViewHolder(VITEM holder, int position);
 
     public abstract void onBindHeaderViewHolder(VH holder, int position);
 

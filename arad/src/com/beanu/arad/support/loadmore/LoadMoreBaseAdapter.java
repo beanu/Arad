@@ -12,7 +12,7 @@ import com.beanu.arad.R;
 
 
 /**
- * LoadMore专用
+ * ListView LoadMore专用
  * 
  * @author beanu
  * 

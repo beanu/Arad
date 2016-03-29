@@ -6,7 +6,7 @@ import android.widget.BaseAdapter;
 import com.beanu.arad.base.ToolBarActivity;
 
 /**
- * 加载更多
+ * ListView 加载更多
  * Created by beanu on 13-11-29.
  */
 public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILoadMoreAdapter, AbsListView.OnScrollListener {

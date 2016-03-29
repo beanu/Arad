@@ -6,40 +6,28 @@ import com.beanu.arad.widget.dialog.ProgressHUD;
 
 /**
  * 基础类
- * 1.继承了INetResult 具备了网络处理能力
- * 2.添加了ProgressHUD 可以显示等待progress
+ * 1.添加了ProgressHUD 可以显示等待progress
  */
 public class BaseActivity extends AppCompatActivity {
 
+
     ProgressHUD mProgressHUD;
 
-//    @Override
-//    public void onRequestSuccess(int requestCode) {
-//
-//    }
-//
-//    @Override
-//    public void onRequestFaild(String errorNo, String errorMessage) {
-//        showProgress(false);
-//        MessageUtils.showShortToast(this, errorMessage);
-//    }
-//
-//    @Override
-//    public void onNoConnect() {
-//        showProgress(false);
-//        MessageUtils.showShortToast(this, "无网络连接");
-//    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        Arad.http.cancelRequests(this);
-    }
-
+    /**
+     * 显示一个等待dialog，内容交互或者提交的时候使用
+     *
+     * @param show 是否要显示
+     */
     public void showProgress(boolean show) {
         showProgressWithText(show, "加载中...");
     }
 
+    /**
+     * 显示一个等待dialog，内容交互或者提交的时候使用
+     *
+     * @param show    是否要显示
+     * @param message 要显示的文字
+     */
     public void showProgressWithText(boolean show, String message) {
         if (show) {
             mProgressHUD = ProgressHUD.show(this, message, true, true, null);

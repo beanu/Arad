@@ -10,38 +10,31 @@
     app:contentInsetEnd="0dp"
     app:contentInsetStart="0dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/toolbar_leftbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:padding="13dp"
-            android:src="@drawable/arad_ic_back_selector"
-            android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/toolbar_leftbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="13dp"
+        android:src="@drawable/arad_ic_back_selector"
+        android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            style="@style/arad_actionbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/material_blue_grey_800"/>
+    <TextView
+        android:id="@+id/toolbar_title"
+        style="@style/arad_actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
-        <ImageView
-            android:id="@+id/toolbar_rightbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="13dp"
-            android:src="@drawable/arad_ic_share_selector"
-            android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/toolbar_rightbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="13dp"
+        android:src="@drawable/arad_ic_share_selector"
+        android:visibility="gone"/>
 
-    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

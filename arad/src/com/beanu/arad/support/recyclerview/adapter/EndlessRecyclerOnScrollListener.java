@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
 
 /**
- * load more 监听
+ * RecyvleView load more 监听
  * Created by beanu on 15/6/17.
  */
 public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
