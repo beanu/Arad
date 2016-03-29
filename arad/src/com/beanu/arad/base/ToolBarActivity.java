@@ -19,7 +19,9 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     private TextView mTitle;
     private View mLeftButton;
     private View mRightButton;
+
     private ActionBar mActionBar;
+    private Toolbar mToolbar;
 
     private View arad_content;
     private ContentLoadingProgressBar arad_progress;
@@ -28,17 +30,14 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTitle = (TextView) findViewById(R.id.toolbar_title);
         mLeftButton = findViewById(R.id.toolbar_leftbtn);
         mRightButton = findViewById(R.id.toolbar_rightbtn);
-        if (mActionBarToolbar != null) {
-            setSupportActionBar(mActionBarToolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
             mActionBar = getSupportActionBar();
-            if (mActionBar != null) {
-                mActionBar.setDisplayHomeAsUpEnabled(true);
-            }
+            displayHomeAsUp();
         }
 
         arad_content = findViewById(R.id.arad_content);
@@ -58,14 +57,10 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
         if (mLeftButton != null) {
             if (setupToolBarLeftButton(mLeftButton)) {
                 mLeftButton.setVisibility(View.VISIBLE);
-                if (mActionBar != null) {
-                    mActionBar.setDisplayHomeAsUpEnabled(false);
-                }
+                hideHomeAsUp();
             } else {
                 mLeftButton.setVisibility(View.GONE);
-                if (mActionBar != null) {
-                    mActionBar.setDisplayHomeAsUpEnabled(true);
-                }
+                displayHomeAsUp();
             }
         }
 
@@ -76,12 +71,6 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
                 mRightButton.setVisibility(View.GONE);
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
 
     }
 
@@ -156,13 +145,22 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
         }
     }
 
-//  //TODO
-//    http://angeldevil.me/2014/12/24/toolbar-as-actionbar-and-centered-title/
-//    @Override
-//    protected void onTitleChanged(CharSequence title, int color) {
-//        super.onTitleChanged(title, color);
-//        if (toolbarTitle != null) {
-//            toolbarTitle.setText(title);
-//        }
-//    }
+    private void displayHomeAsUp() {
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+    }
+
+    private void hideHomeAsUp() {
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(false);
+        }
+    }
+
 }
