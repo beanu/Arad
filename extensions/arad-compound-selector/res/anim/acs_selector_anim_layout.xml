@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:animation="@anim/acs_push_top_in"
-    android:animationOrder="random"
-    android:duration="50" />
-<!-- 间隔时间是0.5秒，顺序是random随机
- -->
-
