@@ -1,4 +1,4 @@
-package com.arad;
+package com.beanu.demo;
 
 import org.junit.Test;
 

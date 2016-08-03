@@ -1,6 +1,8 @@
 package com.arad;
 
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Arad-Android Rapid Application Development
  *
@@ -13,5 +15,5 @@ public class Arad {
     //TODO 整合glide和okhttp
 //    public static Glide imageLoader;
     public static Preferences preferences;
-    public static RxBus bus;
+    public static EventBus bus;
 }

@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
+import com.arad.Arad;
+import com.arad.AradApplication;
 import com.arad.widget.dialog.AlertDialogFragment;
 import com.arad.widget.dialog.CommentDialogFragment;
 import com.arad.widget.dialog.ProgressDialogFragment;
@@ -26,6 +31,73 @@ import java.util.List;
  * Created by beanu on 14-8-22.
  */
 public class UIUtils {
+
+    /**
+     * 获取上下文
+     *
+     * @return
+     */
+    public static Context getContext() {
+        return Arad.app;
+    }
+
+    /**
+     * 获取布局
+     *
+     * @param resId
+     * @return
+     */
+    public static View inflate(int resId) {
+        return LayoutInflater.from(getContext()).inflate(resId, null);
+    }
+
+
+    /**
+     * 获取主线程
+     *
+     * @return
+     */
+    public static Thread getMainThread() {
+        return AradApplication.getMainThread();
+    }
+
+    /**
+     * 获取主线程id
+     *
+     * @return
+     */
+    public static int getMainThreadId() {
+        return AradApplication.getMainThreadId();
+    }
+
+    // 判断当前的线程是不是在主线程
+    public static boolean isRunInMainThread() {
+        return android.os.Process.myTid() == getMainThreadId();
+    }
+
+    public static void runInMainThread(Runnable runnable) {
+        // 在主线程运行
+        if (isRunInMainThread()) {
+            runnable.run();
+        } else {
+            post(runnable);
+        }
+    }
+
+    /**
+     * 获取主线程的handler
+     */
+    public static Handler getHandler() {
+        return AradApplication.getMainThreadHandler();
+    }
+
+    /**
+     * 在主线程执行runnable
+     */
+    public static boolean post(Runnable runnable) {
+        return getHandler().post(runnable);
+    }
+
 
     public static int convertDpToPixel(Context context, float dp) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
