@@ -18,24 +18,12 @@ public abstract class AradApplication extends Application {
     public void onCreate() {
         super.onCreate();
         config = appConfig();
-        config.daoConfig.setContext(getApplicationContext());
 
         Arad.app = this;
-        Arad.db = DataBase.getInstance(getApplicationContext());
+        Arad.db = DB.getInstance(getApplicationContext());
         Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
         deviceInfo = new DeviceInformant(getApplicationContext());
         Arad.bus = EventBus.getDefault();
-//
-//        this.mMainThreadHandler = new Handler();
-//        this.mMainThreadLooper = getMainLooper();
-//        this.mMainThead = Thread.currentThread();
-//        this.mMainTheadId = android.os.Process.myTid();
-    }
-
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
     }
 
     protected abstract AradApplicationConfig appConfig();

@@ -1,90 +1,97 @@
 package com.arad;
 
+import android.content.Context;
 
-import com.arad.core.IDB;
-
-import net.tsz.afinal.FinalDb;
-import net.tsz.afinal.FinalDb.DaoConfig;
-import net.tsz.afinal.db.sqlite.DbModel;
-import net.tsz.afinal.db.table.TableInfo;
+import com.arad.base.IDB;
+import com.litesuits.orm.LiteOrm;
+import com.litesuits.orm.db.assit.QueryBuilder;
 
 import java.util.ArrayList;
 
+/**
+ * lite-orm 数据库
+ * Created by Beanu on 16/9/7.
+ */
 public class DB implements IDB {
 
-	private static DB instance;
+    private static DB instance;
+    private LiteOrm mLiteOrm;
 
-	private FinalDb db;
+    public DB(Context context) {
+        mLiteOrm = LiteOrm.newCascadeInstance(context, "arad.db");
+        mLiteOrm.setDebugged(true);
+    }
 
-	private DB(DaoConfig config) {
-		db = FinalDb.create(config);
-	}
+    public static DB getInstance(Context context) {
+        if (instance == null)
+            instance = new DB(context);
+        return instance;
+    }
 
-	public static DB getInstance(DaoConfig config) {
-		if (instance == null)
-			instance = new DB(config);
-		return instance;
-	}
+    @Override
+    public void save(Object entity) {
+        mLiteOrm.save(entity);
+    }
 
-	@Override
-	public void save(Object entity) {
-		db.save(entity);
-	}
+    @Override
+    public <T> ArrayList<T> findAll(Class<T> clazz) {
+        return mLiteOrm.query(clazz);
+    }
 
-	@Override
-	public <T> ArrayList<T> findAll(Class<T> clazz) {
-		return (ArrayList<T>)db.findAll(clazz);
-	}
+    @Override
+    public <T> ArrayList<T> findAll(Class<T> clazz, String orderBy) {
+        return mLiteOrm.query(new QueryBuilder<T>(clazz).orderBy(orderBy));
+    }
 
-	@Override
-	public <T> ArrayList<T> findAll(Class<T> clazz, String orderBy) {
-		return (ArrayList<T>) db.findAll(clazz, orderBy);
-	}
+    @Override
+    public <T> ArrayList<T> findAllByWhere(Class<T> clazz, String strWhere) {
+        return mLiteOrm.query(new QueryBuilder<T>(clazz).where(strWhere));
+    }
 
-	@Override
-	public void update(Object entity) {
-		db.update(entity);
-	}
+    @Override
+    public <T> T findById(Class<T> clazz, Object id) {
 
-	@Override
-	public void delete(Object entity) {
-		db.delete(entity);
-	}
+        if (id instanceof Long) {
+            return mLiteOrm.queryById((long) id, clazz);
+        } else if (id instanceof String) {
+            return mLiteOrm.queryById((String) id, clazz);
+        }
 
-	@Override
-	public <T> void deleteById(Class<T> clazz, String id) {
-		db.deleteById(clazz, id);
-	}
+        return mLiteOrm.queryById(String.valueOf(id), clazz);
+    }
 
-	@Override
-	public <T> T findById(Class<T> clazz, Object id) {
-		return db.findById(id, clazz);
-	}
+    @Override
+    public <T> int countByWhere(Class<T> clazz, String strWhere) {
 
-	@Override
-	public <T> int countByWhere(Class<T> clazz, String strWhere) {
-		TableInfo table = TableInfo.get(clazz);
-		DbModel model = db
-				.findDbModelBySQL("select count(*) count from " + table.getTableName() + " where " + strWhere);
-		if (model != null) {
-			return model.getInt("count");
-		}
-		return 0;
-	}
+        return (int) mLiteOrm.queryCount(new QueryBuilder(clazz).where(strWhere));
+    }
 
-	@Override
-	public void update(Object entity, String strWhere) {
-		db.update(entity, strWhere);
-	}
+    @Override
+    public void update(Object entity) {
+        mLiteOrm.update(entity);
+    }
 
-	@Override
-	public <T> ArrayList<T> findAllByWhere(Class<T> clazz, String strWhere) {
-		return (ArrayList<T>)db.findAllByWhere(clazz, strWhere);
-	}
+    @Override
+    public void update(Object entity, String strWhere) {
+//TODO        mLiteOrm.update
+    }
 
-	@Override
-	public <T> void deleteByWhere(Class<?> clazz, String strWhere) {
-		db.deleteByWhere(clazz, strWhere);
-	}
+    @Override
+    public void delete(Object entity) {
+        mLiteOrm.delete(entity);
+    }
 
+    @Override
+    public <T> void deleteById(Class<T> clazz, String id) {
+//TODO       mLiteOrm.delete
+    }
+
+    @Override
+    public <T> void deleteByWhere(Class<?> clazz, String strWhere) {
+//TODO
+    }
+
+    public LiteOrm getLiteOrm() {
+        return mLiteOrm;
+    }
 }

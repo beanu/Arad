@@ -1,6 +1,5 @@
 package com.arad;
 
-import net.tsz.afinal.FinalDb.DaoConfig;
 
 /**
  * 全局配置
@@ -14,14 +13,6 @@ public class AradApplicationConfig {
      */
     public String preferencesName = "arad_preference";
 
-    /**
-     * 数据库配置
-     */
-    public DaoConfig daoConfig = new DaoConfig();
-
-    {
-        daoConfig.setDbName("arad.db");
-    }
 
     /**
      * 如果SD卡存在，则存在SD/Android/PACKAGE_NAME/cache/aradCache
@@ -29,6 +20,5 @@ public class AradApplicationConfig {
      */
     public String imageCacheFolder = "aradCache";
 
-//    public HttpConfig httpConfig = new HttpConfig();
 
 }

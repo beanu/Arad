@@ -9,7 +9,7 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class Arad {
     public static AradApplication app;
-    public static DataBase db;
+    public static DB db;
     public static Preferences preferences;
     public static EventBus bus;
 }

@@ -3,7 +3,7 @@ package com.arad;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.arad.core.IPreferences;
+import com.arad.base.IPreferences;
 
 import java.util.Map;
 import java.util.Map.Entry;

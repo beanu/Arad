@@ -1,4 +1,4 @@
-package com.arad.core;
+package com.arad.base;
 
 import java.util.Map;
 
