@@ -1,16 +1,16 @@
 package com.arad.core;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IDB {
 
 	public void save(Object entity);
 
-	public <T> List<T> findAll(Class<T> clazz);
+	public <T> ArrayList<T> findAll(Class<T> clazz);
 
-	public <T> List<T> findAll(Class<T> clazz, String orderBy);
+	public <T> ArrayList<T> findAll(Class<T> clazz, String orderBy);
 
-	public <T> List<T> findAllByWhere(Class<T> clazz, String strWhere);
+	public <T> ArrayList<T> findAllByWhere(Class<T> clazz, String strWhere);
 
 	public <T> T findById(Class<T> clazz, Object id);
 
@@ -23,7 +23,7 @@ public interface IDB {
 	public void delete(Object entity);
 
 	public <T> void deleteById(Class<T> clazz, String id);
-	
+
 	public <T> void deleteByWhere(Class<?> clazz, String strWhere);
 
 }

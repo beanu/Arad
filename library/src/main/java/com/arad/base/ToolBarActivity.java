@@ -157,6 +157,10 @@ public abstract class ToolBarActivity extends BaseActivity implements ISetupTool
         return mRightButton;
     }
 
+    public Toolbar getToolbar() {
+        return mToolbar;
+    }
+
     public LoadingPager getLoadingPage() {
         return loadingPage;
     }

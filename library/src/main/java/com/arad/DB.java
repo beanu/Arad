@@ -8,7 +8,7 @@ import net.tsz.afinal.FinalDb.DaoConfig;
 import net.tsz.afinal.db.sqlite.DbModel;
 import net.tsz.afinal.db.table.TableInfo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class DB implements IDB {
 
@@ -32,13 +32,13 @@ public class DB implements IDB {
 	}
 
 	@Override
-	public <T> List<T> findAll(Class<T> clazz) {
-		return db.findAll(clazz);
+	public <T> ArrayList<T> findAll(Class<T> clazz) {
+		return (ArrayList<T>)db.findAll(clazz);
 	}
 
 	@Override
-	public <T> List<T> findAll(Class<T> clazz, String orderBy) {
-		return db.findAll(clazz, orderBy);
+	public <T> ArrayList<T> findAll(Class<T> clazz, String orderBy) {
+		return (ArrayList<T>) db.findAll(clazz, orderBy);
 	}
 
 	@Override
@@ -78,8 +78,8 @@ public class DB implements IDB {
 	}
 
 	@Override
-	public <T> List<T> findAllByWhere(Class<T> clazz, String strWhere) {
-		return db.findAllByWhere(clazz, strWhere);
+	public <T> ArrayList<T> findAllByWhere(Class<T> clazz, String strWhere) {
+		return (ArrayList<T>)db.findAllByWhere(clazz, strWhere);
 	}
 
 	@Override
