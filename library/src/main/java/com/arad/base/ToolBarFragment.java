@@ -1,7 +1,6 @@
 package com.arad.base;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +22,9 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
     private Toolbar mToolbar;
 
     private View arad_content;
-    private ContentLoadingProgressBar arad_progress;
+    private View arad_loading;
+    private View arad_loading_error;
+    private View arad_loading_empty;
 
     @Override
     public void onResume() {
@@ -68,7 +69,9 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
 
         arad_content = view.findViewById(R.id.arad_content);
-        arad_progress = (ContentLoadingProgressBar) view.findViewById(R.id.arad_progress);
+        arad_loading = view.findViewById(R.id.arad_loading);
+        arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
+        arad_loading_error = view.findViewById(R.id.arad_loading_error);
     }
 
     private ActionBar initToolbar(FragmentActivity parent) {
@@ -121,9 +124,15 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
      * 加载内容
      */
     public void contentLoading() {
-        if (arad_progress != null && arad_content != null) {
-            arad_progress.show();
+        if (arad_loading != null && arad_content != null) {
+            arad_loading.setVisibility(View.VISIBLE);
             arad_content.setVisibility(View.GONE);
+        }
+        if (arad_loading_empty != null) {
+            arad_loading_empty.setVisibility(View.GONE);
+        }
+        if (arad_loading_error != null) {
+            arad_loading_error.setVisibility(View.GONE);
         }
     }
 
@@ -131,9 +140,16 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
      * 内容加载完成
      */
     public void contentLoadingComplete() {
-        if (arad_progress != null && arad_content != null) {
-            arad_progress.hide();
+        if (arad_loading != null && arad_content != null) {
+            arad_loading.setVisibility(View.GONE);
             arad_content.setVisibility(View.VISIBLE);
+        }
+
+        if (arad_loading_empty != null) {
+            arad_loading_empty.setVisibility(View.GONE);
+        }
+        if (arad_loading_error != null) {
+            arad_loading_error.setVisibility(View.GONE);
         }
     }
 
@@ -141,11 +157,35 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
      * 内容加载失败
      */
     public void contentLoadingError() {
-        if (arad_progress != null && arad_content != null) {
-            arad_progress.hide();
-            arad_content.setVisibility(View.VISIBLE);
+        if (arad_loading != null && arad_content != null) {
+            arad_loading.setVisibility(View.GONE);
+            arad_content.setVisibility(View.GONE);
+        }
+        if (arad_loading_empty != null) {
+            arad_loading_empty.setVisibility(View.VISIBLE);
+        }
+        if (arad_loading_error != null) {
+            arad_loading_error.setVisibility(View.GONE);
+        }
+
+    }
+
+    /**
+     * 内容为空
+     */
+    public void contentLoadingEmpty() {
+        if (arad_loading != null && arad_content != null) {
+            arad_loading.setVisibility(View.GONE);
+            arad_content.setVisibility(View.GONE);
+        }
+        if (arad_loading_empty != null) {
+            arad_loading_empty.setVisibility(View.GONE);
+        }
+        if (arad_loading_error != null) {
+            arad_loading_error.setVisibility(View.VISIBLE);
         }
     }
+
 
     private void displayHomeAsUp() {
         if (mActionBar != null) {

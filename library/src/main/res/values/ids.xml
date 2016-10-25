@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="arad_content" type="id"/>
-    <item name="arad_progress" type="id"/>
+    <item name="arad_loading" type="id"/>
+    <item name="arad_loading_empty" type="id"/>
+    <item name="arad_loading_error" type="id"/>
 </resources>
