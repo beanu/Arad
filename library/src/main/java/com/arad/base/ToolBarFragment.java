@@ -162,10 +162,10 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.VISIBLE);
+            arad_loading_empty.setVisibility(View.GONE);
         }
         if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.GONE);
+            arad_loading_error.setVisibility(View.VISIBLE);
         }
 
     }
@@ -179,10 +179,10 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.GONE);
+            arad_loading_empty.setVisibility(View.VISIBLE);
         }
         if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.VISIBLE);
+            arad_loading_error.setVisibility(View.GONE);
         }
     }
 

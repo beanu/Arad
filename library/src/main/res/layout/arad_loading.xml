@@ -4,11 +4,13 @@
                 android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/arad_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/loading_progress"
@@ -21,5 +23,26 @@
             android:layout_marginTop="8dp"
             android:text="加载中..."/>
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/arad_loading_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/arad_no_content"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/arad_loading_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="16dp"
+        android:drawableTop="@drawable/arad_no_net"
+        android:text="网络有问题，点击重新请求"
+        android:visibility="gone"/>
+
 
 </RelativeLayout>
