@@ -21,12 +21,9 @@ import java.net.URL;
 
 /**
  * 项目维护地址https://github.com/feicien/android-auto-update
- * <p/>
+ * <p>
  * DownloadService需要在xml中注册
- * <p/>
- * <service
- * android:name="com.beanu.arad.support.updateversion.DownloadService"
- * android:exported="true" />
+ * <p>
  */
 public class DownloadService extends IntentService {
     // 10-10 19:14:32.618: D/DownloadService(1926): 测试缓存：41234 32kb

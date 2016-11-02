@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,7 +25,6 @@ public class CacheManager {
      *
      * @param ser
      * @param file
-     * @throws IOException
      */
     public static boolean saveObject(Context context, Serializable ser,
                                      String file) {
@@ -35,7 +33,7 @@ public class CacheManager {
         try {
             fos = context.openFileOutput(file, Context.MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
-            Log.i(TAG,"save object to cache key =" + file);
+            Log.i(TAG, "save object to cache key =" + file);
             oos.writeObject(ser);
             oos.flush();
             return true;
@@ -59,7 +57,6 @@ public class CacheManager {
      *
      * @param file
      * @return
-     * @throws IOException
      */
     public static Serializable readObject(Context context, String file, final long expireTime) {
         if (!isExistDataCache(context, file))
@@ -71,7 +68,7 @@ public class CacheManager {
         try {
             fis = context.openFileInput(file);
             ois = new ObjectInputStream(fis);
-            Log.i(TAG,"read object key =" + file);
+            Log.i(TAG, "read object key =" + file);
             return (Serializable) ois.readObject();
         } catch (FileNotFoundException e) {
         } catch (Exception e) {
@@ -114,7 +111,6 @@ public class CacheManager {
      * 判断缓存是否存在
      *
      * @param cachefile
-     * @return
      */
     public static boolean isExistDataCache(Context context, String cachefile) {
         if (context == null)

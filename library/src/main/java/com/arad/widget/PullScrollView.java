@@ -14,7 +14,7 @@ import com.arad.R;
 
 /**
  * Created by harvic on 2015/6/17
- * @adress blog.csdn.net/harvic880925
+ * http://blog.csdn.net/harvic880925
  */
 public class PullScrollView extends ScrollView {
     //底部图片View
@@ -147,7 +147,7 @@ public class PullScrollView extends ScrollView {
             mContentInitRect.set(mContentView.getLeft(), mContentView.getTop(), mContentView.getRight(), mContentView.getBottom());
             mIsMoving = false;
             //如果当前不是从初始化位置开始滚动的话，就不让用户拖拽
-            if (getScrollY() == 0){
+            if (getScrollY() == 0) {
                 mIsLayout = true;
             }
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -157,7 +157,7 @@ public class PullScrollView extends ScrollView {
             int deltaY = (int) event.getY() - mTouchPoint.y;
 //          deltaY = deltaY < 0 ? 0 : (deltaY > mHeaderView.getHeight() ? mHeaderView.getHeight() : deltaY);
             deltaY = deltaY < 0 ? 0 : (deltaY > mHeaderHeight ? mHeaderHeight : deltaY);
-            if (deltaY > 0 && deltaY >= getScrollY()&& getScrollY() == 0) {
+            if (deltaY > 0 && deltaY >= getScrollY() && getScrollY() == 0) {
                 onTouchEvent(event);
                 return true;
             }

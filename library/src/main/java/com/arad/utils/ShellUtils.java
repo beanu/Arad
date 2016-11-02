@@ -8,12 +8,13 @@ import java.util.List;
 
 /**
  * ShellUtils
+ * Check root
  * <ul>
- * <strong>Check root</strong>
  * <li>{@link ShellUtils#checkRootPermission()}</li>
  * </ul>
+ * <p>
+ * Execte command
  * <ul>
- * <strong>Execte command</strong>
  * <li>{@link ShellUtils#execCommand(String, boolean)}</li>
  * <li>{@link ShellUtils#execCommand(String, boolean, boolean)}</li>
  * <li>{@link ShellUtils#execCommand(List, boolean)}</li>

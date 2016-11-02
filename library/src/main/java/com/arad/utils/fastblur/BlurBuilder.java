@@ -75,7 +75,6 @@ public class BlurBuilder {
      * 获取当前屏幕截图，不包含状态栏
      *
      * @param activity
-     * @return
      */
     public static void snapShotWithoutStatusBar(Activity activity) {
         if (tab_bg != null) {

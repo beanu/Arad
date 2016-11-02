@@ -8,9 +8,9 @@ import android.view.View;
 
 /**
  * 給RecycleView添加点击和长按事件
- * <p/>
+ *
  * 参考 https://github.com/Jamlh/Sample
- * <p/>
+ *
  * Created by Beanu on 16/8/31.
  */
 @Deprecated

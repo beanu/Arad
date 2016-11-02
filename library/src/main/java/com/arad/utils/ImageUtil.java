@@ -28,7 +28,7 @@ import static android.graphics.PorterDuff.Mode.DST_IN;
 /**
  * Image utilities
  * from: https://github.com/github/android/blob/master/app/src/main/java/com/github/mobile/util/ImageUtils.java
- * <p/>
+ * <p>
  * Created by jeremy16601 on 2015/3/5.
  */
 public class ImageUtil {
