@@ -1,0 +1,88 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 93
+        versionName "0.9.3"
+//      multiDexEnabled true   如果方法超过了64k,需要设置这个选项。记得只有比Lollipop高版本的系统可以,4.4以下的版本都有NoClassDefFoundError的异常,需要依赖com.android.support:multidex:1.0.0
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+
+    //rxjava
+    compile 'io.reactivex:rxjava:1.1.8'
+    compile 'io.reactivex:rxandroid:1.2.1'
+
+    //gson
+    compile 'com.google.code.gson:gson:2.7'
+
+    //okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    //glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //event bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+}
+
+ext {
+    bintrayRepo = 'maven'////bintray上的仓库名，一般为maven
+    bintrayName = 'Arad'//bintray上的项目名
+
+    publishedGroupId = 'com.beanu'//JCenter的GroupId
+    artifact = 'arad'//JCenter的ArtifactId
+
+    siteUrl = 'https://github.com/beanu/Arad'
+    gitUrl = 'https://github.com/beanu/Arad.git'
+
+    libraryVersion = '0.9.3'//版本号
+    libraryName = 'Arad'//项目名字，没什么用
+    libraryDescription = 'Arad'//项目描述，没什么用
+
+    //开发者信息
+    developerId = 'beanu'
+    developerName = 'yunhe'
+    developerEmail = 'zhaoyunhello@gmail.com'
+
+    //以上所有信息自行修改，以下不变
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/install.gradle'
+apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/bintray.gradle'

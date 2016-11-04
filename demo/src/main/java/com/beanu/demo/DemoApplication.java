@@ -1,7 +1,7 @@
 package com.beanu.demo;
 
-import com.arad.AradApplication;
-import com.arad.AradApplicationConfig;
+import com.beanu.arad.AradApplication;
+import com.beanu.arad.AradApplicationConfig;
 
 /**
  * 全局入口

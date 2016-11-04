@@ -2,7 +2,7 @@ package com.beanu.demo;
 
 import android.os.Bundle;
 
-import com.arad.base.ToolBarActivity;
+import com.beanu.arad.base.ToolBarActivity;
 
 public class MainActivity extends ToolBarActivity {
 
