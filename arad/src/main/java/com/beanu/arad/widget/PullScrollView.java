@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
-import com.arad.R;
+import com.beanu.arad.R;
+
 
 /**
  * Created by harvic on 2015/6/17

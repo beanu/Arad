@@ -9,7 +9,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.arad.R;
+import com.beanu.arad.R;
+
 
 public class ProgressHUD extends Dialog {
     public ProgressHUD(Context context) {

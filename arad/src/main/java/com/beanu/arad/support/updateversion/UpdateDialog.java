@@ -7,7 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import com.arad.R;
+import com.beanu.arad.R;
+
 
 public class UpdateDialog extends DialogFragment {
 

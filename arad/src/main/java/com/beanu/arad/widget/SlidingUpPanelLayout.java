@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
-import com.arad.R;
+import com.beanu.arad.R;
 
 
 public class SlidingUpPanelLayout extends ViewGroup {

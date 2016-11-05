@@ -15,7 +15,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 
-import com.arad.R;
+import com.beanu.arad.R;
+
 
 public class UpdateChecker extends Fragment {
 

@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
-import com.arad.R;
+import com.beanu.arad.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

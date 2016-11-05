@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.arad.R;
+import com.beanu.arad.R;
 import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
 
 import java.util.List;

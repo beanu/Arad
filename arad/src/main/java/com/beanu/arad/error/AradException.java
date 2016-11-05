@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.beanu.arad.Arad;
-import com.arad.R;
+import com.beanu.arad.R;
 
 /**
  * API接口，异常错误处理

@@ -2,7 +2,8 @@ package com.beanu.arad.utils;
 
 import android.app.Activity;
 
-import com.arad.R;
+import com.beanu.arad.R;
+
 
 public class AnimUtil {
 

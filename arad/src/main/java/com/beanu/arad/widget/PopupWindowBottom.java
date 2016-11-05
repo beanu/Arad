@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import com.arad.R;
+import com.beanu.arad.R;
 
 /**
  * 底部弹出的PopupWindow
