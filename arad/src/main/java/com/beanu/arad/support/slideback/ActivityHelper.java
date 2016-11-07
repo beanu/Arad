@@ -5,6 +5,8 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.beanu.arad.base.BaseActivity;
+
 import java.util.Stack;
 
 /**
@@ -23,6 +25,13 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
             mActivityStack = new Stack<>();
         }
         mActivityStack.add(activity);
+
+        //如果Activity栈的元素个数至少为2个时，并且activity是BaseActivity的子类，则开启滑动返回
+        if (mActivityStack.size() > 1) {
+            if (activity instanceof BaseActivity) {
+                ((BaseActivity) activity).enableSlideBack();
+            }
+        }
     }
 
     @Override
@@ -52,8 +61,17 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        //当前至少有2个Activity时
+        if (mActivityStack.size() > 1) {
+            //activity是栈底元素
+            if (activity.equals(mActivityStack.get(0))) {
+                Activity a = mActivityStack.get(1);//得到下标为1的元素
+                if (a instanceof BaseActivity) { //如果是BaseActivity的子类则关闭滑动返回
+                    ((BaseActivity) a).disableSlideBack();
+                }
+            }
+        }
 
-        // Log.e("TAG", "ActivityHelper-销毁: " + activity);
         mActivityStack.remove(activity);
 
         if (mListener != null) {

@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.beanu.arad.support.slideback.SlideBackHelper;
-import com.beanu.arad.support.slideback.SlideConfig;
-import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.AradApplication;
 import com.beanu.arad.R;
+import com.beanu.arad.support.slideback.SlideBackHelper;
+import com.beanu.arad.support.slideback.SlideConfig;
+import com.beanu.arad.support.slideback.widget.SlideBackLayout;
+import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
 
 
@@ -25,6 +26,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     public E mModel;
 
     ProgressHUD mProgressHUD;
+    private SlideBackLayout mSlideBackLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,29 +38,43 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
 
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
+    }
 
-        //如果当前Activity没有上一个页面就不开启滑动返回
-        if (AradApplication.activityHelper.getPreActivity() != null) {
-            SlideBackHelper.attach(
-                    // 当前Activity
-                    this,
-                    // Activity栈管理工具
-                    AradApplication.activityHelper,
-                    // 参数的配置
-                    new SlideConfig.Builder()
-                            // 屏幕是否旋转
-                            .rotateScreen(true)
-                            // 是否侧滑
-                            .edgeOnly(true)
-                            // 是否禁止侧滑
-                            .lock(false)
-                            // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
-                            .edgePercent(0.2f)
-                            // 关闭页面的阈值，0~1，对应屏幕宽度*percent
-                            .slideOutPercent(0.5f).create(),
-                    // 滑动的监听
-                    null);
+
+    private void initSlideBackLayout(){
+        mSlideBackLayout = SlideBackHelper.attach(
+                // 当前Activity
+                this,
+                // Activity栈管理工具
+                AradApplication.activityHelper,
+                // 参数的配置
+                new SlideConfig.Builder()
+                        // 屏幕是否旋转
+                        .rotateScreen(true)
+                        // 是否侧滑
+                        .edgeOnly(true)
+                        // 是否禁止侧滑
+                        .lock(false)
+                        // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
+                        .edgePercent(0.2f)
+                        // 关闭页面的阈值，0~1，对应屏幕宽度*percent
+                        .slideOutPercent(0.5f).create(),
+                // 滑动的监听
+                null);
+    }
+
+    public void enableSlideBack(){
+        if(mSlideBackLayout == null){
+            initSlideBackLayout();
         }
+        mSlideBackLayout.lock(false);
+    }
+
+    public void disableSlideBack(){
+        if(mSlideBackLayout == null){
+            initSlideBackLayout();
+        }
+        mSlideBackLayout.lock(true);
     }
 
     @Override
