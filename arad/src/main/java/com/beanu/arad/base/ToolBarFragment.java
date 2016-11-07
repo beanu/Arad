@@ -15,7 +15,7 @@ import com.beanu.arad.R;
  *
  * @author beanu
  */
-public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
+public class ToolBarFragment extends BaseFragment implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
     private View mLeftButton;
@@ -121,9 +121,7 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
         return false;
     }
 
-    /**
-     * 加载内容
-     */
+    @Override
     public void contentLoading() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.VISIBLE);
@@ -137,9 +135,8 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
         }
     }
 
-    /**
-     * 内容加载完成
-     */
+
+    @Override
     public void contentLoadingComplete() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);
@@ -154,9 +151,8 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
         }
     }
 
-    /**
-     * 内容加载失败
-     */
+
+    @Override
     public void contentLoadingError() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);
@@ -171,9 +167,8 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar {
 
     }
 
-    /**
-     * 内容为空
-     */
+
+    @Override
     public void contentLoadingEmpty() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);

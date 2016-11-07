@@ -14,7 +14,7 @@ import com.beanu.arad.utils.AnimUtil;
  *
  * @author beanu
  */
-public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
+public class ToolBarActivity extends BaseActivity implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
     private View mLeftButton;
@@ -139,9 +139,7 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
     }
 
 
-    /**
-     * 加载内容
-     */
+    @Override
     public void contentLoading() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.VISIBLE);
@@ -155,9 +153,7 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
         }
     }
 
-    /**
-     * 内容加载完成
-     */
+    @Override
     public void contentLoadingComplete() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);
@@ -172,9 +168,8 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
         }
     }
 
-    /**
-     * 内容加载失败
-     */
+
+    @Override
     public void contentLoadingError() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);
@@ -189,9 +184,7 @@ public class ToolBarActivity extends BaseActivity implements ISetupToolBar {
 
     }
 
-    /**
-     * 内容为空
-     */
+    @Override
     public void contentLoadingEmpty() {
         if (arad_loading != null && arad_content != null) {
             arad_loading.setVisibility(View.GONE);
