@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.beanu.arad.crash.CrashHandler;
+import com.beanu.arad.support.slideback.ActivityHelper;
 import com.beanu.arad.utils.DeviceInformant;
-import com.oubowu.slideback.ActivityHelper;
 
 import org.greenrobot.eventbus.EventBus;
 

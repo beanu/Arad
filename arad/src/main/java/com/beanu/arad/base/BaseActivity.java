@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.beanu.arad.support.slideback.SlideBackHelper;
+import com.beanu.arad.support.slideback.SlideConfig;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.AradApplication;
 import com.beanu.arad.R;
 import com.beanu.arad.widget.dialog.ProgressHUD;
-import com.oubowu.slideback.SlideBackHelper;
-import com.oubowu.slideback.SlideConfig;
 
 
 /**

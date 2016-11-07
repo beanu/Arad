@@ -1,1 +1,1 @@
-include ':arad', ':demo', ':slideback-library'
+include ':arad', ':demo'
