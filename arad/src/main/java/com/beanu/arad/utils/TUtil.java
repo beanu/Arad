@@ -1,6 +1,7 @@
 package com.beanu.arad.utils;
 
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * 类转换初始化
@@ -8,9 +9,11 @@ import java.lang.reflect.ParameterizedType;
 public class TUtil {
     public static <T> T getT(Object o, int i) {
         try {
-            return ((Class<T>) ((ParameterizedType) (o.getClass()
-                    .getGenericSuperclass())).getActualTypeArguments()[i])
-                    .newInstance();
+
+            Type clsType = o.getClass().getGenericSuperclass();
+            if (clsType instanceof ParameterizedType) {
+                return ((Class<T>) ((ParameterizedType) clsType).getActualTypeArguments()[i]).newInstance();
+            }
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
