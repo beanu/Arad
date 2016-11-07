@@ -1,4 +1,9 @@
-<manifest package="com.beanu.arad">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.beanu.arad">
 
+    <application>
+        <activity android:name=".crash.DefaultCrashActivity"></activity>
+    </application>
 
 </manifest>
