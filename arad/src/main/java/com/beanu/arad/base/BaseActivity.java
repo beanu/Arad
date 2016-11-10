@@ -56,7 +56,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
                         // 是否禁止侧滑
                         .lock(false)
                         // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
-                        .edgePercent(0.2f)
+                        .edgePercent(0.1f)
                         // 关闭页面的阈值，0~1，对应屏幕宽度*percent
                         .slideOutPercent(0.5f).create(),
                 // 滑动的监听
