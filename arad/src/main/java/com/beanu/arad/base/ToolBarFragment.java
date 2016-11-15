@@ -1,5 +1,7 @@
 package com.beanu.arad.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +30,17 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar, Base
     private View arad_loading;
     private View arad_loading_error;
     private View arad_loading_empty;
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        arad_content = view.findViewById(R.id.arad_content);
+        arad_loading = view.findViewById(R.id.arad_loading);
+        arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
+        arad_loading_error = view.findViewById(R.id.arad_loading_error);
+    }
 
     @Override
     public void onResume() {
@@ -67,11 +80,6 @@ public class ToolBarFragment extends BaseFragment implements ISetupToolBar, Base
             }
 
         }
-
-        arad_content = view.findViewById(R.id.arad_content);
-        arad_loading = view.findViewById(R.id.arad_loading);
-        arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
-        arad_loading_error = view.findViewById(R.id.arad_loading_error);
     }
 
     private ActionBar initToolbar(FragmentActivity parent) {
