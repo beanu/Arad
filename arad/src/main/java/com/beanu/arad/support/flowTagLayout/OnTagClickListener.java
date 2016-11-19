@@ -1,4 +1,4 @@
-package com.beanu.arad.support.FlowTagLayout;
+package com.beanu.arad.support.flowTagLayout;
 
 import android.view.View;
 
