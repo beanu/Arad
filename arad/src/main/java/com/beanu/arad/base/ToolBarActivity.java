@@ -10,11 +10,12 @@ import com.beanu.arad.utils.AnimUtil;
 
 
 /**
- * 加入toolbar的操作
+ * 1.加入toolbar的操作
+ * 2. 加入了全局的loading
  *
  * @author beanu
  */
-public class ToolBarActivity extends BaseActivity implements ISetupToolBar, BaseView {
+public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity<T, E> implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
     private View mLeftButton;

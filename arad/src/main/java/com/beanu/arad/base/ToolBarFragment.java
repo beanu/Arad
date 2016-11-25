@@ -17,7 +17,7 @@ import com.beanu.arad.R;
  *
  * @author beanu
  */
-public class ToolBarFragment extends BaseFragment implements ISetupToolBar, BaseView {
+public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> extends BaseFragment<T, E> implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
     private View mLeftButton;
