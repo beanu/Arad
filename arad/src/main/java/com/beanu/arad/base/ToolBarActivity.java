@@ -198,4 +198,14 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
             arad_loading_error.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void showProgress() {
+        showProgress(true);
+    }
+
+    @Override
+    public void hideProgress() {
+        showProgress(false);
+    }
 }

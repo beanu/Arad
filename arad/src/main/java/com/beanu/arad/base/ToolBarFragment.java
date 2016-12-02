@@ -190,6 +190,16 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         }
     }
 
+    @Override
+    public void showProgress() {
+        showProgress(true);
+    }
+
+    @Override
+    public void hideProgress() {
+        showProgress(false);
+    }
+
 
     protected void displayHomeAsUp() {
         if (mActionBar != null) {

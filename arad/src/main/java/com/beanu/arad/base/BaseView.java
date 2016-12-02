@@ -18,4 +18,10 @@ public interface BaseView {
     // 内容为空
     void contentLoadingEmpty();
 
+    //当前页面加载条
+    void showProgress();
+
+    //当前页面隐藏加载条
+    void hideProgress();
+
 }
