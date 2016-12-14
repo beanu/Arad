@@ -3,7 +3,6 @@ package com.beanu.arad.crash;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.os.Process;
 
 

@@ -26,9 +26,10 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
         }
         mActivityStack.add(activity);
 
-        //如果Activity栈的元素个数至少为2个时，并且activity是BaseActivity的子类，则开启滑动返回
-        if (mActivityStack.size() > 1) {
-            if (activity instanceof BaseActivity) {
+        if (activity instanceof BaseActivity) {
+            if (mActivityStack.size() < 2) {
+                ((BaseActivity) activity).disableSlideBack();
+            } else {
                 ((BaseActivity) activity).enableSlideBack();
             }
         }
@@ -61,21 +62,15 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        //当前至少有2个Activity时
-        if (mActivityStack.size() > 1) {
-            //activity是栈底元素
-            if (activity.equals(mActivityStack.get(0))) {
-                Activity a = mActivityStack.get(1);//得到下标为1的元素
-                if (a instanceof BaseActivity) { //如果是BaseActivity的子类则关闭滑动返回
-                    ((BaseActivity) a).disableSlideBack();
-                }
-            }
-        }
 
+        // Log.e("TAG", "ActivityHelper-销毁: " + activity);
         mActivityStack.remove(activity);
 
-        if (mListener != null) {
-            mListener.onDestroy(activity);
+        if (!mActivityStack.isEmpty()) {
+            Activity a = mActivityStack.get(0);
+            if (a instanceof BaseActivity) {
+                ((BaseActivity) a).disableSlideBack();
+            }
         }
     }
 
@@ -108,17 +103,15 @@ public class ActivityHelper implements Application.ActivityLifecycleCallbacks {
         }
     }
 
-    @Deprecated
-    void setOnActivityDestroyListener(OnActivityDestroyListener listener) {
-        mListener = listener;
-    }
-
-    @Deprecated
-    private OnActivityDestroyListener mListener;
-
-    @Deprecated
-    interface OnActivityDestroyListener {
-        void onDestroy(Activity activity);
+    /**
+     * 强制删掉activity，用于用户快速滑动页面的时候，因为页面还没来得及destroy导致的问题
+     *
+     * @param activity 删掉的activity
+     */
+    void postRemoveActivity(Activity activity) {
+        if (mActivityStack != null) {
+            mActivityStack.remove(activity);
+        }
     }
 
 }

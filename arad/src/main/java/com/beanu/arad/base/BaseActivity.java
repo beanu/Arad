@@ -41,7 +41,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     }
 
 
-    private void initSlideBackLayout(){
+    private void initSlideBackLayout() {
         mSlideBackLayout = SlideBackHelper.attach(
                 // 当前Activity
                 this,
@@ -54,27 +54,28 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
                         // 是否侧滑
                         .edgeOnly(true)
                         // 是否禁止侧滑
-                        .lock(false)
+                        .lock(true)
                         // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
-                        .edgePercent(0.1f)
+                        .edgePercent(0.2f)
                         // 关闭页面的阈值，0~1，对应屏幕宽度*percent
                         .slideOutPercent(0.5f).create(),
                 // 滑动的监听
                 null);
     }
 
-    public void enableSlideBack(){
-        if(mSlideBackLayout == null){
+    public void enableSlideBack() {
+        if (mSlideBackLayout == null) {
             initSlideBackLayout();
         }
-        mSlideBackLayout.lock(false);
+        if(mSlideBackLayout != null) {
+            mSlideBackLayout.lock(false);
+        }
     }
 
-    public void disableSlideBack(){
-        if(mSlideBackLayout == null){
-            initSlideBackLayout();
+    public void disableSlideBack() {
+        if (mSlideBackLayout != null) {
+            mSlideBackLayout.lock(true);
         }
-        mSlideBackLayout.lock(true);
     }
 
     @Override

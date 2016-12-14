@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.beanu.arad.support.slideback.SlideConfig;
 import com.beanu.arad.support.slideback.callbak.OnInternalStateListener;
 
+
 /**
  * Created by Oubowu on 2016/9/22 0022 15:24.
  */
@@ -213,7 +214,7 @@ public class SlideBackLayout extends FrameLayout {
         if (mRotateScreen) {
             mCloseFlagForDetached = true;
             mCloseFlagForWindowFocus = false;
-            mOnInternalStateListener.onClose(false);
+            mOnInternalStateListener.onClose(null);
             mPreContentView.setX(0);
         }
     }

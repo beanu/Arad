@@ -9,10 +9,14 @@ import java.lang.reflect.Type;
 public class TUtil {
     public static <T> T getT(Object o, int i) {
         try {
-
             Type clsType = o.getClass().getGenericSuperclass();
             if (clsType instanceof ParameterizedType) {
-                return ((Class<T>) ((ParameterizedType) clsType).getActualTypeArguments()[i]).newInstance();
+                Type type = ((ParameterizedType) clsType).getActualTypeArguments()[i];
+                if (type instanceof ParameterizedType) {
+                    return ((Class<T>) ((ParameterizedType) type).getRawType()).newInstance();
+                } else if (type instanceof Class) {
+                    return ((Class<T>) type).newInstance();
+                }
             }
         } catch (InstantiationException e) {
             e.printStackTrace();
