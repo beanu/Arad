@@ -107,6 +107,11 @@ public class Preferences implements IPreferences {
     }
 
     @Override
+    public Set<String> getStringSet(String key) {
+        return sharedPrefs.getStringSet(key, null);
+    }
+
+    @Override
     public boolean getBoolean(String key, boolean defValue) {
         return sharedPrefs.getBoolean(key, defValue);
     }
@@ -129,6 +134,11 @@ public class Preferences implements IPreferences {
     @Override
     public String getString(String key, String defValue) {
         return sharedPrefs.getString(key, defValue);
+    }
+
+    @Override
+    public Set<String> getStringSet(String key, Set<String> defValue) {
+        return sharedPrefs.getStringSet(key, defValue);
     }
 
     @Override
