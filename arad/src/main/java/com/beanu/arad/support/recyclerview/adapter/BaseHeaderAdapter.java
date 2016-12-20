@@ -19,14 +19,18 @@ public abstract class BaseHeaderAdapter<E, VH extends RecyclerView.ViewHolder, V
     public static final int VIEW_TYPE_ITEM = 1;
 
     protected final LayoutInflater inflater;
+    protected Context mContext;
+
 
     public BaseHeaderAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
+        this.mContext = context;
     }
 
     public BaseHeaderAdapter(Context context, List<E> list) {
         this.inflater = LayoutInflater.from(context);
         this.list = list;
+        this.mContext = context;
     }
 
     @Override

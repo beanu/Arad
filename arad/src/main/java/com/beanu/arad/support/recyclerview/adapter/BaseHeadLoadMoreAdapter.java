@@ -22,13 +22,13 @@ public abstract class BaseHeadLoadMoreAdapter<E, VH extends RecyclerView.ViewHol
     private static final int VIEW_TYPE_LOADING = 2;
 
     protected LayoutInflater inflater;
-    protected Context context;
+    protected Context mContext;
 
     private ILoadMoreAdapter listener;
 
     public BaseHeadLoadMoreAdapter(Context context, List<E> list, ILoadMoreAdapter listener) {
         this.list = list;
-        this.context = context;
+        this.mContext = context;
         this.listener = listener;
         this.inflater = LayoutInflater.from(context);
     }
