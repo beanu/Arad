@@ -1,52 +1,60 @@
 package com.beanu.arad.base;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface IPreferences {
-	public void putBoolean(String key, boolean val);
+    IPreferences putBoolean(String key, boolean val);
 
-	public void putInteger(String key, int val);
+    IPreferences putInteger(String key, int val);
 
-	public void putLong(String key, long val);
+    IPreferences putLong(String key, long val);
 
-	public void putFloat(String key, float val);
+    IPreferences putFloat(String key, float val);
 
-	public void putString(String key, String val);
+    IPreferences putString(String key, String val);
 
-	public void put(Map<String, ?> vals);
+    IPreferences putStringSet(String key, Set<String> set);
 
-	public boolean getBoolean(String key);
+    IPreferences put(Map<String, ?> vals);
 
-	public int getInteger(String key);
+    boolean getBoolean(String key);
 
-	public long getLong(String key);
+    int getInteger(String key);
 
-	public float getFloat(String key);
+    long getLong(String key);
 
-	public String getString(String key);
+    float getFloat(String key);
 
-	public boolean getBoolean(String key, boolean defValue);
+    String getString(String key);
 
-	public int getInteger(String key, int defValue);
+    Set<String> getStringSet(String key);
 
-	public long getLong(String key, long defValue);
+    boolean getBoolean(String key, boolean defValue);
 
-	public float getFloat(String key, float defValue);
+    int getInteger(String key, int defValue);
 
-	public String getString(String key, String defValue);
+    long getLong(String key, long defValue);
 
-	/**
-	 * Returns a read only  Map with all the key, objects of the
-	 * preferences.
-	 */
-	public Map<String, ?> get();
+    float getFloat(String key, float defValue);
 
-	public boolean contains(String key);
+    String getString(String key, String defValue);
 
-	public void clear();
+    Set<String> getStringSet(String key, Set<String> defValue);
+    /**
+     * Returns a read only  Map with all the key, objects of the
+     * preferences.
+     */
+    Map<String, ?> get();
 
-	public void remove(String key);
+    boolean contains(String key);
 
-	/** Makes sure the preferences are persisted. */
-	public void flush();
+    void clear();
+
+    void remove(String key);
+
+    /**
+     * Makes sure the preferences are persisted.
+     */
+    void flush();
 }
