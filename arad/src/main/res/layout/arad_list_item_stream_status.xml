@@ -15,17 +15,17 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="?android:listPreferredItemHeight"
-    android:gravity="center"
-    android:orientation="horizontal" >
+              android:layout_width="match_parent"
+              android:layout_height="?android:listPreferredItemHeight"
+              android:gravity="center"
+              android:orientation="horizontal">
 
     <ProgressBar
         android:id="@android:id/progress"
+        style="?android:progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp" />
-    <!-- style="?android:progressBarStyleSmall" 小样式-->
+        android:layout_marginRight="8dp"/>
 
     <TextView
         android:id="@android:id/text1"
@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:textColor="#aaa"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
 </LinearLayout>
