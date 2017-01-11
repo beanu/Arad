@@ -3,7 +3,7 @@ package com.beanu.arad.support.recyclerview.adapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreAdapter;
 
 /**
  * RecyvleView load more 监听

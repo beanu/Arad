@@ -1,15 +1,15 @@
-package com.beanu.arad.support.loadmore;
+package com.beanu.arad.support.listview;
 
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 
-import com.beanu.arad.base.ToolBarFragment;
+import com.beanu.arad.base.ToolBarActivity;
 
 /**
- * listview 加载更多
+ * ListView 加载更多
  * Created by beanu on 13-11-29.
  */
-public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILoadMoreAdapter, AbsListView.OnScrollListener {
 
     protected int lastItem;
 
@@ -21,6 +21,8 @@ public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILo
 
     protected abstract boolean isError();
 
+    private boolean isScrolling = false;
+
     @Override
     public boolean hasMoreResults() {
         return hasMore();
@@ -31,6 +33,19 @@ public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILo
         return isError();
     }
 
+    public boolean isScrolling() {
+        return isScrolling;
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+            isScrolling = true;
+        } else {
+            isScrolling = false;
+        }
+    }
+
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         lastItem = firstVisibleItem + visibleItemCount;
@@ -38,10 +53,5 @@ public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILo
                 && firstVisibleItem + visibleItemCount >= totalItemCount - 1) {
             loadMore();
         }
-    }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-
     }
 }

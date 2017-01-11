@@ -1,4 +1,4 @@
-package com.beanu.arad.support.loadmore;
+package com.beanu.arad.support.listview;
 
 public interface ILoadMoreAdapter {
 

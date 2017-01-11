@@ -2,7 +2,7 @@ package com.beanu.arad.support.recyclerview.adapter;
 
 import android.support.v7.widget.GridLayoutManager;
 
-import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreAdapter;
 
 /**
  * 适合带有loadmore的gridlayout

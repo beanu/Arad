@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
-import com.beanu.arad.support.loadmore.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreAdapter;
 
 import java.util.List;
 
