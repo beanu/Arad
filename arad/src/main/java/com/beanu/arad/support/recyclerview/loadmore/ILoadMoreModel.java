@@ -13,5 +13,5 @@ import rx.Observable;
  */
 
 public interface ILoadMoreModel<B> extends BaseModel {
-    Observable<IPageModel<B>> loadData(Map<String, Object> params, int pageIndex);
+    Observable<? extends IPageModel<B>> loadData(Map<String, Object> params, int pageIndex);
 }
