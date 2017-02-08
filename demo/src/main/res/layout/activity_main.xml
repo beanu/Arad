@@ -22,4 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="点我出现错误"/>
+
+    <Button
+        android:id="@+id/bt_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="底部弹出菜单" />
 </LinearLayout>
