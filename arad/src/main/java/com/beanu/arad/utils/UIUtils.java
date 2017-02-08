@@ -128,17 +128,6 @@ public class UIUtils {
     }
 
     /**
-     * 打电话拨号
-     */
-    public static void dial(Context context, String telephone) {
-        if (telephone != null && !telephone.equals("")) {
-            Uri uri = Uri.parse("tel:" + telephone);
-            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-            context.startActivity(intent);
-        }
-    }
-
-    /**
      * 打开网页
      */
     public static void openWeb(Context context, String url) {
@@ -151,6 +140,21 @@ public class UIUtils {
 
     }
 
+    /**
+     * 打电话拨号
+     */
+    public static void dial(Context ctx, String telephone) {
+        try {
+            if (telephone != null && !telephone.equals("")) {
+                Uri uri = Uri.parse("tel:" + telephone);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                ctx.startActivity(intent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * 分享

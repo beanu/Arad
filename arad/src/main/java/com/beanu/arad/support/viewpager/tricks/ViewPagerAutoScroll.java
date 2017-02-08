@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * view pager自动滚动
  * Created by yunhe on 2015/5/27.
+ *
+ * //TODO 换成RxJava的形式
  */
 public class ViewPagerAutoScroll {
 
