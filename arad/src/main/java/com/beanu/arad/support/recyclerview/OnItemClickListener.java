@@ -7,63 +7,42 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * 給RecycleView添加点击和长按事件
- *
- * 参考 https://github.com/Jamlh/Sample
- *
- * Created by Beanu on 16/8/31.
+ * Created by lizhihua on 2017/1/13.
  */
-@Deprecated
-public abstract class OnItemClickListener implements RecyclerView.OnItemTouchListener {
-    private GestureDetectorCompat mGestureDetector;
-    private RecyclerView recyclerView;
 
+public abstract class OnItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
+    private GestureDetectorCompat gestureDetector;
 
-    public OnItemClickListener(RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
-        mGestureDetector = new GestureDetectorCompat(recyclerView.getContext(), new ItemTouchHelperGestureListener());
+    public OnItemClickListener(final RecyclerView recyclerView) {
+        gestureDetector = new GestureDetectorCompat(recyclerView.getContext(),
+                new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent e) {
+                        View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                        if (childView != null) {
+                            onItemClick(recyclerView, childView, recyclerView.getChildAdapterPosition(childView));
+                        }
+                        return true;
+                    }
 
+                    @Override
+                    public void onLongPress(MotionEvent e) {
+                        View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                        if (childView != null) {
+                            onItemLongClick(recyclerView, childView, recyclerView.getChildAdapterPosition(childView));
+                        }
+                    }
+                });
     }
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-        mGestureDetector.onTouchEvent(e);
+        gestureDetector.onTouchEvent(e);
         return false;
     }
 
-    @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-        mGestureDetector.onTouchEvent(e);
-    }
+    public abstract void onItemClick(RecyclerView recyclerView, View view, int position);
 
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-    }
-
-    public abstract void onItemClick(RecyclerView.ViewHolder holder, int position);
-
-    public void onLongPress(RecyclerView.ViewHolder holder, int position) {
-    }
-
-    class ItemTouchHelperGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
-            if (child != null) {
-                int position = recyclerView.indexOfChild(child);
-                onItemClick(recyclerView.getChildViewHolder(child), position);
-            }
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent e) {
-            View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
-            if (child != null) {
-                int position = recyclerView.indexOfChild(child);
-                OnItemClickListener.this.onLongPress(recyclerView.getChildViewHolder(child), position);
-            }
-        }
+    public void onItemLongClick(RecyclerView recyclerView, View view, int position) {
     }
 }
