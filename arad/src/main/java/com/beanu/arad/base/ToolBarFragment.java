@@ -40,13 +40,22 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         arad_loading = view.findViewById(R.id.arad_loading);
         arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
         arad_loading_error = view.findViewById(R.id.arad_loading_error);
+
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         FragmentActivity parent = getActivity();
-        View view = parent.getWindow().getDecorView();
+
+        View view;
+        if (mToolbar != null) {
+            view = getView();
+        } else {
+            view = parent.getWindow().getDecorView();
+            mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        }
 
         if (getParentFragment() == null && parent instanceof AppCompatActivity) {
             mActionBar = initToolbar(parent);
@@ -84,7 +93,6 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
 
     private ActionBar initToolbar(FragmentActivity parent) {
         ActionBar actionBar = null;
-        mToolbar = (Toolbar) parent.getWindow().getDecorView().findViewById(R.id.toolbar);
         if (mToolbar != null) {
             AppCompatActivity mActivity = (AppCompatActivity) parent;
             mActivity.setSupportActionBar(mToolbar);
@@ -128,6 +136,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     public boolean setupToolBarRightButton(View rightButton) {
         return false;
     }
+
     @Override
     public void contentLoading() {
         if (arad_loading != null) {
@@ -150,7 +159,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if(arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.VISIBLE);
         }
         if (arad_loading_empty != null) {
@@ -167,7 +176,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if(arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {
@@ -185,7 +194,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if (arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {
