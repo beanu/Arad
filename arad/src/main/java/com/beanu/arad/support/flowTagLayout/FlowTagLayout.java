@@ -105,42 +105,43 @@ public class FlowTagLayout extends ViewGroup {
         //遍历每个子元素
         for (int i = 0, childCount = getChildCount(); i < childCount; i++) {
             View childView = getChildAt(i);
-            //测量每一个子view的宽和高
-            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+            if (childView.getVisibility() != GONE) {//如果childView不可见并且不占空间就不计算
+                //测量每一个子view的宽和高
+                measureChild(childView, widthMeasureSpec, heightMeasureSpec);
 
-            //获取到测量的宽和高
-            int childWidth = childView.getMeasuredWidth();
-            int childHeight = childView.getMeasuredHeight();
+                //获取到测量的宽和高
+                int childWidth = childView.getMeasuredWidth();
+                int childHeight = childView.getMeasuredHeight();
 
-            //因为子View可能设置margin，这里要加上margin的距离
-            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) childView.getLayoutParams();
-            int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin;
-            int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin;
+                //因为子View可能设置margin，这里要加上margin的距离
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) childView.getLayoutParams();
+                int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin;
+                int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin;
 
-            //如果当前一行的宽度加上要加入的子view的宽度大于父容器给的宽度，就换行
-            if ((lineWidth + realChildWidth) > sizeWidth) {
-                //换行
-                resultWidth = Math.max(lineWidth, realChildWidth);
-                resultHeight += realChildHeight;
-                //换行了，lineWidth和lineHeight重新算
-                lineWidth = realChildWidth;
-                lineHeight = realChildHeight;
-            } else {
-                //不换行，直接相加
-                lineWidth += realChildWidth;
-                //每一行的高度取二者最大值
-                lineHeight = Math.max(lineHeight, realChildHeight);
+                //如果当前一行的宽度加上要加入的子view的宽度大于父容器给的宽度，就换行
+                if ((lineWidth + realChildWidth) > sizeWidth) {
+                    //换行
+                    resultWidth = Math.max(lineWidth, realChildWidth);
+                    resultHeight += realChildHeight;
+                    //换行了，lineWidth和lineHeight重新算
+                    lineWidth = realChildWidth;
+                    lineHeight = realChildHeight;
+                } else {
+                    //不换行，直接相加
+                    lineWidth += realChildWidth;
+                    //每一行的高度取二者最大值
+                    lineHeight = Math.max(lineHeight, realChildHeight);
+                }
+
+                //遍历到最后一个的时候，肯定走的是不换行
+                if (i == childCount - 1) {
+                    resultWidth = Math.max(lineWidth, resultWidth);
+                    resultHeight += lineHeight;
+                }
+
+                setMeasuredDimension(modeWidth == View.MeasureSpec.EXACTLY ? sizeWidth : resultWidth,
+                        modeHeight == View.MeasureSpec.EXACTLY ? sizeHeight : resultHeight);
             }
-
-            //遍历到最后一个的时候，肯定走的是不换行
-            if (i == childCount - 1) {
-                resultWidth = Math.max(lineWidth, resultWidth);
-                resultHeight += lineHeight;
-            }
-
-            setMeasuredDimension(modeWidth == View.MeasureSpec.EXACTLY ? sizeWidth : resultWidth,
-                    modeHeight == View.MeasureSpec.EXACTLY ? sizeHeight : resultHeight);
-
         }
 
     }
