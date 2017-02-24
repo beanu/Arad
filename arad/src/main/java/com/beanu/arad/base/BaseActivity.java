@@ -38,6 +38,17 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
 
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
+
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        setStatusBar();
+    }
+
+    protected void setStatusBar() {
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
 
 
@@ -67,7 +78,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
         if (mSlideBackLayout == null) {
             initSlideBackLayout();
         }
-        if(mSlideBackLayout != null) {
+        if (mSlideBackLayout != null) {
             mSlideBackLayout.lock(false);
         }
     }
@@ -113,21 +124,21 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivity(Class<?> cls) {
+    public void startActivity(Class cls) {
         startActivity(cls, null);
     }
 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivityForResult(Class<?> cls, int requestCode) {
+    public void startActivityForResult(Class cls, int requestCode) {
         startActivityForResult(cls, null, requestCode);
     }
 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivityForResult(Class<?> cls, Bundle bundle,
+    public void startActivityForResult(Class cls, Bundle bundle,
                                        int requestCode) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
@@ -140,7 +151,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivity(Class<?> cls, Bundle bundle) {
+    public void startActivity(Class cls, Bundle bundle) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
         if (bundle != null) {

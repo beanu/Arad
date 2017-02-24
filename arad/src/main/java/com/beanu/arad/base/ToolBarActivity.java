@@ -161,7 +161,7 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if(arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.VISIBLE);
         }
         if (arad_loading_empty != null) {
@@ -178,7 +178,7 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if(arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {
@@ -195,7 +195,7 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         if (arad_loading != null) {
             arad_loading.setVisibility(View.GONE);
         }
-        if(arad_content != null){
+        if (arad_content != null) {
             arad_content.setVisibility(View.GONE);
         }
         if (arad_loading_empty != null) {

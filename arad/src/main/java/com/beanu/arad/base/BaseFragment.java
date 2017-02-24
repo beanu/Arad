@@ -21,7 +21,6 @@ public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends 
 
     ProgressHUD mProgressHUD;
 
-    //TODO 需要验证一下 是否需要写到onCreateView里面
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +30,7 @@ public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends 
             mPresenter.mContext = this.getActivity();
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
+
     }
 
     @Override
@@ -57,21 +57,21 @@ public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivity(Class<?> cls) {
+    public void startActivity(Class cls) {
         startActivity(cls, null);
     }
 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivityForResult(Class<?> cls, int requestCode) {
+    public void startActivityForResult(Class cls, int requestCode) {
         startActivityForResult(cls, null, requestCode);
     }
 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivityForResult(Class<?> cls, Bundle bundle,
+    public void startActivityForResult(Class cls, Bundle bundle,
                                        int requestCode) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), cls);
@@ -84,7 +84,7 @@ public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivity(Class<?> cls, Bundle bundle) {
+    public void startActivity(Class cls, Bundle bundle) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), cls);
         if (bundle != null) {
