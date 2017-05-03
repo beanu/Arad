@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 102
-        versionName "1.0.0"
+        versionCode 104
+        versionName "1.0.2"
 //      multiDexEnabled true   如果方法超过了64k,需要设置这个选项。记得只有比Lollipop高版本的系统可以,4.4以下的版本都有NoClassDefFoundError的异常,需要依赖com.android.support:multidex:1.0.0
     }
     buildTypes {
@@ -31,22 +31,22 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     //rxjava
-    compile 'io.reactivex:rxjava:1.2.4'
+    compile 'io.reactivex:rxjava:1.2.10'
     compile 'io.reactivex:rxandroid:1.2.1'
     //gson
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.0'
     //okhttp
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
     //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
     //glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //    compile 'com.squareup.picasso:picasso:2.5.2'
@@ -64,7 +64,7 @@ ext {
     siteUrl = 'https://github.com/beanu/Arad'
     gitUrl = 'https://github.com/beanu/Arad.git'
 
-    libraryVersion = '1.0.0'//版本号
+    libraryVersion = '1.0.2'//版本号
     libraryName = 'Arad'//项目名字，没什么用
     libraryDescription = 'Arad'//项目描述，没什么用
 
