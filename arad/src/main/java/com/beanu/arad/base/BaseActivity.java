@@ -25,8 +25,8 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     public T mPresenter;
     public E mModel;
 
-    ProgressHUD mProgressHUD;
-    private SlideBackLayout mSlideBackLayout;
+    private ProgressHUD mProgressHUD;
+    protected SlideBackLayout mSlideBackLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,17 +38,6 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
 
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
-
-    }
-
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        setStatusBar();
-    }
-
-    protected void setStatusBar() {
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
 
 
@@ -67,7 +56,7 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
                         // 是否禁止侧滑
                         .lock(true)
                         // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
-                        .edgePercent(0.2f)
+                        .edgePercent(0.1f)
                         // 关闭页面的阈值，0~1，对应屏幕宽度*percent
                         .slideOutPercent(0.5f).create(),
                 // 滑动的监听

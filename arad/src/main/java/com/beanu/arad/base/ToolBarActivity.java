@@ -30,27 +30,6 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     private View arad_loading_empty;
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mLeftButton = findViewById(R.id.toolbar_leftbtn);
-        mRightButton = findViewById(R.id.toolbar_rightbtn);
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar);
-            mActionBar = getSupportActionBar();
-            hideHomeAsUp();
-        }
-
-        arad_content = findViewById(R.id.arad_content);
-        arad_loading = findViewById(R.id.arad_loading);
-        arad_loading_empty = findViewById(R.id.arad_loading_empty);
-        arad_loading_error = findViewById(R.id.arad_loading_error);
-    }
-
-
-    @Override
     protected void onStart() {
         super.onStart();
         if (mTitle != null && setupToolBarTitle() != null) {
@@ -77,6 +56,33 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
             }
         }
 
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTitle = (TextView) findViewById(R.id.toolbar_title);
+        mLeftButton = findViewById(R.id.toolbar_leftbtn);
+        mRightButton = findViewById(R.id.toolbar_rightbtn);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            mActionBar = getSupportActionBar();
+            hideHomeAsUp();
+        }
+
+        arad_content = findViewById(R.id.arad_content);
+        arad_loading = findViewById(R.id.arad_loading);
+        arad_loading_empty = findViewById(R.id.arad_loading_empty);
+        arad_loading_error = findViewById(R.id.arad_loading_error);
+
+        setStatusBar();
+
+    }
+
+    protected void setStatusBar() {
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
 
     @Override
@@ -138,7 +144,6 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     public Toolbar getToolbar() {
         return mToolbar;
     }
-
 
     @Override
     public void contentLoading() {
