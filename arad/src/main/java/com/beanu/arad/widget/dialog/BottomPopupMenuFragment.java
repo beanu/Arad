@@ -1,15 +1,12 @@
 package com.beanu.arad.widget.dialog;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,10 +21,9 @@ import com.beanu.arad.R;
 import com.beanu.arad.support.recyclerview.OnItemClickListener;
 import com.beanu.arad.support.recyclerview.divider.HorizontalDividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lizhihua on 2017/1/12.
@@ -35,44 +31,59 @@ import java.util.List;
 
 public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
     private static final String TAG = BottomPopupMenuFragment.class.getSimpleName();
-    private static final String ARG_ID = "id";
-    private static final String ARG_TITLE = "title";
-    private static final String ARG_MENUS = "menus";
+
+    private String mId;
+    private String mTitle;
+    private List<String> mMenus;
     private Listener mListener;
+    private Map<String, Object> mExtData;
 
-    public static void show(String id, String title, Collection<String> menus, @NonNull FragmentManager fragmentManager) {
-        newInstance(id, title, menus).show(fragmentManager, TAG + id);
-    }
+    public static class Builder {
+        private String id;
+        private String title;
+        private List<String> menus;
+        private Listener listener;
+        private Map<String, Object> extData;
 
-    public static void show(String id, String title, String[] menus, @NonNull FragmentManager fragmentManager) {
-        newInstance(id, title, Arrays.asList(menus)).show(fragmentManager, TAG + id);
-    }
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
 
-    public static void show(String id, Collection<String> menus, @NonNull FragmentManager fragmentManager) {
-        newInstance(id, menus).show(fragmentManager, TAG + id);
-    }
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
 
-    public static void show(String id, String[] menus, @NonNull FragmentManager fragmentManager) {
-        newInstance(id, Arrays.asList(menus)).show(fragmentManager, TAG + id);
-    }
+        public Builder setMenus(List<String> menus) {
+            this.menus = menus;
+            return this;
+        }
 
-    public static BottomPopupMenuFragment newInstance(String id, String title, @NonNull Collection<String> menus) {
-        Bundle args = new Bundle();
-        args.putString(ARG_ID, id);
-        args.putString(ARG_TITLE, title);
-        args.putStringArrayList(ARG_MENUS, new ArrayList<>(menus));
-        BottomPopupMenuFragment fragment = new BottomPopupMenuFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+        public Builder setMenus(String... menus) {
+            this.menus = Arrays.asList(menus);
+            return this;
+        }
 
-    public static BottomPopupMenuFragment newInstance(String id, @NonNull Collection<String> menus) {
-        Bundle args = new Bundle();
-        args.putString(ARG_ID, id);
-        args.putStringArrayList(ARG_MENUS, new ArrayList<>(menus));
-        BottomPopupMenuFragment fragment = new BottomPopupMenuFragment();
-        fragment.setArguments(args);
-        return fragment;
+        public Builder setListener(Listener listener) {
+            this.listener = listener;
+            return this;
+        }
+
+        public Builder setExtData(Map<String, Object> extData) {
+            this.extData = extData;
+            return this;
+        }
+
+        public BottomPopupMenuFragment create() {
+            BottomPopupMenuFragment fragment = new BottomPopupMenuFragment();
+            fragment.mId = id;
+            fragment.mTitle = title;
+            fragment.mMenus = menus;
+            fragment.mListener = listener;
+            fragment.mExtData = extData;
+            return fragment;
+        }
     }
 
     public BottomPopupMenuFragment() {
@@ -92,15 +103,13 @@ public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
         TextView textCancel = (TextView) view.findViewById(R.id.text_cancel);
         RecyclerView listMenus = (RecyclerView) view.findViewById(R.id.list_menus);
         listMenus.setLayoutManager(new LinearLayoutManager(getContext()));
-        listMenus.setAdapter(new MenusAdapter(getArguments().getStringArrayList(ARG_MENUS)));
-
-        final ArrayList<String> menus = getArguments().getStringArrayList(ARG_MENUS);
+        listMenus.setAdapter(new MenusAdapter(mMenus));
 
         listMenus.addOnItemTouchListener(new OnItemClickListener(listMenus) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View view, int position) {
-                if (mListener != null && menus != null) {
-                    mListener.onMenuClick(getArguments().getString(ARG_ID), menus.get(position), position);
+                if (mListener != null && mMenus != null) {
+                    mListener.onMenuClick(mId, position, mExtData);
                 }
                 dismiss();
             }
@@ -110,10 +119,9 @@ public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
                 .size(1)
                 .build());
 
-        String title = getArguments().getString(ARG_TITLE);
-        if (!TextUtils.isEmpty(title)) {
+        if (!TextUtils.isEmpty(mTitle)) {
             textTitle.setVisibility(View.VISIBLE);
-            textTitle.setText(title);
+            textTitle.setText(mTitle);
         }
         textCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,26 +145,8 @@ public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
         return dialog;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        final Fragment parent = getParentFragment();
-        if (parent != null && parent instanceof Listener) {
-            mListener = (Listener) parent;
-        } else if (context instanceof Listener) {
-            mListener = (Listener) context;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        mListener = null;
-        super.onDetach();
-    }
-
     public interface Listener {
-        void onMenuClick(String id, String clickMenuString, int clickIndex);
+        void onMenuClick(String id, int clickIndex, Map<String, Object> extData);
     }
 
     private class MenusViewHolder extends RecyclerView.ViewHolder {
@@ -177,10 +167,10 @@ public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
     }
 
     private class MenusAdapter extends RecyclerView.Adapter<MenusViewHolder> {
-        ArrayList<String> menus;
+        List<String> menus;
         LayoutInflater inflater;
 
-        MenusAdapter(ArrayList<String> menus) {
+        MenusAdapter(List<String> menus) {
             this.menus = menus;
             this.inflater = LayoutInflater.from(getContext());
         }

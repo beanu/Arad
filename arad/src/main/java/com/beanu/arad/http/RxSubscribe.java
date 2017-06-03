@@ -6,13 +6,16 @@ import android.support.v7.app.AlertDialog;
 
 import com.beanu.arad.error.AradException;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * Created by Jam on 16-7-21
  * Description: 自定义Subscribe
  */
-public abstract class RxSubscribe<T> extends Subscriber<T> {
+public abstract class RxSubscribe<T> implements Observer<T> {
     private Context mContext;
     private AlertDialog dialog;
     private String msg;
@@ -38,14 +41,13 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         if (showDialog())
             dialog.dismiss();
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onSubscribe(final @NonNull Disposable d) {
         if (showDialog()) {
             dialog = new AlertDialog.Builder(mContext).setTitle(msg).create();
             dialog.setCancelable(true);
@@ -54,8 +56,8 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
             dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    if (!isUnsubscribed()) {
-                        unsubscribe();
+                    if (!d.isDisposed()) {
+                        d.dispose();
                     }
                 }
             });
