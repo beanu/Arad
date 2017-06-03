@@ -3,11 +3,16 @@ package com.beanu.arad.http;
 
 import com.beanu.arad.error.AradException;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by Jam on 16-6-12
@@ -18,14 +23,14 @@ public class RxHelper {
     /**
      * 对结果进行预处理
      */
-    public static <T> Observable.Transformer<IHttpModel<T>, T> handleResult() {
+    public static <T> ObservableTransformer<IHttpModel<T>, T> handleResult() {
 
-        return new Observable.Transformer<IHttpModel<T>, T>() {
+        return new ObservableTransformer<IHttpModel<T>, T>() {
             @Override
-            public Observable<T> call(Observable<IHttpModel<T>> tObservable) {
-                return tObservable.flatMap(new Func1<IHttpModel<T>, Observable<T>>() {
+            public ObservableSource<T> apply(@NonNull Observable<IHttpModel<T>> upstream) {
+                return upstream.flatMap(new Function<IHttpModel<T>, ObservableSource<T>>() {
                     @Override
-                    public Observable<T> call(IHttpModel<T> result) {
+                    public ObservableSource<T> apply(@NonNull IHttpModel<T> result) throws Exception {
                         if (result.success()) {
                             return createData(result.getResults());
                         } else {
@@ -45,12 +50,15 @@ public class RxHelper {
      * 创建成功的数据
      */
     private static <T> Observable<T> createData(final T data) {
-        return Observable.create(new Observable.OnSubscribe<T>() {
+        return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
-            public void call(Subscriber<? super T> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
                 try {
-                    subscriber.onNext(data);
-                    subscriber.onCompleted();
+                    //TODO
+                    if (data != null){
+                        subscriber.onNext(data);
+                    }
+                    subscriber.onComplete();
                 } catch (Exception e) {
                     subscriber.onError(e);
                 }

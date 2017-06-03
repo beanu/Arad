@@ -2,13 +2,18 @@ package com.beanu.arad.http;
 
 import android.content.Context;
 
+import org.reactivestreams.Subscriber;
+
 import java.io.Serializable;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by Jam on 16-7-6
@@ -28,14 +33,14 @@ public class RxRetrofitCache {
      * @return
      */
     public static <T> Observable<T> load(final Context context, final String cacheKey, final long expireTime, Observable<T> fromNetwork, boolean forceRefresh) {
-        Observable<T> fromCache = Observable.create(new Observable.OnSubscribe<T>() {
+        Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
             @Override
-            public void call(Subscriber<? super T> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
                 T cache = (T) CacheManager.readObject(context, cacheKey,expireTime);
                 if (cache != null) {
                     subscriber.onNext(cache);
                 } else {
-                    subscriber.onCompleted();
+                    subscriber.onComplete();
                 }
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
@@ -44,9 +49,9 @@ public class RxRetrofitCache {
         /**
          * 这里的fromNetwork 不需要指定Schedule,在handleRequest中已经变换了
          */
-        fromNetwork = fromNetwork.map(new Func1<T, T>() {
+        fromNetwork = fromNetwork.map(new Function<T, T>() {
             @Override
-            public T call(T result) {
+            public T apply(T result) {
                 CacheManager.saveObject(context, (Serializable) result, cacheKey);
                 return result;
             }
@@ -54,7 +59,7 @@ public class RxRetrofitCache {
         if (forceRefresh) {
             return fromNetwork;
         } else {
-            return Observable.concat(fromCache, fromNetwork).first();
+            return Observable.concat(fromCache, fromNetwork).firstElement().toObservable();
         }
 
     }

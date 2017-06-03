@@ -7,7 +7,10 @@ import com.beanu.arad.http.IPageModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * LoadMore P层的实现
@@ -67,9 +70,19 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
     public void loadDataNext() {
         ++mCurPage;
         mIsLoading = true;
-        mRxManage.add(mModel.loadData(mParams, mCurPage).subscribe(new Subscriber<IPageModel<B>>() {
+        mModel.loadData(mParams, mCurPage).subscribe(new Observer<IPageModel<B>>() {
+
             @Override
-            public void onCompleted() {
+            public void onError(Throwable e) {
+                mIsLoading = false;
+                mHasError = true;
+                if (mList == null || mList.isEmpty()) {
+                    mView.contentLoadingError();
+                }
+            }
+
+            @Override
+            public void onComplete() {
                 mIsLoading = false;
                 mHasError = false;
                 if (mList == null || mList.isEmpty()) {
@@ -81,12 +94,8 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
             }
 
             @Override
-            public void onError(Throwable e) {
-                mIsLoading = false;
-                mHasError = true;
-                if (mList == null || mList.isEmpty()) {
-                    mView.contentLoadingError();
-                }
+            public void onSubscribe(@NonNull Disposable d) {
+                mRxManage.add(d);
             }
 
             @Override
@@ -99,6 +108,6 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
                     mList.addAll(pageModel.getDataList());
                 }
             }
-        }));
+        });
     }
 }

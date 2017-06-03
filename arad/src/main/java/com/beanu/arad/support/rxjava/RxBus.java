@@ -9,11 +9,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.subjects.PublishSubject;
-import rx.subjects.Subject;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
+
 
 /**
  * 用RxJava实现的EventBus
@@ -43,10 +44,10 @@ public class RxBus {
      * @param mAction1
      * @return
      */
-    public RxBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
-        mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1, new Action1<Throwable>() {
+    public RxBus OnEvent(Observable<?> mObservable, Consumer<Object> mAction1) {
+        mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1, new Consumer<Throwable>() {
             @Override
-            public void call(Throwable throwable) {
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
                 throwable.printStackTrace();
             }
         });
@@ -63,10 +64,10 @@ public class RxBus {
     public <T> Observable<T> register(@NonNull Object tag) {
         List<Subject> subjectList = subjectMapper.get(tag);
         if (null == subjectList) {
-            subjectList = new ArrayList<Subject>();
+            subjectList = new ArrayList<>();
             subjectMapper.put(tag, subjectList);
         }
-        Subject<T, T> subject;
+        Subject<T> subject;
         subjectList.add(subject = PublishSubject.create());
         KLog.d("register" + tag + "  size:" + subjectList.size());
         return subject;
@@ -94,7 +95,7 @@ public class RxBus {
             return getInstance();
         List<Subject> subjects = subjectMapper.get(tag);
         if (null != subjects) {
-            subjects.remove((Subject<?, ?>) observable);
+            subjects.remove((Subject<?>) observable);
             if (isEmpty(subjects)) {
                 subjectMapper.remove(tag);
                 KLog.d("unregister" + tag + "  size:" + subjects.size());
