@@ -1,19 +1,9 @@
 package com.beanu.arad.support.rxjava;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -60,33 +50,6 @@ public class RxManager {
     public void add(Disposable d) {
         /*订阅管理*/
         mCompositeSubscription.add(d);
-
-        Observable.create(new ObservableOnSubscribe<Object>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-
-            }
-        }).subscribe(new Observer<Object>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@NonNull Object o) {
-
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
     }
 
     /**
