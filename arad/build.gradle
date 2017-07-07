@@ -78,5 +78,7 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/install.gradle'
-apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/bintray.gradle'
+//apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/install.gradle'
+//apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/bintray.gradle'
+apply from:'install.gradle'
+apply from:'bintray.gradle'
