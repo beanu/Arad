@@ -21,14 +21,14 @@ import java.util.List;
  */
 public abstract class LoadMoreBaseAdapter<T> extends BaseAdapter {
 
-	private ILoadMoreAdapter listener;
+	private ILoadMoreListener listener;
 	private List<T> list;
 	protected LayoutInflater mlinflater;
 
 	private static final int VIEW_TYPE_ACTIVITY = 0;
 	private static final int VIEW_TYPE_LOADING = 1;
 
-	public LoadMoreBaseAdapter(Context context, List<T> data, ILoadMoreAdapter listener) {
+	public LoadMoreBaseAdapter(Context context, List<T> data, ILoadMoreListener listener) {
 		this.mlinflater = LayoutInflater.from(context);
 		this.list = data;
 		this.listener = listener;

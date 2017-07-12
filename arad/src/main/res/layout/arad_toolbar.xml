@@ -3,6 +3,7 @@
     android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
@@ -15,8 +16,8 @@
         android:id="@+id/toolbar_leftbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:padding="13dp"
+        android:layout_gravity="start"
+        android:padding="16dp"
         android:src="@drawable/arad_ic_back_selector"
         android:visibility="gone"/>
 
@@ -27,11 +28,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
+    <TextView
+        android:id="@+id/toolbar_txt_right_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:padding="16dp"
+        android:visibility="gone"
+        tools:text="编辑"/>
+
     <ImageView
         android:id="@+id/toolbar_rightbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:padding="13dp"
         android:src="@drawable/arad_ic_share_selector"
         android:visibility="gone"/>

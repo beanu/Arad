@@ -3,6 +3,7 @@ package com.beanu.arad.base;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
@@ -18,8 +19,9 @@ import com.beanu.arad.utils.AnimUtil;
 public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity<T, E> implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
-    private View mLeftButton;
-    private View mRightButton;
+    private ImageView mLeftButton;
+    private ImageView mRightButton;
+    private TextView mRightText;
 
     private ActionBar mActionBar;
     private Toolbar mToolbar;
@@ -28,6 +30,8 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     private View arad_loading;
     private View arad_loading_error;
     private View arad_loading_empty;
+    private View.OnClickListener mOnRetryListener;
+
 
     @Override
     protected void onStart() {
@@ -56,6 +60,14 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
             }
         }
 
+        if (mRightText != null) {
+            if (setupToolBarRightText(mRightText)) {
+                mRightText.setVisibility(View.VISIBLE);
+            } else {
+                mRightText.setVisibility(View.GONE);
+            }
+        }
+
     }
 
     @Override
@@ -64,8 +76,10 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mLeftButton = findViewById(R.id.toolbar_leftbtn);
-        mRightButton = findViewById(R.id.toolbar_rightbtn);
+        mLeftButton = (ImageView) findViewById(R.id.toolbar_leftbtn);
+        mRightButton = (ImageView) findViewById(R.id.toolbar_rightbtn);
+        mRightText = (TextView) findViewById(R.id.toolbar_txt_right_btn);
+
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             mActionBar = getSupportActionBar();
@@ -78,7 +92,6 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         arad_loading_error = findViewById(R.id.arad_loading_error);
 
         setStatusBar();
-
     }
 
     protected void setStatusBar() {
@@ -117,28 +130,38 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     }
 
     @Override
-    public boolean setupToolBarLeftButton(View leftButton) {
+    public boolean setupToolBarLeftButton(ImageView leftButton) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightButton(View rightButton) {
+    public boolean setupToolBarRightButton(ImageView rightButton) {
         return false;
     }
 
     @Override
-    public TextView getmTitle() {
+    public boolean setupToolBarRightText(TextView rightText) {
+        return false;
+    }
+
+    @Override
+    public TextView getToolBarTitle() {
         return mTitle;
     }
 
     @Override
-    public View getmLeftButton() {
+    public View getToolBarLeftButton() {
         return mLeftButton;
     }
 
     @Override
-    public View getmRightButton() {
+    public View getToolBarRightButton() {
         return mRightButton;
+    }
+
+    @Override
+    public View getToolBarRightText() {
+        return mRightText;
     }
 
     public Toolbar getToolbar() {
@@ -191,6 +214,14 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         }
         if (arad_loading_error != null) {
             arad_loading_error.setVisibility(View.VISIBLE);
+            arad_loading_error.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mOnRetryListener != null) {
+                        mOnRetryListener.onClick(view);
+                    }
+                }
+            });
         }
 
     }
@@ -219,5 +250,9 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     @Override
     public void hideProgress() {
         showProgress(false);
+    }
+
+    public void setOnRetryListener(View.OnClickListener onRetryListener) {
+        mOnRetryListener = onRetryListener;
     }
 }

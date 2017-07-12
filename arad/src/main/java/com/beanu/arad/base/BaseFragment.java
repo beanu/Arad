@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.beanu.arad.support.rxjava.RxManager;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
 
@@ -13,13 +14,16 @@ import com.beanu.arad.widget.dialog.ProgressHUD;
  * 1.加入了progress dialog
  * 2.mvp的泛形实现
  * 3.start activity的封装
+ * 4.加入rxManager
  */
 public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
 
     public T mPresenter;
     public E mModel;
 
-    ProgressHUD mProgressHUD;
+    public RxManager mRxManage;
+
+    private ProgressHUD mProgressHUD;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,13 +35,20 @@ public class BaseFragment<T extends BasePresenter, E extends BaseModel> extends 
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
 
+        mRxManage = new RxManager();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.onDestroy();
+        }
+
+        if (mRxManage != null) {
+            mRxManage.clear();
+        }
+
     }
 
     public void showProgress(boolean show) {

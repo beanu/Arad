@@ -7,21 +7,24 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
 
 
 /**
- * 加入toolbar的操作
+ * 1.加入toolbar的操作
+ * 2.视图不同状态的显示，加载中，加载失败，空数据，加载完成 四个状态。使用方式，用layout包含arad_loading.xml和自己的布局，自己的布局id定义为arad_content
  *
  * @author beanu
  */
 public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> extends BaseFragment<T, E> implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
-    private View mLeftButton;
-    private View mRightButton;
+    private ImageView mLeftButton;
+    private ImageView mRightButton;
+    private TextView mRightText;
 
     private ActionBar mActionBar;
     private Toolbar mToolbar;
@@ -30,6 +33,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     private View arad_loading;
     private View arad_loading_error;
     private View arad_loading_empty;
+    private View.OnClickListener mOnRetryListener;
 
 
     @Override
@@ -60,11 +64,11 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         if (getParentFragment() == null && parent instanceof AppCompatActivity) {
             mActionBar = initToolbar(parent);
 
-            if (setupToolBarTitle() != null) {
-
+            if (view != null) {
                 mTitle = (TextView) view.findViewById(R.id.toolbar_title);
-                mLeftButton = view.findViewById(R.id.toolbar_leftbtn);
-                mRightButton = view.findViewById(R.id.toolbar_rightbtn);
+                mLeftButton = (ImageView) view.findViewById(R.id.toolbar_leftbtn);
+                mRightButton = (ImageView) view.findViewById(R.id.toolbar_rightbtn);
+                mRightText = (TextView) view.findViewById(R.id.toolbar_txt_right_btn);
 
                 if (mTitle != null && setupToolBarTitle() != null) {
                     mTitle.setText(setupToolBarTitle());
@@ -83,6 +87,14 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
                         mRightButton.setVisibility(View.VISIBLE);
                     } else {
                         mRightButton.setVisibility(View.GONE);
+                    }
+                }
+
+                if (mRightText != null) {
+                    if (setupToolBarRightText(mRightText)) {
+                        mRightText.setVisibility(View.VISIBLE);
+                    } else {
+                        mRightText.setVisibility(View.GONE);
                     }
                 }
 
@@ -108,17 +120,22 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
 
 
     @Override
-    public View getmRightButton() {
+    public View getToolBarRightButton() {
         return mRightButton;
     }
 
     @Override
-    public TextView getmTitle() {
+    public View getToolBarRightText() {
+        return mRightText;
+    }
+
+    @Override
+    public TextView getToolBarTitle() {
         return mTitle;
     }
 
     @Override
-    public View getmLeftButton() {
+    public View getToolBarLeftButton() {
         return mLeftButton;
     }
 
@@ -128,12 +145,17 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     }
 
     @Override
-    public boolean setupToolBarLeftButton(View leftButton) {
+    public boolean setupToolBarLeftButton(ImageView leftButton) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightButton(View rightButton) {
+    public boolean setupToolBarRightButton(ImageView rightButton) {
+        return false;
+    }
+
+    @Override
+    public boolean setupToolBarRightText(TextView rightText) {
         return false;
     }
 
@@ -184,6 +206,14 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         }
         if (arad_loading_error != null) {
             arad_loading_error.setVisibility(View.VISIBLE);
+            arad_loading_error.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mOnRetryListener != null) {
+                        mOnRetryListener.onClick(view);
+                    }
+                }
+            });
         }
 
     }
@@ -215,6 +245,9 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         showProgress(false);
     }
 
+    public void setOnRetryListener(View.OnClickListener onRetryListener) {
+        mOnRetryListener = onRetryListener;
+    }
 
     protected void displayHomeAsUp() {
         if (mActionBar != null) {

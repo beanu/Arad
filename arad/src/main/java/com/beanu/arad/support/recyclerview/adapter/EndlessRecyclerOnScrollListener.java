@@ -3,7 +3,7 @@ package com.beanu.arad.support.recyclerview.adapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.beanu.arad.support.listview.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreListener;
 
 /**
  * RecyvleView load more 监听
@@ -16,10 +16,10 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     int lastVisiblePostion, totalItemCount;
 
     private LinearLayoutManager mLinearLayoutManager;
-    private ILoadMoreAdapter listener;
+    private ILoadMoreListener listener;
 
 
-    public EndlessRecyclerOnScrollListener(LinearLayoutManager linearLayoutManager, ILoadMoreAdapter listener) {
+    public EndlessRecyclerOnScrollListener(LinearLayoutManager linearLayoutManager, ILoadMoreListener listener) {
         this.mLinearLayoutManager = linearLayoutManager;
         this.listener = listener;
     }

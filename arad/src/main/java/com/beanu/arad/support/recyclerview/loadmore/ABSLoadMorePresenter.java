@@ -3,7 +3,7 @@ package com.beanu.arad.support.recyclerview.loadmore;
 import android.support.v4.util.ArrayMap;
 
 import com.beanu.arad.base.BasePresenter;
-import com.beanu.arad.support.listview.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreListener;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public abstract class ABSLoadMorePresenter<V extends ILoadMoreView, M extends ILoadMoreModel> extends BasePresenter<V, M>
-        implements ILoadMoreAdapter {
+        implements ILoadMoreListener {
 
     /**
      * 初始化Model层的数据请求参数

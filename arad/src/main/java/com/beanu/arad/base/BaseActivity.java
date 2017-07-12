@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.beanu.arad.AradApplication;
 import com.beanu.arad.R;
+import com.beanu.arad.support.rxjava.RxManager;
 import com.beanu.arad.support.slideback.SlideBackHelper;
 import com.beanu.arad.support.slideback.SlideConfig;
 import com.beanu.arad.support.slideback.widget.SlideBackLayout;
@@ -25,6 +26,8 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     public T mPresenter;
     public E mModel;
 
+    public RxManager mRxManage;
+
     private ProgressHUD mProgressHUD;
     protected SlideBackLayout mSlideBackLayout;
 
@@ -35,9 +38,9 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
         mModel = TUtil.getT(this, 1);
         if (mPresenter != null) {
             mPresenter.mContext = this;
-
             if (this instanceof BaseView) mPresenter.setVM(this, mModel);
         }
+        mRxManage = new RxManager();
     }
 
 
@@ -83,6 +86,10 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
         super.onDestroy();
         if (mPresenter != null)
             mPresenter.onDestroy();
+
+        if (mRxManage != null)
+            mRxManage.clear();
+
     }
 
     /**

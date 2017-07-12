@@ -1,6 +1,6 @@
 package com.beanu.arad.support.listview;
 
-public interface ILoadMoreAdapter {
+public interface ILoadMoreListener {
 
     /**
      * loadMore操作的时候 是否还有更多的结果

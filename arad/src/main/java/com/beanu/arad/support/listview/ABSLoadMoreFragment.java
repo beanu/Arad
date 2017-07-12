@@ -9,7 +9,7 @@ import com.beanu.arad.base.ToolBarFragment;
  * listview 加载更多
  * Created by beanu on 13-11-29.
  */
-public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ABSLoadMoreFragment extends ToolBarFragment implements ILoadMoreListener, AbsListView.OnScrollListener {
 
     protected int lastItem;
 

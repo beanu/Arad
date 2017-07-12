@@ -9,7 +9,7 @@ import com.beanu.arad.base.ToolBarActivity;
  * ListView 加载更多
  * Created by beanu on 13-11-29.
  */
-public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILoadMoreAdapter, AbsListView.OnScrollListener {
+public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILoadMoreListener, AbsListView.OnScrollListener {
 
     protected int lastItem;
 

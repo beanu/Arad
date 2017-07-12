@@ -2,7 +2,7 @@ package com.beanu.arad.support.recyclerview.adapter;
 
 import android.support.v7.widget.GridLayoutManager;
 
-import com.beanu.arad.support.listview.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreListener;
 
 /**
  * 适合带有loadmore的gridlayout
@@ -11,9 +11,9 @@ import com.beanu.arad.support.listview.ILoadMoreAdapter;
 public class LoadMoreSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     private final GridLayoutManager layoutManager;
-    private ILoadMoreAdapter listener;
+    private ILoadMoreListener listener;
 
-    public LoadMoreSpanSizeLookup(GridLayoutManager layoutManager, ILoadMoreAdapter listener) {
+    public LoadMoreSpanSizeLookup(GridLayoutManager layoutManager, ILoadMoreListener listener) {
         this.layoutManager = layoutManager;
         this.listener = listener;
     }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
-import com.beanu.arad.support.listview.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreListener;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ public abstract class BaseHeadLoadMoreAdapter<E, VH extends RecyclerView.ViewHol
     protected LayoutInflater inflater;
     protected Context mContext;
 
-    private ILoadMoreAdapter listener;
+    private ILoadMoreListener listener;
 
-    public BaseHeadLoadMoreAdapter(Context context, List<E> list, ILoadMoreAdapter listener) {
+    public BaseHeadLoadMoreAdapter(Context context, List<E> list, ILoadMoreListener listener) {
         this.list = list;
         this.mContext = context;
         this.listener = listener;

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
-import com.beanu.arad.support.listview.ILoadMoreAdapter;
+import com.beanu.arad.support.listview.ILoadMoreListener;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder>
     protected LayoutInflater inflater;
     protected Context mContext;
 
-    private ILoadMoreAdapter listener;
+    private ILoadMoreListener listener;
 
     public static class LoadMoreViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
@@ -47,7 +47,7 @@ public abstract class BaseLoadMoreAdapter<E, VH extends RecyclerView.ViewHolder>
         this.list = list;
     }
 
-    public BaseLoadMoreAdapter(Context context, List<E> list, ILoadMoreAdapter listener) {
+    public BaseLoadMoreAdapter(Context context, List<E> list, ILoadMoreListener listener) {
         this.mContext = context;
         this.inflater = LayoutInflater.from(context);
         this.listener = listener;
