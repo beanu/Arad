@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
-    android:minHeight="?attr/actionBarSize"
-    app:contentInsetEnd="0dp"
-    app:contentInsetStart="0dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
+    <View
+        android:id="@+id/arad_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimary"/>
 
-    <ImageView
-        android:id="@+id/toolbar_leftbtn"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:padding="16dp"
-        android:src="@drawable/arad_ic_back_selector"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/toolbar_title"
-        style="@style/arad_actionbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/toolbar_txt_right_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:padding="16dp"
-        android:visibility="gone"
-        tools:text="编辑"/>
-
-    <ImageView
-        android:id="@+id/toolbar_rightbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:padding="13dp"
-        android:src="@drawable/arad_ic_share_selector"
-        android:visibility="gone"/>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
 
 
-</android.support.v7.widget.Toolbar>
+        <ImageView
+            android:id="@+id/toolbar_leftbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="16dp"
+            android:src="@drawable/arad_ic_back_selector"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/arad_actionbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/toolbar_txt_right_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="16dp"
+            android:visibility="gone"
+            tools:text="编辑"/>
+
+        <ImageView
+            android:id="@+id/toolbar_rightbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="13dp"
+            android:src="@drawable/arad_ic_share_selector"
+            android:visibility="gone"/>
+
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>

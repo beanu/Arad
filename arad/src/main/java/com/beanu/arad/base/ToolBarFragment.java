@@ -27,7 +27,8 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     private TextView mRightText;
 
     private ActionBar mActionBar;
-    private Toolbar mToolbar;
+    private Toolbar mToolbar;//标题栏
+    private View mStatusBar;//状态栏
 
     private View arad_content;
     private View arad_loading;

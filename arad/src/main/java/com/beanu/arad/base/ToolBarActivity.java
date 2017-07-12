@@ -25,7 +25,9 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     private TextView mRightText;
 
     private ActionBar mActionBar;
-    private Toolbar mToolbar;
+    private Toolbar mToolbar;//标题栏
+    private View mStatusBar;//状态栏
+
 
     private View arad_content;
     private View arad_loading;
@@ -81,6 +83,8 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         mLeftButton = (ImageView) findViewById(R.id.toolbar_leftbtn);
         mRightButton = (ImageView) findViewById(R.id.toolbar_rightbtn);
         mRightText = (TextView) findViewById(R.id.toolbar_txt_right_btn);
+        mStatusBar = findViewById(R.id.arad_status_bar);
+
 
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
@@ -98,8 +102,12 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
 
     protected void setStatusBar() {
         mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.statusBarColor(R.color.colorPrimary).init();
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+        //在沉浸式状态栏的时候，保证内容视图与状态栏不重叠。两种方案。
+        if (mStatusBar != null) {
+            mImmersionBar.statusBarView(mStatusBar).init();
+        } else {
+            mImmersionBar.statusBarColor(R.color.colorPrimary).fitsSystemWindows(true).init();
+        }
     }
 
     @Override
