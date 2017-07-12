@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.beanu.arad.crash.CrashHandler;
 import com.beanu.arad.support.slideback.ActivityHelper;
 import com.beanu.arad.utils.DeviceInformant;
+import com.beanu.arad.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,6 +33,7 @@ public abstract class AradApplication extends Application {
 
         if (getApplicationContext().getPackageName().equals(processName)) {
             //只在主进程中，初始化一次
+            Utils.init(getApplicationContext());
 
             config = appConfig();
             Arad.app = this;
@@ -40,12 +41,6 @@ public abstract class AradApplication extends Application {
             Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
             deviceInfo = new DeviceInformant(getApplicationContext());
             Arad.bus = EventBus.getDefault();
-
-            //开启CrashHandler
-            CrashHandler crashHandler = CrashHandler.getInstance();
-            crashHandler.init(this);
-            crashHandler.setLogFolder(config.logFolder);
-            crashHandler.setDebugServer(config.debugServer);
 
             //开启侧滑支持需要此Helper类支持
             activityHelper = new ActivityHelper();
@@ -56,14 +51,6 @@ public abstract class AradApplication extends Application {
     }
 
     protected abstract AradApplicationConfig appConfig();
-
-    public void disableCrashHandler() {
-        CrashHandler.getInstance().disable();
-    }
-
-    public void enableCrashHandler() {
-        CrashHandler.getInstance().enable();
-    }
 
     /**
      * 获取进程号对应的进程名

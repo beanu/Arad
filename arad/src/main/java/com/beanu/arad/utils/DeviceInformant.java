@@ -36,17 +36,16 @@ public class DeviceInformant {
 
     private String countryCode;
     private String deviceID;
+
     private String deviceImsi;// SIM卡的IMSI码
-    private String phoneNumber;
+    private int phoneType;
 
     private int screenHeight;
     private int screenWidth;
     private int densityDpi;
 
-    private Context context;
 
     public DeviceInformant(Context context) {
-        this.context = context;
         try {
             osSystem = "Android";
             osSystemVer = Build.VERSION.RELEASE;
@@ -60,13 +59,13 @@ public class DeviceInformant {
             countryCode = tm == null ? "" : (tm.getSimCountryIso() == null ? "" : tm.getSimCountryIso().toUpperCase());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("ERROR","Device Info Error");
+            Log.e("ERROR", "Device Info Error");
         }
     }
 
     public String getDeviceImsi() {
-        if (StringUtils.isNull(deviceImsi))
-            deviceImsi = AndroidUtil.getDeviceImsi(context);
+        if (StringUtils.isEmpty(deviceImsi))
+            deviceImsi = PhoneUtils.getIMSI();
         return deviceImsi;
     }
 
@@ -84,13 +83,13 @@ public class DeviceInformant {
 
     public int getVersionCode() {
         if (versionCode == 0)
-            versionCode = AndroidUtil.getVerCode(context);
+            versionCode = AppUtils.getAppVersionCode();
         return versionCode;
     }
 
     public String getVersionName() {
-        if (StringUtils.isNull(versionName))
-            versionName = AndroidUtil.getVerName(context);
+        if (StringUtils.isEmpty(versionName))
+            versionName = AppUtils.getAppVersionName();
         return versionName;
     }
 
@@ -99,15 +98,14 @@ public class DeviceInformant {
     }
 
     public String getDeviceID() {
-        if (StringUtils.isNull(deviceID))
-            deviceID = AndroidUtil.getDeviceId(context);
+        if (StringUtils.isEmpty(deviceID))
+            deviceID = DeviceUtils.getAndroidID();
         return deviceID;
     }
 
-    public String getPhoneNumber() {
-        if (StringUtils.isNull(phoneNumber))
-            phoneNumber = AndroidUtil.getPhoneNumber(context);
-        return phoneNumber;
+    public int getPhoneType() {
+        phoneType = PhoneUtils.getPhoneType();
+        return phoneType;
     }
 
     public int getScreenHeight() {

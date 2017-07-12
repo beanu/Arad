@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.beanu.arad.R;
 import com.beanu.arad.utils.AnimUtil;
+import com.beanu.arad.utils.statusbar.ImmersionBar;
 
 
 /**
@@ -32,6 +33,7 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     private View arad_loading_empty;
     private View.OnClickListener mOnRetryListener;
 
+    protected ImmersionBar mImmersionBar;
 
     @Override
     protected void onStart() {
@@ -95,7 +97,17 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     }
 
     protected void setStatusBar() {
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.statusBarColor(R.color.colorPrimary).init();
 //        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mImmersionBar != null) {
+            mImmersionBar.destroy();
+        }
     }
 
     @Override

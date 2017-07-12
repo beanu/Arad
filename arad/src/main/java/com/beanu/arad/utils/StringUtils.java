@@ -1,340 +1,190 @@
 package com.beanu.arad.utils;
 
-import android.util.Log;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Pattern;
-
 /**
- * String util类， 详情参考http://10.249.200.45:1880/test/requestSignature.html
- *
- * @author frank.yef
- * @author zhe.yangz
+ * <pre>
+ *     author: Blankj
+ *     blog  : http://blankj.com
+ *     time  : 2016/08/16
+ *     desc  : 字符串相关工具类
+ * </pre>
  */
 public final class StringUtils {
-    public static final String TAG = "StringUtil";
-
-    public static final String CHARSET_NAME_UTF8 = "UTF-8";
-    public static final char[] digital = "0123456789ABCDEF".toCharArray();
-    public static final String DEFAULT_DATA_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public final static Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
-            + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
-    public static final String EMPTY_STRING = "";
-    public final static Pattern PHONE_PATTERN = Pattern.compile("^(1[3,4,5,7,8][0-9])\\d{8}$");
 
     private StringUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static boolean isNull(String str) {
-        if (str == null || str.equals("")) {
-            return true;
+    /**
+     * 判断字符串是否为null或长度为0
+     *
+     * @param s 待校验字符串
+     * @return {@code true}: 空<br> {@code false}: 不为空
+     */
+    public static boolean isEmpty(final CharSequence s) {
+        return s == null || s.length() == 0;
+    }
+
+    /**
+     * 判断字符串是否为null或全为空格
+     *
+     * @param s 待校验字符串
+     * @return {@code true}: null或全空格<br> {@code false}: 不为null且不全空格
+     */
+    public static boolean isTrimEmpty(final String s) {
+        return (s == null || s.trim().length() == 0);
+    }
+
+    /**
+     * 判断字符串是否为null或全为空白字符
+     *
+     * @param s 待校验字符串
+     * @return {@code true}: null或全空白字符<br> {@code false}: 不为null且不全空白字符
+     */
+    public static boolean isSpace(final String s) {
+        if (s == null) return true;
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断两字符串是否相等
+     *
+     * @param a 待校验字符串a
+     * @param b 待校验字符串b
+     * @return {@code true}: 相等<br>{@code false}: 不相等
+     */
+    public static boolean equals(final CharSequence a, final CharSequence b) {
+        if (a == b) return true;
+        int length;
+        if (a != null && b != null && (length = a.length()) == b.length()) {
+            if (a instanceof String && b instanceof String) {
+                return a.equals(b);
+            } else {
+                for (int i = 0; i < length; i++) {
+                    if (a.charAt(i) != b.charAt(i)) return false;
+                }
+                return true;
+            }
         }
         return false;
     }
 
-    public static String format(Date date) {
-        String retString = "";
-        try {
-            SimpleDateFormat format = new SimpleDateFormat(DEFAULT_DATA_TIME_FORMAT);
-            retString = format.format(date);
-        } catch (Exception e) {
-            Log.e("Arad",e.toString());
-            e.printStackTrace();
-        }
-        return retString;
+    /**
+     * 判断两字符串忽略大小写是否相等
+     *
+     * @param a 待校验字符串a
+     * @param b 待校验字符串b
+     * @return {@code true}: 相等<br>{@code false}: 不相等
+     */
+    public static boolean equalsIgnoreCase(final String a, final String b) {
+        return a == null ? b == null : a.equalsIgnoreCase(b);
     }
 
     /**
-     * 时间格式化
+     * null转为长度为0的字符串
      *
-     * @param date    时间
-     * @param pattern 需要格式化的模式
-     * @return
+     * @param s 待转字符串
+     * @return s为null转为长度为0字符串，否则不改变
      */
-    public static String format(String date, String pattern) {
-        String retString = "";
-        try {
-            SimpleDateFormat format = new SimpleDateFormat(DEFAULT_DATA_TIME_FORMAT);
-            Date _date = null;
-            try {
-                _date = format.parse(date);   // 将给定的字符串中的日期提取出来
-                format.applyPattern(pattern);
-                retString = format.format(_date);
-            } catch (Exception e) {            // 如果提供的字符串格式有错误，则进行异常处理
-                e.printStackTrace();       // 打印异常信息
-            }
-        } catch (Exception e) {
-            Log.e("Arad",e.toString());
-            e.printStackTrace();
-        }
-        return retString;
+    public static String null2Length0(final String s) {
+        return s == null ? "" : s;
     }
 
-    public static String encodeHexStr(final byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        char[] result = new char[bytes.length * 2];
-        for (int i = 0; i < bytes.length; i++) {
-            result[i * 2] = digital[(bytes[i] & 0xf0) >> 4];
-            result[i * 2 + 1] = digital[bytes[i] & 0x0f];
-        }
-        return new String(result);
+    /**
+     * 返回字符串长度
+     *
+     * @param s 字符串
+     * @return null返回0，其他返回自身长度
+     */
+    public static int length(final CharSequence s) {
+        return s == null ? 0 : s.length();
     }
 
-    public static byte[] decodeHexStr(final String str) {
-        if (str == null) {
-            return null;
+    /**
+     * 首字母大写
+     *
+     * @param s 待转字符串
+     * @return 首字母大写字符串
+     */
+    public static String upperFirstLetter(final String s) {
+        if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) return s;
+        return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
+    }
+
+    /**
+     * 首字母小写
+     *
+     * @param s 待转字符串
+     * @return 首字母小写字符串
+     */
+    public static String lowerFirstLetter(final String s) {
+        if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) return s;
+        return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
+    }
+
+    /**
+     * 反转字符串
+     *
+     * @param s 待反转字符串
+     * @return 反转字符串
+     */
+    public static String reverse(final String s) {
+        int len = length(s);
+        if (len <= 1) return s;
+        int mid = len >> 1;
+        char[] chars = s.toCharArray();
+        char c;
+        for (int i = 0; i < mid; ++i) {
+            c = chars[i];
+            chars[i] = chars[len - i - 1];
+            chars[len - i - 1] = c;
         }
-        char[] charArray = str.toCharArray();
-        if (charArray.length % 2 != 0) {
-            throw new RuntimeException("hex str length must can mod 2, str:" + str);
-        }
-        byte[] bytes = new byte[charArray.length / 2];
-        for (int i = 0; i < charArray.length; i++) {
-            char c = charArray[i];
-            int b;
-            if (c >= '0' && c <= '9') {
-                b = (c - '0') << 4;
-            } else if (c >= 'A' && c <= 'F') {
-                b = (c - 'A' + 10) << 4;
+        return new String(chars);
+    }
+
+    /**
+     * 转化为半角字符
+     *
+     * @param s 待转字符串
+     * @return 半角字符串
+     */
+    public static String toDBC(final String s) {
+        if (isEmpty(s)) return s;
+        char[] chars = s.toCharArray();
+        for (int i = 0, len = chars.length; i < len; i++) {
+            if (chars[i] == 12288) {
+                chars[i] = ' ';
+            } else if (65281 <= chars[i] && chars[i] <= 65374) {
+                chars[i] = (char) (chars[i] - 65248);
             } else {
-                throw new RuntimeException("unsport hex str:" + str);
+                chars[i] = chars[i];
             }
-            c = charArray[++i];
-            if (c >= '0' && c <= '9') {
-                b |= c - '0';
-            } else if (c >= 'A' && c <= 'F') {
-                b |= c - 'A' + 10;
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 转化为全角字符
+     *
+     * @param s 待转字符串
+     * @return 全角字符串
+     */
+    public static String toSBC(final String s) {
+        if (isEmpty(s)) return s;
+        char[] chars = s.toCharArray();
+        for (int i = 0, len = chars.length; i < len; i++) {
+            if (chars[i] == ' ') {
+                chars[i] = (char) 12288;
+            } else if (33 <= chars[i] && chars[i] <= 126) {
+                chars[i] = (char) (chars[i] + 65248);
             } else {
-                throw new RuntimeException("unsport hex str:" + str);
-            }
-            bytes[i / 2] = (byte) b;
-        }
-        return bytes;
-    }
-
-    public static String encodeBase64Str(final byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        // Base64Coder.encode(in)
-        return new String(Base64Coder.encode(bytes));
-    }
-
-    public static byte[] decodeBase64Str(final String str) {
-        if (str == null) {
-            return null;
-        }
-        return Base64Coder.decode(str);
-    }
-
-    public static String toString(final byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        try {
-            return new String(bytes, CHARSET_NAME_UTF8);
-        } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    public static String toString(final byte[] bytes, String charset) {
-        if (bytes == null) {
-            return null;
-        }
-        try {
-            return new String(bytes, charset);
-        } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    public static byte[] toBytes(final String str) {
-        if (str == null) {
-            return null;
-        }
-        try {
-            return str.getBytes(CHARSET_NAME_UTF8);
-        } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    /**
-     * 得到一个字符串的'字符长度', 约定英文半角字符长度为1，中文全角字符长度为2。
-     *
-     * @param str
-     * @return 字符长度
-     */
-    public static int getCharLength(String str) {
-        int counter = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c < 255) {
-                counter++;
-            } else {
-                counter = counter + 2;
+                chars[i] = chars[i];
             }
         }
-        return counter;
+        return new String(chars);
     }
-
-    /**
-     * 按指定长度截断中英文混合字符串，并以后缀…结尾，此后缀长度为2。 约定英文半角字符长度为1，中文全角字符长度为2。
-     * 如果字符串‘字符长度’等于len，不截断
-     *
-     * @param str
-     * @param len
-     * @return
-     */
-    public static String ShortenCn(String str, int len) {
-        return ShortenCn(str, len, "…", 2);
-    }
-
-    /**
-     * 按指定长度截断中英文混合字符串，并以指定后缀结尾。 约定英文半角字符长度为1，中文全角字符长度为2。 如果字符串‘字符长度’等于len，不截断
-     *
-     * @param str
-     * @param len
-     * @param suffix
-     * @return
-     */
-    public static String ShortenCn(String str, int len, String suffix, int suffLen) {
-        if ("".equals(str) || str == null || str.trim().equals(""))
-            return "";
-        if (suffix.length() >= str.length())
-            suffix = "";
-
-        StringBuffer sb = new StringBuffer();
-        int counter = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            sb.append(c);
-            if (c < 255) {
-                counter++;
-            } else {
-                counter = counter + 2;
-            }
-            if (counter > len - suffLen) {
-                if (i < str.length() - 1) {
-                    sb.delete(sb.length() - 1, sb.length());
-                    sb.append(suffix);
-                }
-                break;
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 截取str字符串的前charLen个字符，这里的charLen为字符长度 约定英文半角字符长度为1，中文全角字符长度为2。
-     *
-     * @param str
-     * @param charLen
-     * @return
-     */
-    public static String charSubString(String str, int charLen) {
-        StringBuffer sb = new StringBuffer();
-        int counter = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            sb.append(c);
-            if (c < 255) {
-                counter++;
-            } else {
-                counter = counter + 2;
-            }
-            if (counter > charLen) {
-                if (i < str.length() - 1) {
-                    sb.delete(sb.length() - 1, sb.length());
-                }
-                break;
-            } else if (counter == charLen) {
-                break;
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 将某个字符串取相应长度返回（若有截断则已suffix结尾），字符长度均为1
-     *
-     * @param str
-     * @param length
-     * @param suffix
-     * @return 不可能返回null
-     */
-    public static String trimString(String str, int length, String suffix) {
-        if (suffix != null && suffix.length() > 0) {
-            int suffixLength = suffix.length();
-            if (length < suffixLength) {
-                return ".";
-            }
-
-            if (str == null) {
-                return ".";
-            } else if (str.length() > length) {
-                return str.subSequence(0, length - suffixLength) + suffix;
-            } else {
-                return str;
-            }
-        } else {
-            return ".";
-        }
-    }
-
-    /**
-     * 以…结尾的trim（若有截断则已suffix结尾），字符长度均为1
-     *
-     * @param str
-     * @param length
-     * @return 不可能返回null
-     */
-    public static String trimString(String str, int length) {
-        return trimString(str, length, "…");
-    }
-
-    /**
-     * 判断是否英文,含正常的英文符号
-     *
-     * @return
-     */
-    public static boolean isMessageEnglish(String msg) {
-        if (Pattern.matches("^[\\x00-\\x7F]*$", msg)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * URLEncoder.encode(url, "UTF-8")的封装
-     *
-     * @param url
-     * @return
-     */
-    public static String urlEncode(String url) {
-        if (url == null)
-            return null;
-        try {
-            return URLEncoder.encode(url, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace(); // default
-            return "";
-        }
-    }
-
-    public static boolean isEmailFormat(String email) {
-        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
-    }
-
-    public static boolean isPhoneFormat(String phoneNumber) {
-        return PHONE_PATTERN.matcher(phoneNumber).matches();
-    }
-
 }
