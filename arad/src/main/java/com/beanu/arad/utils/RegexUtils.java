@@ -1,6 +1,6 @@
 package com.beanu.arad.utils;
 
-import com.blankj.utilcode.constant.RegexConstants;
+import com.beanu.arad.utils.constant.RegexConstants;
 
 import java.util.ArrayList;
 import java.util.List;

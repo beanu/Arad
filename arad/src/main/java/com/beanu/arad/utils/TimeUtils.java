@@ -1,6 +1,7 @@
 package com.beanu.arad.utils;
 
-import com.blankj.utilcode.constant.TimeConstants;
+
+import com.beanu.arad.utils.constant.TimeConstants;
 
 import java.text.DateFormat;
 import java.text.ParseException;
