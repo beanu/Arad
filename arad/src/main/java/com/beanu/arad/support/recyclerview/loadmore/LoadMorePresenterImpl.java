@@ -43,7 +43,7 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
 
     @Override
     public boolean hasMoreResults() {
-        return mPageModel == null || (mPageModel.getCurrentPage() < mPageModel.getTotalPage());
+        return (mPageModel != null && (mPageModel.getCurrentPage() < mPageModel.getTotalPage()));
     }
 
     @Override

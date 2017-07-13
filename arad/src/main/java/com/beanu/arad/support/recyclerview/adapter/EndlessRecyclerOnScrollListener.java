@@ -1,7 +1,9 @@
 package com.beanu.arad.support.recyclerview.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.beanu.arad.support.listview.ILoadMoreListener;
 
@@ -15,20 +17,32 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     int lastVisiblePostion, totalItemCount;
 
-    private LinearLayoutManager mLinearLayoutManager;
+    private RecyclerView.LayoutManager mLayoutManager;
     private ILoadMoreListener listener;
 
-
-    public EndlessRecyclerOnScrollListener(LinearLayoutManager linearLayoutManager, ILoadMoreListener listener) {
-        this.mLinearLayoutManager = linearLayoutManager;
+    public EndlessRecyclerOnScrollListener(@NonNull RecyclerView.LayoutManager layoutManager, @NonNull ILoadMoreListener listener) {
+        this.mLayoutManager = layoutManager;
         this.listener = listener;
     }
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        totalItemCount = mLinearLayoutManager.getItemCount();
-        lastVisiblePostion = mLinearLayoutManager.findLastVisibleItemPosition();
+        totalItemCount = mLayoutManager.getItemCount();
+
+        if (mLayoutManager instanceof LinearLayoutManager) {
+            lastVisiblePostion = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+
+        } else if (mLayoutManager instanceof StaggeredGridLayoutManager) {
+            int positions[] = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null);
+            int max = 0;
+            for (int pos : positions) {
+                if (pos > max) {
+                    max = pos;
+                }
+            }
+            lastVisiblePostion = max;
+        }
     }
 
     @Override
@@ -40,6 +54,5 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         }
     }
 
-    //TODO 正在加载的过程中，如果再上拉，还是能够执行此方法
     public abstract void onLoadMore();
 }
