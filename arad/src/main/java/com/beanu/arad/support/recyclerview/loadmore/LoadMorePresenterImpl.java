@@ -30,6 +30,7 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
     private int mCurPage = 0;
     private IPageModel<B> mPageModel;
     private List<B> mList = new ArrayList<>();
+    private List<B> mCurrentPageList = new ArrayList<>();//当前页的数据
 
     private boolean mHasError = false;
     private boolean mIsLoading = false;
@@ -90,7 +91,7 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
                 } else {
                     mView.contentLoadingComplete();
                 }
-                mView.loadDataComplete(mList);
+                mView.loadDataComplete(mCurrentPageList);
             }
 
             @Override
@@ -106,6 +107,9 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
                 }
                 if (pageModel.getDataList() != null && !pageModel.getDataList().isEmpty()) {
                     mList.addAll(pageModel.getDataList());
+
+                    mCurrentPageList.clear();
+                    mCurrentPageList.addAll(pageModel.getDataList());
                 }
             }
         });
