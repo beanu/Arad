@@ -77,9 +77,11 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
             public void onError(Throwable e) {
                 mIsLoading = false;
                 mHasError = true;
+                mCurPage--;
                 if (mList == null || mList.isEmpty()) {
                     mView.contentLoadingError();
                 }
+                mView.loadDataComplete(null);
             }
 
             @Override
