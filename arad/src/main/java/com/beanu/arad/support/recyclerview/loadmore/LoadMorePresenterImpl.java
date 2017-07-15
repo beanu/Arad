@@ -5,6 +5,7 @@ import android.support.v4.util.ArrayMap;
 import com.beanu.arad.http.IPageModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -81,7 +82,7 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
                 if (mList == null || mList.isEmpty()) {
                     mView.contentLoadingError();
                 }
-                mView.loadDataComplete(null);
+                mView.loadDataComplete(Collections.<B>emptyList());
             }
 
             @Override
