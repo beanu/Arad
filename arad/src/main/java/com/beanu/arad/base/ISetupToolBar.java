@@ -1,7 +1,6 @@
 package com.beanu.arad.base;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -10,21 +9,21 @@ import android.widget.TextView;
  */
 public interface ISetupToolBar {
 
-    abstract String setupToolBarTitle();
+    String setupToolBarTitle();
 
-    abstract boolean setupToolBarLeftButton(ImageView leftButton);
+    boolean setupToolBarLeftButton(View leftButton);
 
-    abstract boolean setupToolBarRightButton(ImageView rightButton);
+    boolean setupToolBarRightButton2(View rightButton2);
 
-    abstract boolean setupToolBarRightText(TextView rightText);
+    boolean setupToolBarRightButton1(View rightButton1);
 
     // 动态改变
-    abstract TextView getToolBarTitle();
+    TextView getToolBarTitle();
 
-    abstract View getToolBarLeftButton();
+    View getToolBarLeftButton();
 
-    abstract View getToolBarRightButton();
+    View getToolBarRightButton2();
 
-    abstract View getToolBarRightText();
+    View getToolBarRightButton1();
 
 }

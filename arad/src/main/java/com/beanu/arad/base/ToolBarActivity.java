@@ -3,7 +3,6 @@ package com.beanu.arad.base;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
@@ -20,14 +19,13 @@ import com.beanu.arad.utils.statusbar.ImmersionBar;
 public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity<T, E> implements ISetupToolBar, BaseView {
 
     private TextView mTitle;
-    private ImageView mLeftButton;
-    private ImageView mRightButton;
-    private TextView mRightText;
+    private View mLeftButton;
+    private View mRightButton1;
+    private View mRightButton2;
 
     private ActionBar mActionBar;
     private Toolbar mToolbar;//标题栏
     private View mStatusBar;//状态栏
-
 
     private View arad_content;
     private View arad_loading;
@@ -56,19 +54,19 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
             }
         }
 
-        if (mRightButton != null) {
-            if (setupToolBarRightButton(mRightButton)) {
-                mRightButton.setVisibility(View.VISIBLE);
+        if (mRightButton2 != null) {
+            if (setupToolBarRightButton2(mRightButton2)) {
+                mRightButton2.setVisibility(View.VISIBLE);
             } else {
-                mRightButton.setVisibility(View.GONE);
+                mRightButton2.setVisibility(View.GONE);
             }
         }
 
-        if (mRightText != null) {
-            if (setupToolBarRightText(mRightText)) {
-                mRightText.setVisibility(View.VISIBLE);
+        if (mRightButton1 != null) {
+            if (setupToolBarRightButton1(mRightButton1)) {
+                mRightButton1.setVisibility(View.VISIBLE);
             } else {
-                mRightText.setVisibility(View.GONE);
+                mRightButton1.setVisibility(View.GONE);
             }
         }
 
@@ -80,9 +78,9 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mLeftButton = (ImageView) findViewById(R.id.toolbar_leftbtn);
-        mRightButton = (ImageView) findViewById(R.id.toolbar_rightbtn);
-        mRightText = (TextView) findViewById(R.id.toolbar_txt_right_btn);
+        mLeftButton = findViewById(R.id.toolbar_left_btn);
+        mRightButton2 = findViewById(R.id.toolbar_right_btn2);
+        mRightButton1 = findViewById(R.id.toolbar_right_btn1);
         mStatusBar = findViewById(R.id.arad_status_bar);
 
 
@@ -150,17 +148,17 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     }
 
     @Override
-    public boolean setupToolBarLeftButton(ImageView leftButton) {
+    public boolean setupToolBarLeftButton(View leftButton) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightButton(ImageView rightButton) {
+    public boolean setupToolBarRightButton2(View rightButton2) {
         return false;
     }
 
     @Override
-    public boolean setupToolBarRightText(TextView rightText) {
+    public boolean setupToolBarRightButton1(View rightButton1) {
         return false;
     }
 
@@ -175,13 +173,13 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     }
 
     @Override
-    public View getToolBarRightButton() {
-        return mRightButton;
+    public View getToolBarRightButton2() {
+        return mRightButton2;
     }
 
     @Override
-    public View getToolBarRightText() {
-        return mRightText;
+    public View getToolBarRightButton1() {
+        return mRightButton1;
     }
 
     public Toolbar getToolbar() {

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.beanu.arad.base.ToolBarActivity;
-import com.beanu.arad.utils.MessageUtils;
+import com.beanu.arad.utils.ToastUtils;
 import com.beanu.arad.widget.dialog.BottomPopupMenuFragment;
 
 import java.util.Collections;
@@ -56,14 +56,13 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
     }
 
     /**
-     *
-     * @param id              根据该id 判断哪个操作弹出的 底部菜单
-     * @param clickIndex      第几个菜单项
-     * @param extData         附加数据
+     * @param id         根据该id 判断哪个操作弹出的 底部菜单
+     * @param clickIndex 第几个菜单项
+     * @param extData    附加数据
      */
 
     @Override
     public void onMenuClick(String id, int clickIndex, Map<String, Object> extData) {
-        MessageUtils.showShortToast(this, ((String[]) extData.get("menus"))[clickIndex]);
+        ToastUtils.showShort(((String[]) extData.get("menus"))[clickIndex]);
     }
 }
