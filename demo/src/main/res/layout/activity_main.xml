@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.beanu.demo.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.beanu.demo.MainActivity">
+
+    <include layout="@layout/arad_toolbar"/>
 
     <Button
         android:id="@+id/bt_second"
@@ -21,5 +19,13 @@
         android:id="@+id/bt_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="底部弹出菜单" />
+        android:text="底部弹出菜单"/>
+
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.beanu.demo.TestFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 </LinearLayout>

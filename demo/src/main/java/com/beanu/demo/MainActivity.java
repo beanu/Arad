@@ -3,7 +3,6 @@ package com.beanu.demo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.beanu.arad.base.ToolBarActivity;
 import com.beanu.arad.utils.ToastUtils;
@@ -12,7 +11,6 @@ import com.beanu.arad.widget.dialog.BottomPopupMenuFragment;
 import java.util.Collections;
 import java.util.Map;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -23,6 +21,20 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+    }
+
+
+    @Override
+    public boolean setupToolBarLeftButton(View leftButton) {
+
+        return true;
+    }
+
+
+    @Override
+    public boolean setupToolBarRightButton1(View rightButton1) {
+
+        return true;
     }
 
     @OnClick({R.id.bt_second, R.id.bt_menu})
@@ -43,7 +55,8 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
                         .show(getSupportFragmentManager(), "bottom_menu");
 
                 break;
-                default:break;
+            default:
+                break;
         }
     }
 
