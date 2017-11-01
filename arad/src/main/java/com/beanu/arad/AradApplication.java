@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.beanu.arad.support.slideback.ActivityHelper;
 import com.beanu.arad.utils.DeviceInformant;
 import com.beanu.arad.utils.Utils;
+import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,9 +21,6 @@ public abstract class AradApplication extends Application {
     public AradApplicationConfig config;
 
     protected String processName;
-
-    public static ActivityHelper activityHelper;
-
 
     @Override
     public void onCreate() {
@@ -42,9 +39,7 @@ public abstract class AradApplication extends Application {
             deviceInfo = new DeviceInformant(getApplicationContext());
             Arad.bus = EventBus.getDefault();
 
-            //开启侧滑支持需要此Helper类支持
-            activityHelper = new ActivityHelper();
-            registerActivityLifecycleCallbacks(activityHelper);
+            registerActivityLifecycleCallbacks(ParallaxHelper.getInstance());
         }
 
 

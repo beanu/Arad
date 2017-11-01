@@ -30,6 +30,8 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 
+import java.security.MessageDigest;
+
 public class RoundedCornersTransformation implements Transformation<Bitmap> {
 
     public enum CornerType {
@@ -66,26 +68,6 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
         mDiameter = mRadius * 2;
         mMargin = margin;
         mCornerType = cornerType;
-    }
-
-    @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
-        Bitmap source = resource.get();
-
-        int width = source.getWidth();
-        int height = source.getHeight();
-
-        Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
-        if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        drawRoundRect(canvas, paint, width, height);
-        return BitmapResource.obtain(bitmap, mBitmapPool);
     }
 
     private void drawRoundRect(Canvas canvas, Paint paint, float width, float height) {
@@ -250,8 +232,28 @@ public class RoundedCornersTransformation implements Transformation<Bitmap> {
     }
 
     @Override
-    public String getId() {
-        return "RoundedTransformation(radius=" + mRadius + ", margin=" + mMargin + ", diameter="
-                + mDiameter + ", cornerType=" + mCornerType.name() + ")";
+    public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int outWidth, int outHeight) {
+        Bitmap source = resource.get();
+
+        int width = source.getWidth();
+        int height = source.getHeight();
+
+        Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        drawRoundRect(canvas, paint, width, height);
+        return BitmapResource.obtain(bitmap, mBitmapPool);
+    }
+
+    @Override
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
+        messageDigest.update(("RoundedTransformation(radius=" + mRadius + ", margin=" + mMargin + ", diameter="
+                + mDiameter + ", cornerType=" + mCornerType.name() + ")").getBytes());
     }
 }

@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.beanu.arad.AradApplication;
 import com.beanu.arad.R;
 import com.beanu.arad.support.rxjava.RxManager;
-import com.beanu.arad.support.slideback.SlideBackHelper;
-import com.beanu.arad.support.slideback.SlideConfig;
-import com.beanu.arad.support.slideback.widget.SlideBackLayout;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
+import com.github.anzewei.parallaxbacklayout.ParallaxBack;
+import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 
 
 /**
@@ -21,75 +19,95 @@ import com.beanu.arad.widget.dialog.ProgressHUD;
  * 2.mvp的泛形实现
  * 3.start activity的封装
  */
-public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
 
-    public T mPresenter;
-    public E mModel;
+@ParallaxBack
+public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
+
+    public P mPresenter;
+    public M mModel;
 
     public RxManager mRxManage;
 
     private ProgressHUD mProgressHUD;
-    protected SlideBackLayout mSlideBackLayout;
+
+    boolean disableNextPageSlideBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
+        mPresenter = obtainPresenter();
+        mModel = obtainModel();
         if (mPresenter != null) {
             mPresenter.mContext = this;
-            if (this instanceof BaseView) mPresenter.setVM(this, mModel);
+            if (this instanceof BaseView){
+                mPresenter.setVM(this, mModel);
+            }
+            mPresenter.onCreate(savedInstanceState);
         }
         mRxManage = new RxManager();
+
+        if (getIntent().getBooleanExtra("disableSlideBack", false)){
+            disableSlideBack();
+        }
     }
 
-
-    private void initSlideBackLayout() {
-        mSlideBackLayout = SlideBackHelper.attach(
-                // 当前Activity
-                this,
-                // Activity栈管理工具
-                AradApplication.activityHelper,
-                // 参数的配置
-                new SlideConfig.Builder()
-                        // 屏幕是否旋转
-                        .rotateScreen(true)
-                        // 是否侧滑
-                        .edgeOnly(true)
-                        // 是否禁止侧滑
-                        .lock(true)
-                        // 侧滑的响应阈值，0~1，对应屏幕宽度*percent
-                        .edgePercent(0.1f)
-                        // 关闭页面的阈值，0~1，对应屏幕宽度*percent
-                        .slideOutPercent(0.5f).create(),
-                // 滑动的监听
-                null);
+    /**
+     * 禁止下一个页面滑动返回
+     */
+    protected void requireDisableNextPageSlideBack(){
+        disableNextPageSlideBack = true;
     }
 
     public void enableSlideBack() {
-        if (mSlideBackLayout == null) {
-            initSlideBackLayout();
-        }
-        if (mSlideBackLayout != null) {
-            mSlideBackLayout.lock(false);
-        }
+        ParallaxHelper.enableParallaxBack(this);
     }
 
     public void disableSlideBack() {
-        if (mSlideBackLayout != null) {
-            mSlideBackLayout.lock(true);
+        ParallaxHelper.disableParallaxBack(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mPresenter != null){
+            mPresenter.onStart();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mPresenter!= null){
+            mPresenter.onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mPresenter != null){
+            mPresenter.onPause();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mPresenter != null){
+            mPresenter.onStop();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.onDestroy();
+        }
 
-        if (mRxManage != null)
+        if (mRxManage != null) {
             mRxManage.clear();
-
+        }
     }
 
     /**
@@ -166,5 +184,13 @@ public class BaseActivity<T extends BasePresenter, E extends BaseModel> extends 
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_none, R.anim.anim_slide_out);
+    }
+
+    protected P obtainPresenter(){
+        return TUtil.getT(this, 0);
+    }
+
+    protected M obtainModel(){
+        return TUtil.getT(this, 1);
     }
 }

@@ -51,7 +51,7 @@ public interface IPreferences {
 
     void clear();
 
-    void remove(String key);
+    IPreferences remove(String key);
 
     /**
      * Makes sure the preferences are persisted.

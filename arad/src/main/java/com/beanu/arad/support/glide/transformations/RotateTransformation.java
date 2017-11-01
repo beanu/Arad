@@ -3,9 +3,12 @@ package com.beanu.arad.support.glide.transformations;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+
+import java.security.MessageDigest;
 
 /**
  * 旋转图片
@@ -23,7 +26,7 @@ public class RotateTransformation extends BitmapTransformation {
     }
 
     @Override
-    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+    protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
         Matrix matrix = new Matrix();
 
         matrix.postRotate(rotateRotationAngle);
@@ -32,7 +35,7 @@ public class RotateTransformation extends BitmapTransformation {
     }
 
     @Override
-    public String getId() {
-        return "rotate" + rotateRotationAngle;
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
+        messageDigest.update(("rotate" + rotateRotationAngle).getBytes());
     }
 }

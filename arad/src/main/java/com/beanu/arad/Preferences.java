@@ -166,9 +166,10 @@ public class Preferences implements IPreferences {
     }
 
     @Override
-    public void remove(String key) {
+    public IPreferences remove(String key) {
         edit();
         editor.remove(key);
+        return this;
     }
 
     private void edit() {

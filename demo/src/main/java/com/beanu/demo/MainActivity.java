@@ -18,13 +18,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends ToolBarActivity implements BottomPopupMenuFragment.Listener {
 
-    @BindView(R.id.bt_error)
-    Button btError;
-    @BindView(R.id.bt_second)
-    Button btSecond;
-    @BindView(R.id.bt_menu)
-    Button btMenu;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +25,12 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bt_second, R.id.bt_error, R.id.bt_menu})
+    @OnClick({R.id.bt_second, R.id.bt_menu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_second:
                 startActivity(new Intent(this, SecondActivity.class));
                 break;
-            case R.id.bt_error:
-                throw new RuntimeException("哈哈哈，出错了吧");
 
             case R.id.bt_menu:
                 new BottomPopupMenuFragment.Builder()
@@ -52,6 +43,7 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
                         .show(getSupportFragmentManager(), "bottom_menu");
 
                 break;
+                default:break;
         }
     }
 
