@@ -53,6 +53,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         FragmentActivity parent = getActivity();
 
         View view;
+        //如果fragment本身没有就使用上级Activity的
         if (mToolbar != null) {
             view = getView();
         } else {
@@ -62,6 +63,9 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
 
         if (getParentFragment() == null && parent instanceof AppCompatActivity) {
             mActionBar = initToolbar(parent);
+            if (mActionBar != null) {
+                mActionBar.setDisplayShowTitleEnabled(false);
+            }
 
             if (view != null) {
                 mTitle = view.findViewById(R.id.toolbar_title);
@@ -71,9 +75,6 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
 
                 if (mTitle != null && setupToolBarTitle() != null) {
                     mTitle.setText(setupToolBarTitle());
-                    if (mActionBar != null) {
-                        mActionBar.setDisplayShowTitleEnabled(false);
-                    }
                 }
 
                 if (mLeftButton != null && setupToolBarLeftButton(mLeftButton)) {

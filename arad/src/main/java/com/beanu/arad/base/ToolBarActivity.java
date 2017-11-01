@@ -38,11 +38,13 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     @Override
     protected void onStart() {
         super.onStart();
+
+        if (mActionBar != null) {
+            mActionBar.setDisplayShowTitleEnabled(false);
+        }
+
         if (mTitle != null && setupToolBarTitle() != null) {
             mTitle.setText(setupToolBarTitle());
-            if (mActionBar != null) {
-                mActionBar.setDisplayShowTitleEnabled(false);
-            }
         }
 
         if (mLeftButton != null) {
