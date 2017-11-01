@@ -44,7 +44,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
         arad_loading_error = view.findViewById(R.id.arad_loading_error);
 
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar = view.findViewById(R.id.toolbar);
     }
 
     @Override
@@ -57,14 +57,14 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
             view = getView();
         } else {
             view = parent.getWindow().getDecorView();
-            mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+            mToolbar = view.findViewById(R.id.toolbar);
         }
 
         if (getParentFragment() == null && parent instanceof AppCompatActivity) {
             mActionBar = initToolbar(parent);
 
             if (view != null) {
-                mTitle = (TextView) view.findViewById(R.id.toolbar_title);
+                mTitle = view.findViewById(R.id.toolbar_title);
                 mLeftButton = view.findViewById(R.id.toolbar_left_btn);
                 mRightButton1 = view.findViewById(R.id.toolbar_right_btn1);
                 mRightButton2 = view.findViewById(R.id.toolbar_right_btn2);

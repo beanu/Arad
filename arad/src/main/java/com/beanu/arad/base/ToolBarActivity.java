@@ -73,11 +73,19 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mImmersionBar != null) {
+            mImmersionBar.destroy();
+        }
+    }
+
+    @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mTitle = findViewById(R.id.toolbar_title);
         mLeftButton = findViewById(R.id.toolbar_left_btn);
         mRightButton2 = findViewById(R.id.toolbar_right_btn2);
         mRightButton1 = findViewById(R.id.toolbar_right_btn1);
@@ -105,14 +113,6 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
             mImmersionBar.statusBarView(mStatusBar).init();
         } else {
             mImmersionBar.statusBarColor(R.color.colorPrimary).fitsSystemWindows(true).init();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();
         }
     }
 
