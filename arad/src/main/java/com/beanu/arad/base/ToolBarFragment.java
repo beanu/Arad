@@ -52,11 +52,13 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         super.onResume();
         FragmentActivity parent = getActivity();
 
-        View view;
+        View view = getView();
+        if (view != null) {
+            mToolbar = view.findViewById(R.id.toolbar);
+        }
+
         //如果fragment本身没有就使用上级Activity的
-        if (mToolbar != null) {
-            view = getView();
-        } else {
+        if (mToolbar == null) {
             view = parent.getWindow().getDecorView();
             mToolbar = view.findViewById(R.id.toolbar);
         }
