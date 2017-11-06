@@ -50,58 +50,62 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     @Override
     public void onResume() {
         super.onResume();
-        FragmentActivity parent = getActivity();
 
-        View view = getView();
-        if (view != null) {
-            mToolbar = view.findViewById(R.id.toolbar);
-        }
+        if (getUserVisibleHint() && !isHidden()) {
 
-        //如果fragment本身没有就使用上级Activity的
-        if (mToolbar == null) {
-            view = parent.getWindow().getDecorView();
-            mToolbar = view.findViewById(R.id.toolbar);
-        }
+            FragmentActivity parent = getActivity();
 
-        if (getParentFragment() == null && parent instanceof AppCompatActivity) {
-            mActionBar = initToolbar(parent);
-            if (mActionBar != null) {
-                mActionBar.setDisplayShowTitleEnabled(false);
-            }
-
+            View view = getView();
             if (view != null) {
-                mTitle = view.findViewById(R.id.toolbar_title);
-                mLeftButton = view.findViewById(R.id.toolbar_left_btn);
-                mRightButton1 = view.findViewById(R.id.toolbar_right_btn1);
-                mRightButton2 = view.findViewById(R.id.toolbar_right_btn2);
+                mToolbar = view.findViewById(R.id.toolbar);
+            }
 
-                if (mTitle != null && setupToolBarTitle() != null) {
-                    mTitle.setText(setupToolBarTitle());
+            //如果fragment本身没有就使用上级Activity的
+            if (mToolbar == null) {
+                view = parent.getWindow().getDecorView();
+                mToolbar = view.findViewById(R.id.toolbar);
+            }
+
+            if (getParentFragment() == null && parent instanceof AppCompatActivity) {
+                mActionBar = initToolbar(parent);
+                if (mActionBar != null) {
+                    mActionBar.setDisplayShowTitleEnabled(false);
                 }
 
-                if (mLeftButton != null && setupToolBarLeftButton(mLeftButton)) {
-                    mLeftButton.setVisibility(View.VISIBLE);
-                    hideHomeAsUp();
-                }
+                if (view != null) {
+                    mTitle = view.findViewById(R.id.toolbar_title);
+                    mLeftButton = view.findViewById(R.id.toolbar_left_btn);
+                    mRightButton1 = view.findViewById(R.id.toolbar_right_btn1);
+                    mRightButton2 = view.findViewById(R.id.toolbar_right_btn2);
 
-                if (mRightButton2 != null) {
-                    if (setupToolBarRightButton2(mRightButton2)) {
-                        mRightButton2.setVisibility(View.VISIBLE);
-                    } else {
-                        mRightButton2.setVisibility(View.GONE);
+                    if (mTitle != null && setupToolBarTitle() != null) {
+                        mTitle.setText(setupToolBarTitle());
                     }
-                }
 
-                if (mRightButton1 != null) {
-                    if (setupToolBarRightButton1(mRightButton1)) {
-                        mRightButton1.setVisibility(View.VISIBLE);
-                    } else {
-                        mRightButton1.setVisibility(View.GONE);
+                    if (mLeftButton != null && setupToolBarLeftButton(mLeftButton)) {
+                        mLeftButton.setVisibility(View.VISIBLE);
+                        hideHomeAsUp();
                     }
+
+                    if (mRightButton2 != null) {
+                        if (setupToolBarRightButton2(mRightButton2)) {
+                            mRightButton2.setVisibility(View.VISIBLE);
+                        } else {
+                            mRightButton2.setVisibility(View.GONE);
+                        }
+                    }
+
+                    if (mRightButton1 != null) {
+                        if (setupToolBarRightButton1(mRightButton1)) {
+                            mRightButton1.setVisibility(View.VISIBLE);
+                        } else {
+                            mRightButton1.setVisibility(View.GONE);
+                        }
+                    }
+
                 }
 
             }
-
         }
     }
 

@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 119
-        versionName "1.1.9"
+        versionCode 120
+        versionName "1.2.0"
 //      multiDexEnabled true   如果方法超过了64k,需要设置这个选项。记得只有比Lollipop高版本的系统可以,4.4以下的版本都有NoClassDefFoundError的异常,需要依赖com.android.support:multidex:1.0.0
     }
     buildTypes {
@@ -77,7 +77,7 @@ ext {
     siteUrl = 'https://github.com/beanu/Arad'
     gitUrl = 'https://github.com/beanu/Arad.git'
 
-    libraryVersion = '1.1.9'//版本号
+    libraryVersion = '1.2.0'//版本号
     libraryName = 'Arad'//项目名字，没什么用
     libraryDescription = 'Arad'//项目描述，没什么用
 
