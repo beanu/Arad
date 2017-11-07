@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
-import com.beanu.arad.utils.AnimUtil;
 import com.beanu.arad.utils.statusbar.ImmersionBar;
 
 
@@ -116,13 +115,6 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
         } else {
             mImmersionBar.statusBarColor(R.color.colorPrimary).fitsSystemWindows(true).init();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        AnimUtil.intentSlidOut(this);
     }
 
     protected void displayHomeAsUp() {
