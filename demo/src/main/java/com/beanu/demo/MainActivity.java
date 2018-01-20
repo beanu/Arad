@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.beanu.arad.base.ToolBarActivity;
+import com.beanu.arad.support.updateversion.UpdateChecker;
 import com.beanu.arad.utils.ToastUtils;
 import com.beanu.arad.widget.dialog.BottomPopupMenuFragment;
 
@@ -37,7 +38,7 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
         return true;
     }
 
-    @OnClick({R.id.bt_second, R.id.bt_menu})
+    @OnClick({R.id.bt_second, R.id.bt_menu, R.id.update})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_second:
@@ -54,6 +55,9 @@ public class MainActivity extends ToolBarActivity implements BottomPopupMenuFrag
                         .create()
                         .show(getSupportFragmentManager(), "bottom_menu");
 
+                break;
+            case R.id.update:
+                UpdateChecker.checkForDialog(MainActivity.this, "适配测试, 不要安装", "http://116.196.90.77:8080/jrl/sign.apk", 10000);
                 break;
             default:
                 break;

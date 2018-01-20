@@ -21,6 +21,12 @@
         android:layout_height="wrap_content"
         android:text="底部弹出菜单"/>
 
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试更新" />
+
 
     <fragment
         android:id="@+id/fragment"
