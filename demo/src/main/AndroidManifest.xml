@@ -3,6 +3,7 @@
     package="com.beanu.demo">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".DemoApplication"
@@ -19,6 +20,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"></activity>
+
+        <service android:name="com.beanu.arad.support.updateversion.DownloadService" />
+        <provider
+            android:name="com.beanu.arad.support.updateversion.ApkFileProvider"
+            android:authorities="${applicationId}.install"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/apk_path" />
+        </provider>
     </application>
 
 </manifest>

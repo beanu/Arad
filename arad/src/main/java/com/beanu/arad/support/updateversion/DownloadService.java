@@ -6,11 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.os.FileUriExposedException;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
 import com.beanu.arad.R;
+import com.beanu.arad.utils.IntentUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +23,7 @@ import java.net.URL;
 /**
  * 项目维护地址https://github.com/feicien/android-auto-update
  * <p>
- * DownloadService需要在xml中注册
+ * 需要在xml中注册 DownloadService,ApkFileProvider
  * <p>
  */
 public class DownloadService extends IntentService {
@@ -68,7 +69,7 @@ public class DownloadService extends IntentService {
             long bytesum = 0;
             int byteread = 0;
             in = urlConnection.getInputStream();
-            File dir = StorageUtils.getCacheDirectory(this);
+            File dir = getCacheDir();
             String apkName = urlStr.substring(urlStr.lastIndexOf("/") + 1, urlStr.length());
             File apkFile = new File(dir, apkName);
             out = new FileOutputStream(apkFile);
@@ -90,13 +91,14 @@ public class DownloadService extends IntentService {
             // 下载完成
             mBuilder.setContentText(getString(R.string.arad_download_success)).setProgress(0, 0, false);
 
-            Intent installAPKIntent = new Intent(Intent.ACTION_VIEW);
+            Intent installAPKIntent = IntentUtils.getInstallAppIntent(apkFile, getPackageName() + ".install");
+
             //如果没有设置SDCard写权限，或者没有sdcard,apk文件保存在内存中，需要授予权限才能安装
             String[] command = {"chmod", "777", apkFile.toString()};
             ProcessBuilder builder = new ProcessBuilder(command);
             builder.start();
 
-            installAPKIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+//            installAPKIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
             //installAPKIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //installAPKIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             //installAPKIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
