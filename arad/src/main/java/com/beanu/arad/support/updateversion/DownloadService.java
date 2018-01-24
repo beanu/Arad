@@ -1,17 +1,18 @@
 package com.beanu.arad.support.updateversion;
 
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.FileUriExposedException;
+import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.beanu.arad.R;
-import com.beanu.arad.utils.IntentUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +35,7 @@ public class DownloadService extends IntentService {
     private static final String TAG = "DownloadService";
     private NotificationManager mNotifyManager;
     private Builder mBuilder;
+    private int NOTIFICATION_ID = 0;
 
     public DownloadService() {
         super("DownloadService");
@@ -43,7 +45,7 @@ public class DownloadService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mBuilder = new Builder(this);
+        mBuilder = new NotificationCompat.Builder(this);
 
         String appName = getString(getApplicationInfo().labelRes);
         int icon = getApplicationInfo().icon;
@@ -91,24 +93,8 @@ public class DownloadService extends IntentService {
             // 下载完成
             mBuilder.setContentText(getString(R.string.arad_download_success)).setProgress(0, 0, false);
 
-            Intent installAPKIntent = IntentUtils.getInstallAppIntent(apkFile, getPackageName() + ".install");
-
-            //如果没有设置SDCard写权限，或者没有sdcard,apk文件保存在内存中，需要授予权限才能安装
-            String[] command = {"chmod", "777", apkFile.toString()};
-            ProcessBuilder builder = new ProcessBuilder(command);
-            builder.start();
-
-//            installAPKIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-            //installAPKIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //installAPKIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //installAPKIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, installAPKIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            mBuilder.setContentIntent(pendingIntent);
-            Notification noti = mBuilder.build();
-            noti.flags = Notification.FLAG_AUTO_CANCEL;
-            mNotifyManager.notify(0, noti);
+            installAPk(this, apkFile);
+            mNotifyManager.cancel(NOTIFICATION_ID);
 
         } catch (Exception e) {
             Log.e(TAG, "download apk file error", e);
@@ -130,13 +116,51 @@ public class DownloadService extends IntentService {
         }
     }
 
+    private void installAPk(Context context, File apkFile) {
+        Intent installAPKIntent = getApkInStallIntent(context, apkFile);
+        startActivity(installAPKIntent);
+    }
+
+    private Intent getApkInStallIntent(Context context, File apkFile) {
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".install", apkFile);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        } else {
+            Uri uri = getApkUri(apkFile);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        }
+        return intent;
+    }
+
+
+    private Uri getApkUri(File apkFile) {
+        Log.d(TAG, apkFile.toString());
+
+        //如果没有设置 SDCard 写权限，或者没有 SDCard,apk 文件保存在内存中，需要授予权限才能安装
+        try {
+            String[] command = {"chmod", "777", apkFile.toString()};
+            ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+        } catch (IOException ignored) {
+        }
+        Uri uri = Uri.fromFile(apkFile);
+        Log.d(TAG, uri.toString());
+
+        return uri;
+    }
+
     private void updateProgress(int progress) {
         //"正在下载:" + progress + "%"
         mBuilder.setContentText(this.getString(R.string.arad_download_progress, progress)).setProgress(100, progress, false);
         //setContentInent如果不设置在4.0+上没有问题，在4.0以下会报异常
         PendingIntent pendingintent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT);
         mBuilder.setContentIntent(pendingintent);
-        mNotifyManager.notify(0, mBuilder.build());
+        mNotifyManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
 }

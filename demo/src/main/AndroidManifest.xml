@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.beanu.demo">
+<manifest package="com.beanu.demo"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".DemoApplication"
@@ -14,14 +14,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"></activity>
 
-        <service android:name="com.beanu.arad.support.updateversion.DownloadService" />
+        <service android:name="com.beanu.arad.support.updateversion.DownloadService"/>
         <provider
             android:name="com.beanu.arad.support.updateversion.ApkFileProvider"
             android:authorities="${applicationId}.install"
@@ -29,7 +29,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/apk_path" />
+                android:resource="@xml/apk_path"/>
         </provider>
     </application>
 

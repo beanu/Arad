@@ -146,9 +146,6 @@ public class UpdateChecker extends Fragment {
     }
 
 
-    /**
-     * Check if a network available
-     */
     public static boolean isNetworkAvailable(Context context) {
         boolean connected = false;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

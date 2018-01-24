@@ -3,6 +3,6 @@
     <paths>
         <cache-path
             name="install_apk"
-            path="" />
+            path="."/>
     </paths>
 </resources>
