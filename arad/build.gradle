@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 124
-        versionName "1.2.4"
+        targetSdkVersion 27
+        versionCode 125
+        versionName "1.2.5"
 //      multiDexEnabled true   如果方法超过了64k,需要设置这个选项。记得只有比Lollipop高版本的系统可以,4.4以下的版本都有NoClassDefFoundError的异常,需要依赖com.android.support:multidex:1.0.0
     }
     buildTypes {
@@ -39,18 +39,18 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:support-v4:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:support-v4:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
     //rxjava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.6'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.9'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //gson
     compile 'com.google.code.gson:gson:2.8.2'
     //okhttp
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -77,7 +77,7 @@ ext {
     siteUrl = 'https://github.com/beanu/Arad'
     gitUrl = 'https://github.com/beanu/Arad.git'
 
-    libraryVersion = '1.2.4'//版本号
+    libraryVersion = '1.2.5'//版本号
     libraryName = 'Arad'//项目名字，没什么用
     libraryDescription = 'Arad'//项目描述，没什么用
 
