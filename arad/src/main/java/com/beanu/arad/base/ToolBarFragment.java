@@ -87,20 +87,12 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
                         hideHomeAsUp();
                     }
 
-                    if (mRightButton2 != null) {
-                        if (setupToolBarRightButton2(mRightButton2)) {
-                            mRightButton2.setVisibility(View.VISIBLE);
-                        } else {
-                            mRightButton2.setVisibility(View.GONE);
-                        }
+                    if (mRightButton2 != null && setupToolBarRightButton2(mRightButton2)) {
+                        mRightButton2.setVisibility(View.VISIBLE);
                     }
 
-                    if (mRightButton1 != null) {
-                        if (setupToolBarRightButton1(mRightButton1)) {
-                            mRightButton1.setVisibility(View.VISIBLE);
-                        } else {
-                            mRightButton1.setVisibility(View.GONE);
-                        }
+                    if (mRightButton1 != null && setupToolBarRightButton1(mRightButton1)) {
+                        mRightButton1.setVisibility(View.VISIBLE);
                     }
 
                 }
