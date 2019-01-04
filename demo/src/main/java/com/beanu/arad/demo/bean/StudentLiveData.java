@@ -1,5 +1,7 @@
 package com.beanu.arad.demo.bean;
 
+import com.beanu.arad.Arad;
+
 import androidx.lifecycle.LiveData;
 
 /**
@@ -19,14 +21,30 @@ public class StudentLiveData extends LiveData<Student> {
         return sIns;
     }
 
+    @Override
+    protected void onActive() {
+        if (getValue() == null) {
+            Student student = Arad.kv.getParcelable("student", Student.class);
+            setValue(student);
+        }
+
+    }
+
+    @Override
+    protected void onInactive() {
+
+    }
 
     @Override
     public void setValue(Student value) {
         super.setValue(value);
+        //实例化到本地
+        Arad.kv.put("student", value);
     }
 
     @Override
     public void postValue(Student value) {
         super.postValue(value);
     }
+
 }
