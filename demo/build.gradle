@@ -41,4 +41,13 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
     implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:3.0.0'
 
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 }

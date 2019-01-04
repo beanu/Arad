@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 
 /**
  * 封装student成一个livedata的单例，只要student变化了 就能通知接收者
+ *
+ * @author Beanu
  */
 public class StudentLiveData extends LiveData<Student> {
 
@@ -25,7 +27,9 @@ public class StudentLiveData extends LiveData<Student> {
     protected void onActive() {
         if (getValue() == null) {
             Student student = Arad.kv.getParcelable("student", Student.class);
-            setValue(student);
+            if (student != null) {
+                setValue(student);
+            }
         }
 
     }
@@ -45,6 +49,7 @@ public class StudentLiveData extends LiveData<Student> {
     @Override
     public void postValue(Student value) {
         super.postValue(value);
+        //最终调用setValue
     }
 
 }
