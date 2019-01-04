@@ -63,7 +63,7 @@ public class KeyboardPatch {
         this.mActivity = activity;
         this.mWindow = window;
         this.mDecorView = mWindow.getDecorView();
-        FrameLayout frameLayout = (FrameLayout) mDecorView.findViewById(android.R.id.content);
+        FrameLayout frameLayout = mDecorView.findViewById(android.R.id.content);
         this.mChildView = frameLayout.getChildAt(0);
         this.mContentView = mChildView != null ? mChildView : frameLayout;
 

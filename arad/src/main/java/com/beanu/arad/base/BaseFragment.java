@@ -1,76 +1,75 @@
 package com.beanu.arad.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.view.View;
 
-import com.beanu.arad.support.rxjava.RxManager;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * 基础fragment
  * 1.加入了progress dialog
  * 2.mvp的泛形实现
  * 3.start activity的封装
- * 4.加入rxManager
+ * 4.引入了ViewModel,横竖屏时保持住数据
+ * 5.引入了lifecycle,保证请求的及时销毁
+ *
+ * @author Beanu
  */
 public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
     public P mPresenter;
-    public M mModel;
-
-    public RxManager mRxManage;
-
     private ProgressHUD mProgressHUD;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        BaseViewModel viewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
+        if (mPresenter == null) {
+            viewModel.setPresenter(obtainPresenter());
+            mPresenter = (P) viewModel.getPresenter();
+        }
+
+        if (mPresenter != null) {
+            mPresenter.attachLifecycle(this);
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = obtainPresenter();
-        mModel = obtainModel();
+
         if (mPresenter != null) {
-            mPresenter.mContext = this.getActivity();
+            M mModel = obtainModel();
+            mPresenter.setModel(mModel);
+        }
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mPresenter != null) {
             if (this instanceof BaseView) {
-                mPresenter.setVM(this, mModel);
+                mPresenter.attachView(this);
             }
-            mPresenter.onCreate(savedInstanceState);
-        }
-
-        mRxManage = new RxManager();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mPresenter != null){
-            mPresenter.onStart();
         }
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (mPresenter != null){
-            mPresenter.onResume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mPresenter !=  null){
-            mPresenter.onPause();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mPresenter != null){
-            mPresenter.onStop();
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
         }
     }
 
@@ -78,13 +77,16 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
-            mPresenter.onDestroy();
+            mPresenter.mModel = null;
         }
+    }
 
-        if (mRxManage != null) {
-            mRxManage.clear();
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (mPresenter != null) {
+            mPresenter.detachLifecycle(this);
         }
-
     }
 
     public void showProgress(boolean show) {
@@ -140,27 +142,29 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
         startActivity(intent);
     }
 
-    @Override public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
         Activity act = getActivity();
-        if (act != null && act instanceof BaseActivity){
-            intent.putExtra("disableSlideBack", ((BaseActivity)act).disableNextPageSlideBack);
+        if (act != null && act instanceof BaseActivity) {
+            intent.putExtra("disableSlideBack", ((BaseActivity) act).disableNextPageSlideBack);
         }
         super.startActivityForResult(intent, requestCode, options);
     }
 
-    @Override public void startActivity(Intent intent, @Nullable Bundle options) {
+    @Override
+    public void startActivity(Intent intent, @Nullable Bundle options) {
         Activity act = getActivity();
-        if (act != null && act instanceof BaseActivity){
-            intent.putExtra("disableSlideBack", ((BaseActivity)act).disableNextPageSlideBack);
+        if (act != null && act instanceof BaseActivity) {
+            intent.putExtra("disableSlideBack", ((BaseActivity) act).disableNextPageSlideBack);
         }
         super.startActivity(intent, options);
     }
 
-    protected P obtainPresenter(){
+    protected P obtainPresenter() {
         return TUtil.getT(this, 0);
     }
 
-    protected M obtainModel(){
+    protected M obtainModel() {
         return TUtil.getT(this, 1);
     }
 }

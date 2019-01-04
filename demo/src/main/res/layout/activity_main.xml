@@ -5,33 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.beanu.demo.MainActivity">
+    tools:context=".MainActivity">
 
-    <include layout="@layout/arad_toolbar"/>
-
-    <Button
-        android:id="@+id/bt_second"
+    <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转到第二个Activity"/>
+        android:layout_marginTop="100dp"
+        android:text="Hello World!"/>
+
 
     <Button
-        android:id="@+id/bt_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="底部弹出菜单"/>
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="测试更新" />
-
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.beanu.demo.TestFragment"
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="wrap_content"
+        android:text="跳转"/>
+
+
+    <Button
+        android:id="@+id/btn_next2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳转TestFragment"/>
+
+    <Button
+        android:id="@+id/btn_next3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MMKV 测试"/>
 </LinearLayout>

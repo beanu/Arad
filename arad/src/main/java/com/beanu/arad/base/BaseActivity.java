@@ -2,15 +2,19 @@ package com.beanu.arad.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.beanu.arad.R;
-import com.beanu.arad.support.rxjava.RxManager;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
 import com.github.anzewei.parallaxbacklayout.ParallaxBack;
 import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
+import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle;
+import com.trello.rxlifecycle3.LifecycleProvider;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProviders;
 
 
 /**
@@ -18,35 +22,48 @@ import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
  * 1.添加了ProgressHUD 可以显示等待progress
  * 2.mvp的泛形实现
  * 3.start activity的封装
+ * 4.引入了ViewModel,横竖屏时保持住数据
+ * 5.引入了lifecycle,保证请求的及时销毁
+ *
+ * @author Beanu
  */
 
 @ParallaxBack
 public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
 
-    public P mPresenter;
-    public M mModel;
-
-    public RxManager mRxManage;
-
+    protected P mPresenter;
+    protected LifecycleProvider<Lifecycle.Event> mLifecycleProvider;
     private ProgressHUD mProgressHUD;
-
     boolean disableNextPageSlideBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = obtainPresenter();
-        mModel = obtainModel();
-        if (mPresenter != null) {
-            mPresenter.mContext = this;
-            if (this instanceof BaseView){
-                mPresenter.setVM(this, mModel);
-            }
-            mPresenter.onCreate(savedInstanceState);
-        }
-        mRxManage = new RxManager();
 
-        if (getIntent().getBooleanExtra("disableSlideBack", false)){
+        BaseViewModel viewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
+
+        mPresenter = (P) viewModel.getPresenter();
+        if (mPresenter == null) {
+            viewModel.setPresenter(obtainPresenter());
+            mPresenter = (P) viewModel.getPresenter();
+        }
+
+        if (mPresenter != null) {
+
+            mPresenter.attachLifecycle(this);
+            if (this instanceof BaseView) {
+                mPresenter.attachView(this);
+            }
+
+            M mModel = obtainModel();
+            mPresenter.setModel(mModel);
+
+        } else {
+            //如果Presenter不为空，则使用Presenter中的LifecycleProvider
+            mLifecycleProvider = AndroidLifecycle.createLifecycleProvider(this);
+        }
+
+        if (getIntent().getBooleanExtra("disableSlideBack", false)) {
             disableSlideBack();
         }
     }
@@ -54,7 +71,7 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
     /**
      * 禁止下一个页面滑动返回
      */
-    protected void requireDisableNextPageSlideBack(){
+    protected void requireDisableNextPageSlideBack() {
         disableNextPageSlideBack = true;
     }
 
@@ -67,47 +84,16 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        if (mPresenter != null){
-            mPresenter.onStart();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mPresenter!= null){
-            mPresenter.onResume();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mPresenter != null){
-            mPresenter.onPause();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mPresenter != null){
-            mPresenter.onStop();
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
+
         if (mPresenter != null) {
-            mPresenter.onDestroy();
+            mPresenter.detachLifecycle(this);
+            mPresenter.detachView();
+
+            mPresenter.mModel = null;
         }
 
-        if (mRxManage != null) {
-            mRxManage.clear();
-        }
     }
 
     /**
@@ -115,7 +101,7 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
      *
      * @param show true显示 false隐藏
      */
-    public void showProgress(boolean show) {
+    void showProgress(boolean show) {
         showProgressWithText(show, "加载中...");
     }
 
@@ -138,22 +124,22 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivity(Class cls) {
-        startActivity(cls, null);
+    public void launchActivity(Class cls) {
+        launchActivity(cls, null);
     }
 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivityForResult(Class cls, int requestCode) {
-        startActivityForResult(cls, null, requestCode);
+    public void launchActivityForResult(Class cls, int requestCode) {
+        launchActivityForResult(cls, null, requestCode);
     }
 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivityForResult(Class cls, Bundle bundle,
-                                       int requestCode) {
+    public void launchActivityForResult(Class cls, Bundle bundle,
+                                        int requestCode) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
         if (bundle != null) {
@@ -165,7 +151,7 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivity(Class cls, Bundle bundle) {
+    public void launchActivity(Class cls, Bundle bundle) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
         if (bundle != null) {
@@ -186,11 +172,11 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
         overridePendingTransition(R.anim.anim_none, R.anim.anim_slide_out);
     }
 
-    protected P obtainPresenter(){
+    protected P obtainPresenter() {
         return TUtil.getT(this, 0);
     }
 
-    protected M obtainModel(){
+    protected M obtainModel() {
         return TUtil.getT(this, 1);
     }
 }

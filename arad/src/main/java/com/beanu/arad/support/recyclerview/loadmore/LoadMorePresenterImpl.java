@@ -1,13 +1,12 @@
 package com.beanu.arad.support.recyclerview.loadmore;
 
-import android.support.v4.util.ArrayMap;
-
 import com.beanu.arad.http.IPageModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.collection.ArrayMap;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -99,7 +98,8 @@ public class LoadMorePresenterImpl<B, V extends ILoadMoreView<B>, M extends ILoa
 
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                mRxManage.add(d);
+                //TODO
+//                mRxManage.add(d);
             }
 
             @Override

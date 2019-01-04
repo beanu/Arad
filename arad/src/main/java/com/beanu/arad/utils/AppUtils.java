@@ -43,7 +43,7 @@ public final class AppUtils {
      * 安装App(支持7.0)
      *
      * @param filePath  文件路径
-     * @param authority 7.0及以上安装需要传入清单文件中的{@code <provider>}的authorities属性
+     * @param authority 7.0及以上安装需要传入清单文件中的{@code <mLifecycleProvider>}的authorities属性
      *                  <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      */
     public static void installApp(final String filePath, final String authority) {
@@ -54,7 +54,7 @@ public final class AppUtils {
      * 安装App（支持7.0）
      *
      * @param file      文件
-     * @param authority 7.0及以上安装需要传入清单文件中的{@code <provider>}的authorities属性
+     * @param authority 7.0及以上安装需要传入清单文件中的{@code <mLifecycleProvider>}的authorities属性
      *                  <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      */
     public static void installApp(final File file, final String authority) {
@@ -67,7 +67,7 @@ public final class AppUtils {
      *
      * @param activity    activity
      * @param filePath    文件路径
-     * @param authority   7.0及以上安装需要传入清单文件中的{@code <provider>}的authorities属性
+     * @param authority   7.0及以上安装需要传入清单文件中的{@code <mLifecycleProvider>}的authorities属性
      *                    <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      * @param requestCode 请求值
      */
@@ -80,7 +80,7 @@ public final class AppUtils {
      *
      * @param activity    activity
      * @param file        文件
-     * @param authority   7.0及以上安装需要传入清单文件中的{@code <provider>}的authorities属性
+     * @param authority   7.0及以上安装需要传入清单文件中的{@code <mLifecycleProvider>}的authorities属性
      *                    <br>参看https://developer.android.com/reference/android/support/v4/content/FileProvider.html
      * @param requestCode 请求值
      */

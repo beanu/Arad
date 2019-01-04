@@ -2,7 +2,7 @@ package com.beanu.arad.support.viewpager.tricks;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

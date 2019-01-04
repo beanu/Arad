@@ -1,12 +1,15 @@
 package com.beanu.arad.base;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
+import com.beanu.arad.utils.ToastUtils;
 import com.beanu.arad.utils.statusbar.ImmersionBar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 
 
 /**
@@ -262,6 +265,11 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     @Override
     public void hideProgress() {
         showProgress(false);
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+        ToastUtils.showShort(message);
     }
 
     public void setOnRetryListener(View.OnClickListener onRetryListener) {

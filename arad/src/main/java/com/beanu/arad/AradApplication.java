@@ -15,6 +15,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
+/**
+ * @author Beanu
+ */
 public abstract class AradApplication extends Application {
 
     public DeviceInformant deviceInfo;
@@ -36,6 +39,7 @@ public abstract class AradApplication extends Application {
             Arad.app = this;
             Arad.db = DB.getInstance(getApplicationContext());
             Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
+            Arad.kv = new MMKVStorage(getApplicationContext());
             deviceInfo = new DeviceInformant(getApplicationContext());
             Arad.bus = EventBus.getDefault();
 

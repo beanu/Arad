@@ -1,6 +1,6 @@
 package com.beanu.arad.support.recyclerview.loadmore;
 
-import android.support.v4.util.ArrayMap;
+import androidx.collection.ArrayMap;
 
 import com.beanu.arad.base.BasePresenter;
 import com.beanu.arad.support.listview.ILoadMoreListener;

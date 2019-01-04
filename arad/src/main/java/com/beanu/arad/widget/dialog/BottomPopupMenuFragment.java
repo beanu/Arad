@@ -4,11 +4,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +15,16 @@ import android.widget.TextView;
 import com.beanu.arad.R;
 import com.beanu.arad.support.recyclerview.OnItemClickListener;
 import com.beanu.arad.support.recyclerview.divider.HorizontalDividerItemDecoration;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by lizhihua on 2017/1/12.
@@ -99,9 +100,9 @@ public class BottomPopupMenuFragment extends BottomSheetDialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textTitle = (TextView) view.findViewById(R.id.text_title);
-        TextView textCancel = (TextView) view.findViewById(R.id.text_cancel);
-        RecyclerView listMenus = (RecyclerView) view.findViewById(R.id.list_menus);
+        TextView textTitle = view.findViewById(R.id.text_title);
+        TextView textCancel = view.findViewById(R.id.text_cancel);
+        RecyclerView listMenus = view.findViewById(R.id.list_menus);
         listMenus.setLayoutManager(new LinearLayoutManager(getContext()));
         listMenus.setAdapter(new MenusAdapter(mMenus));
 

@@ -1,6 +1,6 @@
 package com.beanu.arad.utils.statusbar;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * ImmersionFragment沉浸式基类，因为fragment是基于activity之上的，

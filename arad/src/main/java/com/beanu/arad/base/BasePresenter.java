@@ -1,46 +1,64 @@
 package com.beanu.arad.base;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle;
+import com.trello.rxlifecycle3.LifecycleProvider;
 
-import com.beanu.arad.support.rxjava.RxManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
 /**
  * MVP
- * 基类presenter
+ * 基类presenter，具备了生命周期感知
+ *
+ * @author Beanu
  */
-public abstract class BasePresenter<V, M> {
-    public Context mContext;
+public abstract class BasePresenter<V, M> implements LifecycleObserver {
     public M mModel;
     public V mView;
-    public RxManager mRxManage = new RxManager();
+    public LifecycleProvider<Lifecycle.Event> mLifecycleProvider;
 
-    public void setVM(V v, M m) {
-        this.mView = v;
-        this.mModel = m;
+    final public boolean isViewAttached() {
+        return mView != null;
     }
 
-    public void onCreate(@Nullable Bundle savedInstanceState){
-
-    }
-
-    public void onStart() {
-    }
-
-    public void onResume(){
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public void onCreate() {
 
     }
 
-    public void onPause(){
-
-    }
-
-    public void onStop(){
-
-    }
-
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
-        mRxManage.clear();
+
+    }
+
+    /**
+     * viewmodel销毁的后，调用此方法
+     */
+    public void onCleared() {
+
+    }
+
+
+    void attachLifecycle(LifecycleOwner owner) {
+        owner.getLifecycle().addObserver(this);
+        mLifecycleProvider = AndroidLifecycle.createLifecycleProvider(owner);
+    }
+
+    void detachLifecycle(LifecycleOwner owner) {
+        owner.getLifecycle().removeObserver(this);
+    }
+
+    void attachView(V view) {
+        this.mView = view;
+    }
+
+    void detachView() {
+        this.mView = null;
+    }
+
+    void setModel(M m) {
+        this.mModel = m;
     }
 }

@@ -1,4 +1,4 @@
-package com.beanu.demo;
+package com.beanu.arad.demo;
 
 
 import android.os.Bundle;
@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.beanu.arad.base.ToolBarFragment;
+import com.beanu.arad.demo.mvp.contract.TestContract;
+import com.beanu.arad.demo.mvp.model.TestModelImpl;
+import com.beanu.arad.demo.mvp.presenter.TestPresenterImpl;
 
 
-/**
- */
-public class TestFragment extends ToolBarFragment {
+public class TestFragment extends ToolBarFragment<TestPresenterImpl, TestModelImpl> implements TestContract.View {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -23,6 +24,7 @@ public class TestFragment extends ToolBarFragment {
     public TestFragment() {
         // Required empty public constructor
     }
+
 
     public static TestFragment newInstance(String param1, String param2) {
         TestFragment fragment = new TestFragment();
@@ -45,12 +47,8 @@ public class TestFragment extends ToolBarFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_test, container, false);
     }
 
-
-    @Override
-    public boolean setupToolBarRightButton1(View rightButton1) {
-        return true;
-    }
 }

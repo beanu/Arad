@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.beanu.demo"
+<manifest package="com.beanu.arad.demo"
           xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -19,18 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity"></activity>
-
-        <service android:name="com.beanu.arad.support.updateversion.DownloadService"/>
-        <provider
-            android:name="com.beanu.arad.support.updateversion.ApkFileProvider"
-            android:authorities="${applicationId}.install"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/apk_path"/>
-        </provider>
+        <activity android:name=".SecondActivity">
+        </activity>
+        <activity android:name=".TestFragmentActivity">
+        </activity>
+        <activity android:name=".MMKVActivity">
+        </activity>
     </application>
 
 </manifest>

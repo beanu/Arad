@@ -39,11 +39,7 @@ public abstract class ABSLoadMoreActivity extends ToolBarActivity implements ILo
 
     @Override
     public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-            isScrolling = true;
-        } else {
-            isScrolling = false;
-        }
+        isScrolling = scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING;
     }
 
     @Override

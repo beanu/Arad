@@ -26,4 +26,8 @@ public class RxManager {
     public void clear() {
         mCompositeSubscription.dispose();// 取消所有订阅
     }
+
+    public void destory() {
+        mCompositeSubscription = null;
+    }
 }

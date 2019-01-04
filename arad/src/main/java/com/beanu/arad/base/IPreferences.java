@@ -1,22 +1,23 @@
 package com.beanu.arad.base;
 
-import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author Beanu
+ */
 public interface IPreferences {
-    IPreferences putBoolean(String key, boolean val);
 
-    IPreferences putInteger(String key, int val);
+    IPreferences put(String key, boolean val);
 
-    IPreferences putLong(String key, long val);
+    IPreferences put(String key, int val);
 
-    IPreferences putFloat(String key, float val);
+    IPreferences put(String key, long val);
 
-    IPreferences putString(String key, String val);
+    IPreferences put(String key, float val);
 
-    IPreferences putStringSet(String key, Set<String> set);
+    IPreferences put(String key, String val);
 
-    IPreferences put(Map<String, ?> vals);
+    IPreferences put(String key, Set<String> set);
 
     boolean getBoolean(String key);
 
@@ -41,11 +42,6 @@ public interface IPreferences {
     String getString(String key, String defValue);
 
     Set<String> getStringSet(String key, Set<String> defValue);
-    /**
-     * Returns a read only  Map with all the key, objects of the
-     * preferences.
-     */
-    Map<String, ?> get();
 
     boolean contains(String key);
 

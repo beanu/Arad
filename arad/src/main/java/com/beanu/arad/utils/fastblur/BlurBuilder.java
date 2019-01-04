@@ -48,8 +48,8 @@ public class BlurBuilder {
             int width = Math.round(image.getWidth() * BITMAP_SCALE);
             int height = Math.round(image.getHeight() * BITMAP_SCALE);
 
-            overlay = Bitmap.createScaledBitmap(image, (int) (width),
-                    (int) (height), false);
+            overlay = Bitmap.createScaledBitmap(image, width,
+                    height, false);
 
             overlay = FastBlurUtil.doBlur(overlay, (int) BLUR_RADIUS, true);
         } catch (Exception e) {

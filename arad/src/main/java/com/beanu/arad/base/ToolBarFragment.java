@@ -1,15 +1,17 @@
 package com.beanu.arad.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.beanu.arad.R;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 
 
 /**
@@ -241,6 +243,11 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
     @Override
     public void hideProgress() {
         showProgress(false);
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+
     }
 
     public void setOnRetryListener(View.OnClickListener onRetryListener) {

@@ -8,8 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.AnimRes;
-import android.support.annotation.NonNull;
+import androidx.annotation.AnimRes;
+import androidx.annotation.NonNull;
 import android.util.ArrayMap;
 
 import java.lang.reflect.Field;

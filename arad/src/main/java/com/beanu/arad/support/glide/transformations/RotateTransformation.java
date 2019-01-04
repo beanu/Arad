@@ -3,12 +3,13 @@ package com.beanu.arad.support.glide.transformations;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.support.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
 
 /**
  * 旋转图片
@@ -20,7 +21,7 @@ public class RotateTransformation extends BitmapTransformation {
     private float rotateRotationAngle = 0f;
 
     public RotateTransformation(Context context, float rotateRotationAngle) {
-        super(context);
+        super();
 
         this.rotateRotationAngle = rotateRotationAngle;
     }

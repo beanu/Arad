@@ -41,7 +41,7 @@ public class PinnedSectionListView extends ListView {
     /**
      * List adapter to be implemented for being used with PinnedSectionListView adapter.
      */
-    public static interface PinnedSectionListAdapter extends ListAdapter {
+    public interface PinnedSectionListAdapter extends ListAdapter {
         /**
          * This method shall return 'true' if views of given type has to be pinned.
          */

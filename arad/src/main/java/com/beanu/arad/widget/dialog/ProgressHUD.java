@@ -23,7 +23,7 @@ public class ProgressHUD extends Dialog {
 
 
     public void onWindowFocusChanged(boolean hasFocus) {
-        ImageView imageView = (ImageView) findViewById(R.id.spinnerImageView);
+        ImageView imageView = findViewById(R.id.spinnerImageView);
         AnimationDrawable spinner = (AnimationDrawable) imageView.getBackground();
         spinner.start();
     }
@@ -31,7 +31,7 @@ public class ProgressHUD extends Dialog {
     public void setMessage(CharSequence message) {
         if (message != null && message.length() > 0) {
             findViewById(R.id.message).setVisibility(View.VISIBLE);
-            TextView txt = (TextView) findViewById(R.id.message);
+            TextView txt = findViewById(R.id.message);
             txt.setText(message);
             txt.invalidate();
         }
@@ -45,7 +45,7 @@ public class ProgressHUD extends Dialog {
         if (message == null || message.length() == 0) {
             dialog.findViewById(R.id.message).setVisibility(View.GONE);
         } else {
-            TextView txt = (TextView) dialog.findViewById(R.id.message);
+            TextView txt = dialog.findViewById(R.id.message);
             txt.setText(message);
         }
         dialog.setCancelable(cancelable);

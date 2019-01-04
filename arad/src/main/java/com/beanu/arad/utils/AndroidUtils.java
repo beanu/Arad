@@ -22,9 +22,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.AnimRes;
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.AnimRes;
+import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -467,7 +467,7 @@ public final class AndroidUtils {
 //                 * 判断手机系统的版本！如果API大于10 就是3.0 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
 //                 */
 //                if (Build.VERSION.SDK_INT > 10) {
-//                    intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+//                    intent = new Intent(android.mLifecycleProvider.Settings.ACTION_WIFI_SETTINGS);
 //                } else {
 //                    intent = new Intent();
 //                    ComponentName component = new ComponentName("com.android.settings",

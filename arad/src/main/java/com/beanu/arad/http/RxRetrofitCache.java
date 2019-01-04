@@ -35,7 +35,7 @@ public class RxRetrofitCache {
     public static <T> Observable<T> load(final Context context, final String cacheKey, final long expireTime, Observable<T> fromNetwork, boolean forceRefresh) {
         Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<T> subscriber) {
                 T cache = (T) CacheManager.readObject(context, cacheKey,expireTime);
                 if (cache != null) {
                     subscriber.onNext(cache);

@@ -11,5 +11,6 @@ public class Arad {
     public static AradApplication app;
     public static DB db;
     public static Preferences preferences;
+    public static MMKVStorage kv;
     public static EventBus bus;
 }

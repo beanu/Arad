@@ -5,8 +5,6 @@ import android.content.SharedPreferences.Editor;
 
 import com.beanu.arad.base.IPreferences;
 
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public class Preferences implements IPreferences {
@@ -19,65 +17,44 @@ public class Preferences implements IPreferences {
     }
 
     @Override
-    public IPreferences putBoolean(String key, boolean val) {
+    public IPreferences put(String key, boolean val) {
         edit();
         editor.putBoolean(key, val);
         return this;
     }
 
     @Override
-    public IPreferences putInteger(String key, int val) {
+    public IPreferences put(String key, int val) {
         edit();
         editor.putInt(key, val);
         return this;
     }
 
     @Override
-    public IPreferences putLong(String key, long val) {
+    public IPreferences put(String key, long val) {
         edit();
         editor.putLong(key, val);
         return this;
     }
 
     @Override
-    public IPreferences putFloat(String key, float val) {
+    public IPreferences put(String key, float val) {
         edit();
         editor.putFloat(key, val);
         return this;
     }
 
     @Override
-    public IPreferences putString(String key, String val) {
+    public IPreferences put(String key, String val) {
         edit();
         editor.putString(key, val);
         return this;
     }
 
     @Override
-    public IPreferences putStringSet(String key, Set<String> set) {
+    public IPreferences put(String key, Set<String> set) {
         edit();
         editor.putStringSet(key, set);
-        return this;
-    }
-
-    @Override
-    public IPreferences put(Map<String, ?> vals) {
-        edit();
-        for (Entry<String, ?> val : vals.entrySet()) {
-            if (val.getValue() instanceof Boolean)
-                putBoolean(val.getKey(), (Boolean) val.getValue());
-            if (val.getValue() instanceof Integer)
-                putInteger(val.getKey(), (Integer) val.getValue());
-            if (val.getValue() instanceof Long)
-                putLong(val.getKey(), (Long) val.getValue());
-            if (val.getValue() instanceof String)
-                putString(val.getKey(), (String) val.getValue());
-            if (val.getValue() instanceof Float)
-                putFloat(val.getKey(), (Float) val.getValue());
-            if (val.getValue() instanceof Set) {
-                putStringSet(val.getKey(), (Set<String>) val.getValue());
-            }
-        }
         return this;
     }
 
@@ -142,11 +119,6 @@ public class Preferences implements IPreferences {
     }
 
     @Override
-    public Map<String, ?> get() {
-        return sharedPrefs.getAll();
-    }
-
-    @Override
     public boolean contains(String key) {
         return sharedPrefs.contains(key);
     }
@@ -176,5 +148,9 @@ public class Preferences implements IPreferences {
         if (editor == null) {
             editor = sharedPrefs.edit();
         }
+    }
+
+    public SharedPreferences getSharedPrefs() {
+        return sharedPrefs;
     }
 }

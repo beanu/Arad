@@ -7,11 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 /**
@@ -146,7 +146,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
          * @param parent   RecyclerView
          * @return True if the divider at position should be hidden
          */
-        public boolean shouldHideDivider(int position, RecyclerView parent);
+        boolean shouldHideDivider(int position, RecyclerView parent);
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
          * @param parent   RecyclerView
          * @return Paint instance
          */
-        public Paint dividerPaint(int position, RecyclerView parent);
+        Paint dividerPaint(int position, RecyclerView parent);
     }
 
     /**
@@ -176,7 +176,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
          * @param parent   RecyclerView
          * @return Color value
          */
-        public int dividerColor(int position, RecyclerView parent);
+        int dividerColor(int position, RecyclerView parent);
     }
 
     /**
@@ -191,7 +191,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
          * @param parent   RecyclerView
          * @return Drawable instance
          */
-        public Drawable drawableProvider(int position, RecyclerView parent);
+        Drawable drawableProvider(int position, RecyclerView parent);
     }
 
     /**
@@ -207,7 +207,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
          * @param parent   RecyclerView
          * @return Size of divider
          */
-        public int dividerSize(int position, RecyclerView parent);
+        int dividerSize(int position, RecyclerView parent);
     }
 
     public static class Builder<T extends Builder> {
@@ -313,11 +313,11 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
             if (mPaintProvider != null) {
                 if (mColorProvider != null) {
                     throw new IllegalArgumentException(
-                            "Use setColor method of Paint class to specify line color. Do not provider ColorProvider if you set PaintProvider.");
+                            "Use setColor method of Paint class to specify line color. Do not mLifecycleProvider ColorProvider if you set PaintProvider.");
                 }
                 if (mSizeProvider != null) {
                     throw new IllegalArgumentException(
-                            "Use setStrokeWidth method of Paint class to specify line size. Do not provider SizeProvider if you set PaintProvider.");
+                            "Use setStrokeWidth method of Paint class to specify line size. Do not mLifecycleProvider SizeProvider if you set PaintProvider.");
                 }
             }
         }

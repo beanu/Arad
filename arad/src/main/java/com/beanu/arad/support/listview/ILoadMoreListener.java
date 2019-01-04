@@ -7,19 +7,19 @@ public interface ILoadMoreListener {
      *
      * @return
      */
-    public boolean hasMoreResults();
+    boolean hasMoreResults();
 
     /**
      * loadMore发生了错误
      *
      * @return
      */
-    public boolean hasError();
+    boolean hasError();
 
     /**
      * 是否在加载中
      *
      * @return
      */
-    public boolean isLoading();
+    boolean isLoading();
 }
