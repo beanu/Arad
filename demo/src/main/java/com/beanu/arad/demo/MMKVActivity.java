@@ -38,6 +38,7 @@ public class MMKVActivity extends ToolBarActivity implements OnClickListener {
         }
 
         mTextView.setText(builder.toString());
+
     }
 
     @Override
@@ -50,6 +51,7 @@ public class MMKVActivity extends ToolBarActivity implements OnClickListener {
                 AppHolder.getInstance().flush();
 
                 refreshUI();
+
                 break;
             case R.id.btn_clear:
 

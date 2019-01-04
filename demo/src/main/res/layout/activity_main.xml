@@ -33,4 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MMKV 测试"/>
+
+    <Button
+        android:id="@+id/btn_next4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LiveData测试"/>
 </LinearLayout>

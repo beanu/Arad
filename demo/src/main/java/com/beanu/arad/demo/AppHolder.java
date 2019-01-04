@@ -8,6 +8,9 @@ import com.beanu.arad.demo.bean.Student;
 
 import java.util.List;
 
+/**
+ * 将AppHolder的数据存在本地中，防止全局变量丢失
+ */
 public class AppHolder implements Parcelable {
 
     /**
