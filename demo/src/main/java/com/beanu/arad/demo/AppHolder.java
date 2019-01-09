@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.beanu.arad.Arad;
 import com.beanu.arad.demo.bean.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +59,10 @@ public class AppHolder implements Parcelable {
     public List<Student> getStudentList() {
         if (mStudentList == null) {
             mStudentList = Arad.kv.getParcelable("app", AppHolder.class).mStudentList;
+
+            if (mStudentList == null) {
+                mStudentList = new ArrayList<>();
+            }
         }
         return mStudentList;
     }

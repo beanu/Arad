@@ -33,8 +33,10 @@ public class MMKVActivity extends ToolBarActivity implements OnClickListener {
 
         StringBuilder builder = new StringBuilder();
 
-        for (Student student : list) {
-            builder.append(student.getName() + "\n");
+        if (list != null) {
+            for (Student student : list) {
+                builder.append(student.getName() + "\n");
+            }
         }
 
         mTextView.setText(builder.toString());
