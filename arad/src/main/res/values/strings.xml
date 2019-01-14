@@ -11,5 +11,6 @@
     <string name="arad_download_progress">正在下载:%1$d%%</string>
     <string name="arad_download_success">下载完成，点击安装</string>
     <string name="cancel">取消</string>
+    <string name="arad_loading">加载中…</string>
 
 </resources>

@@ -88,11 +88,11 @@ public class ToolBarActivity<T extends BasePresenter, E extends BaseModel> exten
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        mToolbar = findViewById(R.id.toolbar);
-        mTitle = findViewById(R.id.toolbar_title);
-        mLeftButton = findViewById(R.id.toolbar_left_btn);
-        mRightButton2 = findViewById(R.id.toolbar_right_btn2);
-        mRightButton1 = findViewById(R.id.toolbar_right_btn1);
+        mToolbar = findViewById(R.id.arad_toolbar);
+        mTitle = findViewById(R.id.arad_toolbar_title);
+        mLeftButton = findViewById(R.id.arad_toolbar_left_button);
+        mRightButton2 = findViewById(R.id.arad_toolbar_right_view2);
+        mRightButton1 = findViewById(R.id.arad_toolbar_right_view1);
         mStatusBar = findViewById(R.id.arad_status_bar);
 
 

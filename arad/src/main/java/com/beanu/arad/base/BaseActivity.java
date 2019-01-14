@@ -102,7 +102,7 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
      * @param show true显示 false隐藏
      */
     void showProgress(boolean show) {
-        showProgressWithText(show, "加载中...");
+        showProgressWithText(show, getString(R.string.arad_loading));
     }
 
     /**

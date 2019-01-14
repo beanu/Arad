@@ -46,7 +46,7 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
         arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
         arad_loading_error = view.findViewById(R.id.arad_loading_error);
 
-        mToolbar = view.findViewById(R.id.toolbar);
+        mToolbar = view.findViewById(R.id.arad_toolbar);
     }
 
     @Override
@@ -59,13 +59,13 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
 
             View view = getView();
             if (view != null) {
-                mToolbar = view.findViewById(R.id.toolbar);
+                mToolbar = view.findViewById(R.id.arad_toolbar);
             }
 
             //如果fragment本身没有就使用上级Activity的
             if (mToolbar == null) {
                 view = parent.getWindow().getDecorView();
-                mToolbar = view.findViewById(R.id.toolbar);
+                mToolbar = view.findViewById(R.id.arad_toolbar);
             }
 
             if (getParentFragment() == null && parent instanceof AppCompatActivity) {
@@ -75,10 +75,10 @@ public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> exten
                 }
 
                 if (view != null) {
-                    mTitle = view.findViewById(R.id.toolbar_title);
-                    mLeftButton = view.findViewById(R.id.toolbar_left_btn);
-                    mRightButton1 = view.findViewById(R.id.toolbar_right_btn1);
-                    mRightButton2 = view.findViewById(R.id.toolbar_right_btn2);
+                    mTitle = view.findViewById(R.id.arad_toolbar_title);
+                    mLeftButton = view.findViewById(R.id.arad_toolbar_left_button);
+                    mRightButton1 = view.findViewById(R.id.arad_toolbar_right_view1);
+                    mRightButton2 = view.findViewById(R.id.arad_toolbar_right_view2);
 
                     if (mTitle != null && setupToolBarTitle() != null) {
                         mTitle.setText(setupToolBarTitle());

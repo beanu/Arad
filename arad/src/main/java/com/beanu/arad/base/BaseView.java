@@ -30,6 +30,7 @@ public interface BaseView {
      */
     void contentLoadingEmpty();
 
+
     /**
      * 当前页面加载条
      */

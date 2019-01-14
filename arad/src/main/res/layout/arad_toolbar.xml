@@ -13,7 +13,7 @@
         android:background="?attr/colorPrimary"/>
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/arad_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -23,7 +23,7 @@
 
 
         <ImageView
-            android:id="@+id/toolbar_left_btn"
+            android:id="@+id/arad_toolbar_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -32,14 +32,14 @@
             android:visibility="gone"/>
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/arad_toolbar_title"
             style="@style/arad_actionbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/toolbar_right_btn2"
+            android:id="@+id/arad_toolbar_right_view2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -48,7 +48,7 @@
             tools:text="编辑"/>
 
         <ImageView
-            android:id="@+id/toolbar_right_btn1"
+            android:id="@+id/arad_toolbar_right_view1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
