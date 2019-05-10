@@ -23,7 +23,7 @@ public class TestPresenterImpl extends TestContract.Presenter {
 
         mModel
                 .task()
-                .compose(RxHelper.<String>handleResult(mLifecycleProvider))
+                .compose(RxHelper.<String>handleResultNoWarp())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {

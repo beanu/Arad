@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.beanu.arad.R;
+import com.beanu.arad.http.RxHelper;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
+import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -26,7 +30,7 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
-    public P mPresenter;
+    P mPresenter;
     private ProgressHUD mProgressHUD;
 
     @Override
@@ -89,8 +93,16 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
         }
     }
 
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        return RxHelper.bindLifecycle(this);
+    }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle(Lifecycle.Event event) {
+        return RxHelper.bindLifecycle(this, event);
+    }
+
     public void showProgress(boolean show) {
-        showProgressWithText(show, "加载中...");
+        showProgressWithText(show, getString(R.string.arad_loading));
     }
 
     public void showProgressWithText(boolean show, String message) {
@@ -106,22 +118,22 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivity(Class cls) {
-        startActivity(cls, null);
+    public void launchActivity(Class cls) {
+        launchActivity(cls, null);
     }
 
     /**
      * 通过Class跳转界面
      **/
-    public void startActivityForResult(Class cls, int requestCode) {
-        startActivityForResult(cls, null, requestCode);
+    public void launchActivityForResult(Class cls, int requestCode) {
+        launchActivityForResult(cls, null, requestCode);
     }
 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivityForResult(Class cls, Bundle bundle,
-                                       int requestCode) {
+    public void launchActivityForResult(Class cls, Bundle bundle,
+                                        int requestCode) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), cls);
         if (bundle != null) {
@@ -133,7 +145,7 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
     /**
      * 含有Bundle通过Class跳转界面
      **/
-    public void startActivity(Class cls, Bundle bundle) {
+    public void launchActivity(Class cls, Bundle bundle) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), cls);
         if (bundle != null) {

@@ -1,7 +1,7 @@
 package com.beanu.arad.base;
 
-import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle;
-import com.trello.rxlifecycle3.LifecycleProvider;
+import com.beanu.arad.http.RxHelper;
+import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -15,9 +15,11 @@ import androidx.lifecycle.OnLifecycleEvent;
  * @author Beanu
  */
 public abstract class BasePresenter<V, M> implements LifecycleObserver {
-    public M mModel;
-    public V mView;
-    public LifecycleProvider<Lifecycle.Event> mLifecycleProvider;
+
+    protected M mModel;
+    protected V mView;
+
+    private LifecycleOwner lifecycleOwner;
 
     final public boolean isViewAttached() {
         return mView != null;
@@ -43,7 +45,7 @@ public abstract class BasePresenter<V, M> implements LifecycleObserver {
 
     void attachLifecycle(LifecycleOwner owner) {
         owner.getLifecycle().addObserver(this);
-        mLifecycleProvider = AndroidLifecycle.createLifecycleProvider(owner);
+        lifecycleOwner = owner;
     }
 
     void detachLifecycle(LifecycleOwner owner) {
@@ -61,4 +63,19 @@ public abstract class BasePresenter<V, M> implements LifecycleObserver {
     void setModel(M m) {
         this.mModel = m;
     }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        if (null == lifecycleOwner) {
+            throw new NullPointerException("lifecycleOwner == null");
+        }
+        return RxHelper.bindLifecycle(lifecycleOwner);
+    }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle(Lifecycle.Event event) {
+        if (null == lifecycleOwner) {
+            throw new NullPointerException("lifecycleOwner == null");
+        }
+        return RxHelper.bindLifecycle(lifecycleOwner, event);
+    }
+
 }

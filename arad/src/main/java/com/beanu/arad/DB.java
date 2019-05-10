@@ -17,19 +17,21 @@ public class DB implements IDB {
     private static DB instance;
     private LiteOrm mLiteOrm;
 
-    public DB(Context context) {
+    public DB(Context context, boolean debug) {
         mLiteOrm = LiteOrm.newCascadeInstance(context, "arad.db");
-        mLiteOrm.setDebugged(true);
+        mLiteOrm.setDebugged(debug);
     }
 
-    public static DB getInstance(Context context) {
-        if (instance == null)
-            instance = new DB(context);
+    public static DB getInstance(Context context, boolean debug) {
+        if (instance == null) {
+            instance = new DB(context, debug);
+        }
         return instance;
     }
 
+
     @Override
-    public void save(Object entity) {
+    public <T> void save(T entity) {
         mLiteOrm.save(entity);
     }
 
@@ -67,23 +69,24 @@ public class DB implements IDB {
     }
 
     @Override
-    public void update(Object entity) {
+    public <T> void update(T entity) {
         mLiteOrm.update(entity);
     }
 
     @Override
-    public void update(Object entity, String strWhere) {
-//TODO        mLiteOrm.update
+    public <T> void update(T entity, String strWhere) {
+//        mLiteOrm.update
     }
 
     @Override
-    public void delete(Object entity) {
+    public <T> void delete(T entity) {
         mLiteOrm.delete(entity);
     }
 
+
     @Override
     public <T> void deleteById(Class<T> clazz, String id) {
-//TODO       mLiteOrm.delete
+//       mLiteOrm.delete(new WhereBuilder(clazz).where())
     }
 
     @Override

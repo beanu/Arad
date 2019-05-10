@@ -2,9 +2,12 @@ package com.beanu.arad.http;
 
 
 import com.beanu.arad.error.AradException;
-import com.trello.rxlifecycle3.LifecycleProvider;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -17,15 +20,21 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * Created by Jam on 16-6-12
  * Description: Rx 一些巧妙的处理
+ *
+ * @author Beanu
  */
 public class RxHelper {
+
+
+    private RxHelper() {
+        throw new IllegalStateException("Can't instance the RxHelper");
+    }
 
     /**
      * 对结果进行预处理,输入的参数是规范的格式
      */
-    public static <T> ObservableTransformer<IHttpModel<T>, T> handleSpecResultNoLifecycle() {
+    public static <T> ObservableTransformer<IHttpModel<T>, T> handleResult() {
 
         return new ObservableTransformer<IHttpModel<T>, T>() {
             @Override
@@ -38,7 +47,7 @@ public class RxHelper {
                                     return createData(result.getResults());
                                 } else {
                                     AradException exception = new AradException();
-                                    exception.setError_code(result.getErrorCode());
+                                    exception.setErrorCode(result.getErrorCode());
                                     exception.setOriError(result.getMsg());
                                     return Observable.error(exception);
                                 }
@@ -53,9 +62,9 @@ public class RxHelper {
 
 
     /**
-     * 对结果进行预处理
+     * 对结果进行预处理（没有IHttpModel的包裹）
      */
-    public static <T> ObservableTransformer<T, T> handleResultNoLifecycle() {
+    public static <T> ObservableTransformer<T, T> handleResultNoWarp() {
 
         return new ObservableTransformer<T, T>() {
             @Override
@@ -68,87 +77,6 @@ public class RxHelper {
 
     }
 
-    public static <T> ObservableTransformer<T, T> handleResult(final LifecycleProvider<Lifecycle.Event> provider) {
-
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-                return upstream
-                        .compose(provider.<T>bindToLifecycle())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-
-    }
-
-    public static <T> ObservableTransformer<T, T> handleResult(final LifecycleProvider<Lifecycle.Event> provider, final Lifecycle.Event event) {
-
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-                return upstream
-                        .compose(provider.<T>bindUntilEvent(event))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-
-    }
-
-    public static <T> ObservableTransformer<IHttpModel<T>, T> handleSpecResult(final LifecycleProvider<Lifecycle.Event> provider) {
-
-        return new ObservableTransformer<IHttpModel<T>, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<IHttpModel<T>> upstream) {
-                return upstream
-                        .flatMap(new Function<IHttpModel<T>, ObservableSource<T>>() {
-                            @Override
-                            public ObservableSource<T> apply(@NonNull IHttpModel<T> result) {
-                                if (result.success()) {
-                                    return createData(result.getResults());
-                                } else {
-                                    AradException exception = new AradException();
-                                    exception.setError_code(result.getErrorCode());
-                                    exception.setOriError(result.getMsg());
-                                    return Observable.error(exception);
-                                }
-                            }
-                        })
-                        .compose(provider.<T>bindToLifecycle())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-
-    }
-
-    public static <T> ObservableTransformer<IHttpModel<T>, T> handleSpecResult(final LifecycleProvider<Lifecycle.Event> provider, final Lifecycle.Event event) {
-
-        return new ObservableTransformer<IHttpModel<T>, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<IHttpModel<T>> upstream) {
-                return upstream
-                        .flatMap(new Function<IHttpModel<T>, ObservableSource<T>>() {
-                            @Override
-                            public ObservableSource<T> apply(@NonNull IHttpModel<T> result) {
-                                if (result.success()) {
-                                    return createData(result.getResults());
-                                } else {
-                                    AradException exception = new AradException();
-                                    exception.setError_code(result.getErrorCode());
-                                    exception.setOriError(result.getMsg());
-                                    return Observable.error(exception);
-                                }
-                            }
-                        })
-                        .compose(provider.<T>bindUntilEvent(event))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-
-    }
 
     /**
      * 创建成功的数据
@@ -158,17 +86,45 @@ public class RxHelper {
             @Override
             public void subscribe(@NonNull ObservableEmitter<T> subscriber) {
                 try {
-                    //TODO
                     if (data != null) {
                         subscriber.onNext(data);
+                        subscriber.onComplete();
                     }
-                    subscriber.onComplete();
                 } catch (Exception e) {
                     subscriber.onError(e);
                 }
             }
         });
 
+    }
+
+
+    /**
+     * 自动解绑Dispose
+     *
+     * @param lifecycleOwner activity or fragment
+     * @param <T>            数据
+     * @return AutoDisposeConverter
+     */
+    public static <T> AutoDisposeConverter<T> bindLifecycle(LifecycleOwner lifecycleOwner) {
+        return AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner)
+        );
+    }
+
+
+    /**
+     * 在event生命周期的时候，自动解绑Dispose
+     *
+     * @param lifecycleOwner activity or fragment
+     * @param event          生命周期事件
+     * @param <T>            数据
+     * @return AutoDisposeConverter
+     */
+    public static <T> AutoDisposeConverter<T> bindLifecycle(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
+        return AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
+        );
     }
 
 

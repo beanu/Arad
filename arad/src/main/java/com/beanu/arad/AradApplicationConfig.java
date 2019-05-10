@@ -20,4 +20,6 @@ public class AradApplicationConfig {
      */
     public String imageCacheFolder = "aradCache";
 
+    public boolean debug = BuildConfig.DEBUG;
+
 }

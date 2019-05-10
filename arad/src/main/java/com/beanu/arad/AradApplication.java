@@ -37,7 +37,7 @@ public abstract class AradApplication extends Application {
 
             config = appConfig();
             Arad.app = this;
-            Arad.db = DB.getInstance(getApplicationContext());
+            Arad.db = DB.getInstance(getApplicationContext(), config.debug);
             Arad.preferences = new Preferences(getSharedPreferences(config.preferencesName, Context.MODE_PRIVATE));
             Arad.kv = new MMKVStorage(getApplicationContext());
             deviceInfo = new DeviceInformant(getApplicationContext());
@@ -49,6 +49,11 @@ public abstract class AradApplication extends Application {
 
     }
 
+    /**
+     * 应用程序初始化配置
+     *
+     * @return 基础配置
+     */
     protected abstract AradApplicationConfig appConfig();
 
     /**

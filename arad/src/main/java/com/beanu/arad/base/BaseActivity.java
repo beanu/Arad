@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.beanu.arad.R;
+import com.beanu.arad.http.RxHelper;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
 import com.github.anzewei.parallaxbacklayout.ParallaxBack;
 import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
-import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle;
-import com.trello.rxlifecycle3.LifecycleProvider;
+import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
  * 2.mvp的泛形实现
  * 3.start activity的封装
  * 4.引入了ViewModel,横竖屏时保持住数据
- * 5.引入了lifecycle,保证请求的及时销毁
+ * 5.引入了autoDispose,保证请求的及时销毁
  *
  * @author Beanu
  */
@@ -32,7 +32,6 @@ import androidx.lifecycle.ViewModelProviders;
 public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
 
     protected P mPresenter;
-    protected LifecycleProvider<Lifecycle.Event> mLifecycleProvider;
     private ProgressHUD mProgressHUD;
     boolean disableNextPageSlideBack;
 
@@ -58,9 +57,6 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
             M mModel = obtainModel();
             mPresenter.setModel(mModel);
 
-        } else {
-            //如果Presenter不为空，则使用Presenter中的LifecycleProvider
-            mLifecycleProvider = AndroidLifecycle.createLifecycleProvider(this);
         }
 
         if (getIntent().getBooleanExtra("disableSlideBack", false)) {
@@ -94,6 +90,14 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
             mPresenter.mModel = null;
         }
 
+    }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        return RxHelper.bindLifecycle(this);
+    }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle(Lifecycle.Event event) {
+        return RxHelper.bindLifecycle(this, event);
     }
 
     /**

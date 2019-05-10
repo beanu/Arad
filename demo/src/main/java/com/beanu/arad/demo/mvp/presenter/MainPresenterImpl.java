@@ -33,7 +33,8 @@ public class MainPresenterImpl extends MainContract.Presenter {
 
         mModel
                 .task()
-                .compose(RxHelper.<String>handleResult(mLifecycleProvider, Lifecycle.Event.ON_STOP))
+                .compose(RxHelper.<String>handleResultNoWarp())
+                .as(bindLifecycle())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
