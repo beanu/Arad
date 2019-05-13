@@ -30,7 +30,7 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
-    P mPresenter;
+    protected P mPresenter;
     private ProgressHUD mProgressHUD;
 
     @Override
