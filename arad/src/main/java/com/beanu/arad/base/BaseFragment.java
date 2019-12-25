@@ -1,6 +1,5 @@
 package com.beanu.arad.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -72,15 +71,14 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
+        //TODO 是不是不应该设置view为空
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
+            mPresenter.detachView();
             mPresenter.mModel = null;
         }
     }
@@ -152,24 +150,6 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
             intent.putExtras(bundle);
         }
         startActivity(intent);
-    }
-
-    @Override
-    public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
-        Activity act = getActivity();
-        if (act != null && act instanceof BaseActivity) {
-            intent.putExtra("disableSlideBack", ((BaseActivity) act).disableNextPageSlideBack);
-        }
-        super.startActivityForResult(intent, requestCode, options);
-    }
-
-    @Override
-    public void startActivity(Intent intent, @Nullable Bundle options) {
-        Activity act = getActivity();
-        if (act != null && act instanceof BaseActivity) {
-            intent.putExtra("disableSlideBack", ((BaseActivity) act).disableNextPageSlideBack);
-        }
-        super.startActivity(intent, options);
     }
 
     protected P obtainPresenter() {

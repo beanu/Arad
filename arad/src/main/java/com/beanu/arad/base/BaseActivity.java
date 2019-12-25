@@ -7,8 +7,6 @@ import com.beanu.arad.R;
 import com.beanu.arad.http.RxHelper;
 import com.beanu.arad.utils.TUtil;
 import com.beanu.arad.widget.dialog.ProgressHUD;
-import com.github.anzewei.parallaxbacklayout.ParallaxBack;
-import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.annotation.Nullable;
@@ -28,12 +26,10 @@ import androidx.lifecycle.ViewModelProviders;
  * @author Beanu
  */
 
-@ParallaxBack
 public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
 
     protected P mPresenter;
     private ProgressHUD mProgressHUD;
-    boolean disableNextPageSlideBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,24 +55,6 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
 
         }
 
-        if (getIntent().getBooleanExtra("disableSlideBack", false)) {
-            disableSlideBack();
-        }
-    }
-
-    /**
-     * 禁止下一个页面滑动返回
-     */
-    protected void requireDisableNextPageSlideBack() {
-        disableNextPageSlideBack = true;
-    }
-
-    public void enableSlideBack() {
-        ParallaxHelper.enableParallaxBack(this);
-    }
-
-    public void disableSlideBack() {
-        ParallaxHelper.disableParallaxBack(this);
     }
 
     @Override

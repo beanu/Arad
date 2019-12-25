@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.beanu.arad.utils.DeviceInformant;
 import com.beanu.arad.utils.Utils;
-import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -43,7 +42,7 @@ public abstract class AradApplication extends Application {
             deviceInfo = new DeviceInformant(getApplicationContext());
             Arad.bus = EventBus.getDefault();
 
-            registerActivityLifecycleCallbacks(ParallaxHelper.getInstance());
+            registerActivityLifecycleCallbacks(ActivityManager.getInstance());
         }
 
 
