@@ -5,21 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.beanu.arad.R;
 import com.beanu.arad.http.RxHelper;
 import com.beanu.arad.utils.TUtil;
-import com.beanu.arad.widget.dialog.ProgressHUD;
 import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * 基础fragment
- * 1.加入了progress dialog
  * 2.mvp的泛形实现
  * 3.start activity的封装
  * 4.引入了ViewModel,横竖屏时保持住数据
@@ -30,13 +27,12 @@ import androidx.lifecycle.ViewModelProviders;
 public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
     protected P mPresenter;
-    private ProgressHUD mProgressHUD;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        BaseViewModel viewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
+        BaseViewModel viewModel = new ViewModelProvider(this).get(BaseViewModel.class);
         if (mPresenter == null) {
             viewModel.setPresenter(obtainPresenter());
             mPresenter = (P) viewModel.getPresenter();
@@ -97,20 +93,6 @@ public class BaseFragment<P extends BasePresenter, M extends BaseModel> extends 
 
     protected <T> AutoDisposeConverter<T> bindLifecycle(Lifecycle.Event event) {
         return RxHelper.bindLifecycle(this, event);
-    }
-
-    public void showProgress(boolean show) {
-        showProgressWithText(show, getString(R.string.arad_loading));
-    }
-
-    public void showProgressWithText(boolean show, String message) {
-        if (show) {
-            mProgressHUD = ProgressHUD.show(getActivity(), message, true, true, null);
-        } else {
-            if (mProgressHUD != null) {
-                mProgressHUD.dismiss();
-            }
-        }
     }
 
     /**

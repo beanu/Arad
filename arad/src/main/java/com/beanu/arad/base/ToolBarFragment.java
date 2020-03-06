@@ -2,16 +2,14 @@ package com.beanu.arad.base;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.beanu.arad.R;
+import com.beanu.arad.widget.MultipleStatusView;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 
 
 /**
@@ -20,255 +18,129 @@ import androidx.fragment.app.FragmentActivity;
  *
  * @author beanu
  */
-public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> extends BaseFragment<T, E> implements ISetupToolBar, BaseView {
+public class ToolBarFragment<T extends BasePresenter, E extends BaseModel> extends BaseFragment<T, E> implements BaseView {
 
-    private TextView mTitle;
-    private View mLeftButton;
-    private View mRightButton1;
-    private View mRightButton2;
-
-    private ActionBar mActionBar;
-    private Toolbar mToolbar;//标题栏
-
-    private View arad_content;
-    private View arad_loading;
-    private View arad_loading_error;
-    private View arad_loading_empty;
-    private View.OnClickListener mOnRetryListener;
-
+    private QMUITopBarLayout mTopBarLayout;
+    private MultipleStatusView mMultipleStatusView;
+    private QMUITipDialog mTipDialog;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        arad_content = view.findViewById(R.id.arad_content);
-        arad_loading = view.findViewById(R.id.arad_loading);
-        arad_loading_empty = view.findViewById(R.id.arad_loading_empty);
-        arad_loading_error = view.findViewById(R.id.arad_loading_error);
+        mTopBarLayout = view.findViewById(R.id.arad_toolbar);
+        mMultipleStatusView = view.findViewById(R.id.arad_status_view);
 
-        mToolbar = view.findViewById(R.id.arad_toolbar);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (getUserVisibleHint() && !isHidden()) {
-
-            FragmentActivity parent = getActivity();
-
-            View view = getView();
-            if (view != null) {
-                mToolbar = view.findViewById(R.id.arad_toolbar);
-            }
-
-            //如果fragment本身没有就使用上级Activity的
-            if (mToolbar == null) {
-                view = parent.getWindow().getDecorView();
-                mToolbar = view.findViewById(R.id.arad_toolbar);
-            }
-
-            if (getParentFragment() == null && parent instanceof AppCompatActivity) {
-                mActionBar = initToolbar(parent);
-                if (mActionBar != null) {
-                    mActionBar.setDisplayShowTitleEnabled(false);
-                }
-
-                if (view != null) {
-                    mTitle = view.findViewById(R.id.arad_toolbar_title);
-                    mLeftButton = view.findViewById(R.id.arad_toolbar_left_button);
-                    mRightButton1 = view.findViewById(R.id.arad_toolbar_right_view1);
-                    mRightButton2 = view.findViewById(R.id.arad_toolbar_right_view2);
-
-                    if (mTitle != null && setupToolBarTitle() != null) {
-                        mTitle.setText(setupToolBarTitle());
-                    }
-
-                    if (mLeftButton != null && setupToolBarLeftButton(mLeftButton)) {
-                        mLeftButton.setVisibility(View.VISIBLE);
-                        hideHomeAsUp();
-                    }
-
-                    if (mRightButton2 != null && setupToolBarRightButton2(mRightButton2)) {
-                        mRightButton2.setVisibility(View.VISIBLE);
-                    }
-
-                    if (mRightButton1 != null && setupToolBarRightButton1(mRightButton1)) {
-                        mRightButton1.setVisibility(View.VISIBLE);
-                    }
-
-                }
-
-            }
-        }
-    }
-
-    private ActionBar initToolbar(FragmentActivity parent) {
-        ActionBar actionBar = null;
-        if (mToolbar != null) {
-            AppCompatActivity mActivity = (AppCompatActivity) parent;
-            mActivity.setSupportActionBar(mToolbar);
-            actionBar = mActivity.getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(false);
-                actionBar.setDisplayShowTitleEnabled(false);
-            }
+        if (mTopBarLayout != null) {
+            initTopBar(mTopBarLayout);
         }
 
-        return actionBar;
     }
 
+    public void initTopBar(QMUITopBarLayout topBarLayout) {
+        //       mTopBarLayout.addLeftImageButton(R.drawable.qmui_icon_topbar_back, R.id.arad_toolbar_left_button);
 
-    @Override
-    public View getToolBarRightButton2() {
-        return mRightButton2;
-    }
-
-    @Override
-    public View getToolBarRightButton1() {
-        return mRightButton1;
-    }
-
-    @Override
-    public TextView getToolBarTitle() {
-        return mTitle;
-    }
-
-    @Override
-    public View getToolBarLeftButton() {
-        return mLeftButton;
-    }
-
-    @Override
-    public String setupToolBarTitle() {
-        return null;
-    }
-
-    @Override
-    public boolean setupToolBarLeftButton(View leftButton) {
-        return false;
-    }
-
-    @Override
-    public boolean setupToolBarRightButton2(View rightButton2) {
-        return false;
-    }
-
-    @Override
-    public boolean setupToolBarRightButton1(View rightButton1) {
-        return false;
     }
 
     @Override
     public void contentLoading() {
-        if (arad_loading != null) {
-            arad_loading.setVisibility(View.VISIBLE);
-        }
-        if (arad_content != null) {
-            arad_content.setVisibility(View.GONE);
-        }
-        if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.GONE);
-        }
-        if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.GONE);
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showLoading();
         }
     }
 
-
     @Override
     public void contentLoadingComplete() {
-        if (arad_loading != null) {
-            arad_loading.setVisibility(View.GONE);
-        }
-        if (arad_content != null) {
-            arad_content.setVisibility(View.VISIBLE);
-        }
-        if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.GONE);
-        }
-        if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.GONE);
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showContent();
         }
     }
 
 
     @Override
     public void contentLoadingError() {
-        if (arad_loading != null) {
-            arad_loading.setVisibility(View.GONE);
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showError();
         }
-        if (arad_content != null) {
-            arad_content.setVisibility(View.GONE);
-        }
-        if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.GONE);
-        }
-        if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.VISIBLE);
-            arad_loading_error.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mOnRetryListener != null) {
-                        mOnRetryListener.onClick(view);
-                    }
-                }
-            });
-        }
-
     }
-
 
     @Override
     public void contentLoadingEmpty() {
-        if (arad_loading != null) {
-            arad_loading.setVisibility(View.GONE);
-        }
-        if (arad_content != null) {
-            arad_content.setVisibility(View.GONE);
-        }
-        if (arad_loading_empty != null) {
-            arad_loading_empty.setVisibility(View.VISIBLE);
-        }
-        if (arad_loading_error != null) {
-            arad_loading_error.setVisibility(View.GONE);
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showEmpty();
         }
     }
 
     @Override
-    public void showProgress() {
-        showProgress(true);
+    public void contentLoadingNoNetwork() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showNoNetwork();
+        }
     }
 
     @Override
-    public void hideProgress() {
-        showProgress(false);
-    }
-
-    @Override
-    public void showMessage(@NonNull String message) {
-
-    }
-
     public void setOnRetryListener(View.OnClickListener onRetryListener) {
-        mOnRetryListener = onRetryListener;
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.setOnRetryClickListener(onRetryListener);
+        }
     }
 
-    protected void displayHomeAsUp() {
-        if (mActionBar != null) {
-            mActionBar.setDisplayHomeAsUpEnabled(true);
-            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().onBackPressed();
+    @Override
+    public void showProgressDialog() {
+        mTipDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord("加载中...")
+                .create();
+        mTipDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (mTipDialog != null) {
+            mTipDialog.dismiss();
+        }
+    }
+
+    @Override
+    public QMUITipDialog showMessage(@NonNull String message) {
+        return showMessage(message, QMUITipDialog.Builder.ICON_TYPE_INFO);
+    }
+
+    @Override
+    public QMUITipDialog showErrorMessage(@NonNull String message) {
+        return showMessage(message, QMUITipDialog.Builder.ICON_TYPE_FAIL);
+    }
+
+    @Override
+    public QMUITipDialog showSuccessMessage(@NonNull String message) {
+        return showMessage(message, QMUITipDialog.Builder.ICON_TYPE_SUCCESS);
+    }
+
+
+    private QMUITipDialog showMessage(@NonNull String message, int type) {
+
+        mTipDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(type)
+                .setTipWord(message)
+                .create();
+        mTipDialog.show();
+        if (getActivity() != null) {
+            getActivity().getWindow().getDecorView().postDelayed(() -> {
+                if (mTipDialog != null) {
+                    mTipDialog.dismiss();
                 }
-            });
+            }, 1500);
         }
+
+        return mTipDialog;
     }
 
-    protected void hideHomeAsUp() {
-        if (mActionBar != null) {
-            mActionBar.setDisplayHomeAsUpEnabled(false);
-        }
+
+    public QMUITopBarLayout getTopBarLayout() {
+        return mTopBarLayout;
+    }
+
+    public MultipleStatusView getMultipleStatusView() {
+        return mMultipleStatusView;
     }
 }

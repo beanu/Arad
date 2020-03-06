@@ -5,8 +5,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 143
-        versionName "1.4.3"
+        versionCode 144
+        versionName "1.4.4"
 //      multiDexEnabled true   如果方法超过了64k,需要设置这个选项。记得只有比Lollipop高版本的系统可以,4.4以下的版本都有NoClassDefFoundError的异常,需要依赖com.android.support:multidex:1.0.0
     }
     buildTypes {
@@ -40,14 +40,14 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.2.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.2.16'
+    api 'io.reactivex.rxjava2:rxjava:2.2.18'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //AutoDispose
     api 'com.uber.autodispose:autodispose:1.4.0'
@@ -55,25 +55,29 @@ dependencies {
     //gson
     api 'com.google.code.gson:gson:2.8.6'
     //okhttp
-    api 'com.squareup.okhttp3:okhttp:3.14.4'
-    api 'com.squareup.okhttp3:logging-interceptor:3.14.4'
+    api 'com.squareup.okhttp3:okhttp:4.4.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.4.0'
     //retrofit
-    api 'com.squareup.retrofit2:retrofit:2.7.0'
-    api 'com.squareup.retrofit2:converter-gson:2.7.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
+    api 'com.squareup.retrofit2:retrofit:2.7.2'
+    api 'com.squareup.retrofit2:converter-gson:2.7.2'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.7.2'
 
     //glide
-    api('com.github.bumptech.glide:glide:4.10.0') {
+    api('com.github.bumptech.glide:glide:4.11.0') {
         exclude group: "com.android.support"
     }
-    api('com.github.bumptech.glide:okhttp3-integration:4.10.0') {
+    api('com.github.bumptech.glide:okhttp3-integration:4.11.0') {
         exclude group: "com.squareup.okhttp3", module: "okhttp"
     }
 
     //event bus
-    api 'org.greenrobot:eventbus:3.1.1'
+    api 'org.greenrobot:eventbus:3.2.0'
     //mmkv
     api 'com.tencent:mmkv:1.0.23'
+
+    //qmui
+    api 'com.qmuiteam:qmui:1.4.4'
+
 }
 
 ext {
@@ -86,7 +90,7 @@ ext {
     siteUrl = 'https://github.com/beanu/Arad'
     gitUrl = 'https://github.com/beanu/Arad.git'
 
-    libraryVersion = '1.4.3'//版本号
+    libraryVersion = '1.4.4'//版本号
     libraryName = 'Arad'//项目名字，没什么用
     libraryDescription = 'Arad'//项目描述，没什么用
 

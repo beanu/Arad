@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <include layout="@layout/arad_toolbar" />
+
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Hello World!"/>
+        android:text="Hello World!" />
 
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转"/>
+        android:text="跳转" />
 
 
     <Button
         android:id="@+id/btn_next2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转TestFragment"/>
+        android:text="跳转TestFragment" />
 
     <Button
         android:id="@+id/btn_next3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MMKV 测试"/>
+        android:text="MMKV 测试" />
 
     <Button
         android:id="@+id/btn_next4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LiveData测试"/>
+        android:text="LiveData测试" />
 </LinearLayout>

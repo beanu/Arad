@@ -6,18 +6,16 @@ import android.os.Bundle;
 import com.beanu.arad.R;
 import com.beanu.arad.http.RxHelper;
 import com.beanu.arad.utils.TUtil;
-import com.beanu.arad.widget.dialog.ProgressHUD;
 import com.uber.autodispose.AutoDisposeConverter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 
 /**
  * 基础类
- * 1.添加了ProgressHUD 可以显示等待progress
  * 2.mvp的泛形实现
  * 3.start activity的封装
  * 4.引入了ViewModel,横竖屏时保持住数据
@@ -29,13 +27,12 @@ import androidx.lifecycle.ViewModelProviders;
 public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
 
     protected P mPresenter;
-    private ProgressHUD mProgressHUD;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BaseViewModel viewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
+        BaseViewModel viewModel = new ViewModelProvider(this).get(BaseViewModel.class);
 
         mPresenter = (P) viewModel.getPresenter();
         if (mPresenter == null) {
@@ -78,30 +75,6 @@ public class BaseActivity<P extends BasePresenter, M extends BaseModel> extends 
         return RxHelper.bindLifecycle(this, event);
     }
 
-    /**
-     * 显示一个等待dialog，内容交互或者提交的时候使用
-     *
-     * @param show true显示 false隐藏
-     */
-    void showProgress(boolean show) {
-        showProgressWithText(show, getString(R.string.arad_loading));
-    }
-
-    /**
-     * 显示一个等待dialog，内容交互或者提交的时候使用
-     *
-     * @param show    是否要显示
-     * @param message 要显示的文字
-     */
-    public void showProgressWithText(boolean show, String message) {
-        if (show) {
-            mProgressHUD = ProgressHUD.show(this, message, true, true, null);
-        } else {
-            if (mProgressHUD != null) {
-                mProgressHUD.dismiss();
-            }
-        }
-    }
 
     /**
      * 通过Class跳转界面

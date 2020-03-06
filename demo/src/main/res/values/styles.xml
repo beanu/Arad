@@ -1,20 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="QMUITopBarStyle">@style/FFTopBar</item>
+
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="FFTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_bg_color">@color/colorPrimary</item>
+        <item name="qmui_topbar_title_color">@color/color_font_app</item>
+        <item name="qmui_topbar_subtitle_color">@color/qmui_config_color_gray_2</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/qmui_config_color_gray_2</item>
+        <item name="qmui_topbar_left_back_drawable_id">@drawable/arad_ic_back_normal</item>
+        <item name="qmui_topbar_height">48dp</item>
+        <item name="qmui_topbar_image_btn_height">48dp</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

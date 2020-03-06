@@ -20,13 +20,10 @@ public class MainPresenterImpl extends MainContract.Presenter {
 
     private Student mStudent = new Student();
 
-
     @Override
     public void onCreate() {
         KLog.d("onCreate" + System.identityHashCode(mStudent));
-
     }
-
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {

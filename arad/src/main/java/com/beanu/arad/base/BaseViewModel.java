@@ -3,6 +3,8 @@ package com.beanu.arad.base;
 import androidx.lifecycle.ViewModel;
 
 /**
+ * p层的数据 包裹在了viewmodel中，保证了数据不会被丢失
+ *
  * @author Beanu
  */
 public final class BaseViewModel<P extends BasePresenter> extends ViewModel {

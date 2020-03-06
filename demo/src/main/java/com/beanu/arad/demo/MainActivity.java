@@ -9,6 +9,7 @@ import com.beanu.arad.demo.bean.StudentLiveData;
 import com.beanu.arad.demo.mvp.contract.MainContract;
 import com.beanu.arad.demo.mvp.model.MainModelImpl;
 import com.beanu.arad.demo.mvp.presenter.MainPresenterImpl;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 /**
  * @author Beanu
@@ -52,5 +53,11 @@ public class MainActivity extends ToolBarActivity<MainPresenterImpl, MainModelIm
                 launchActivity(LiveDataActivity.class);
             }
         });
+    }
+
+
+    @Override
+    public void initTopBar(QMUITopBarLayout topBarLayout) {
+        topBarLayout.setTitle("首页");
     }
 }

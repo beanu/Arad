@@ -1,5 +1,9 @@
 package com.beanu.arad.base;
 
+import android.view.View;
+
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -31,22 +35,34 @@ public interface BaseView {
     void contentLoadingEmpty();
 
     /**
-     * 当前页面加载条
+     * 无网络
      */
-    void showProgress();
+    void contentLoadingNoNetwork();
 
     /**
-     * 当前页面隐藏加载条
+     * 点击重试
      */
-    void hideProgress();
+    void setOnRetryListener(View.OnClickListener onRetryListener);
 
     /**
-     * 显示信息
+     * 当前页面等待框
+     */
+    void showProgressDialog();
+
+    /**
+     * 当前页面隐藏等待框
+     */
+    void hideProgressDialog();
+
+    /**
+     * 显示一段信息，1.5s后自动消失
      *
      * @param message 消息内容, 不能为 {@code null}
      */
-    void showMessage(@NonNull String message);
+    QMUITipDialog showMessage(@NonNull String message);
 
+    QMUITipDialog showErrorMessage(@NonNull String message);
 
+    QMUITipDialog showSuccessMessage(@NonNull String message);
 
 }

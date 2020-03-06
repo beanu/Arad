@@ -25,7 +25,6 @@ public class LiveDataActivity extends ToolBarActivity implements View.OnClickLis
         mTextView = findViewById(R.id.textView2);
         findViewById(R.id.button).setOnClickListener(this);
 
-
         StudentLiveData.getInstance().observe(this, new Observer<Student>() {
             @Override
             public void onChanged(Student student) {
